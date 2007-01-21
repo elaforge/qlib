@@ -1,0 +1,29 @@
+# stick local stuff in stash to avoid going over nfs
+s=/usr/local/stash # easy to type interactive
+stash=$s # more descriptive
+src=$stash/src
+dl=$stash/dl
+
+# interactive only shell vars and path elements go here
+export PLAN9=$stash/plan9
+path=($path $stash/plan9/bin)
+export PRINTER=thomasmoore
+
+alias python=python2.3
+alias blog='vi ~/archie-n/blog/$(y-m-d)'
+
+function mdbro {
+  if [ "$1" = "m*" ]; then
+    mysql -umdb_ro -pmdb_ro -h127.0.0.1 -P9201 mdb
+  else
+    mysql -umdb_ro -pmdb_ro -hmdbsqlro.prodz.google.com -P9200 mdb
+  fi
+}
+
+function mdbrw {
+  port=$1
+  if [ -z "$port" ]; then
+    port=9201
+  fi
+  mysql -h127.0.0.1 -P$port -umdlb_rw -p -A mdb
+}

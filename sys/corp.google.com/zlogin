@@ -1,0 +1,19 @@
+function start_agent {
+  if [ "$SSH_AGENT_PID" ] && kill -0 $SSH_AGENT_PID 2>/dev/null; then
+    return 0 # already running
+  fi
+
+  local agent_info=~/.ssh/ssh-agent-$host
+  unset SSH_AGENT_PID
+  if [ -r $agent_info ]; then
+    . $agent_info >/dev/null
+  fi
+
+  if [ -z "$SSH_AGENT_PID" ] || ! kill -0 $SSH_AGENT_PID 2>/dev/null; then
+    ssh-agent >$agent_info
+    . $agent_info >/dev/null
+    echo started new agent $SSH_AGENT_PID
+  fi
+}
+
+start_agent

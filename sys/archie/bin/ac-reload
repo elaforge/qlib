@@ -1,0 +1,5 @@
+#!/bin/csh
+sudo kextunload /System/Library/Extensions/Apple16X50PCcard.kext
+sudo kextload /System/Library/Extensions/Apple16X50PCCard.kext
+sudo rm /System/Library/Extensions.kextcache
+sudo kextcache -k /System/Library/Extensions

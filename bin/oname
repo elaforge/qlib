@@ -1,0 +1,12 @@
+#!/bin/sh
+# I know there are standard mach-arch-whatever codes, for e.g. gcc
+# targets, but I don't remember how to get them
+
+case `uname` in
+Darwin) echo darwin-ppc ;;
+[Ll]inux) case `uname -m` in
+    i?86) echo linux-i386 ;;
+    *) echo linux-`uname -m` ;;
+    esac ;;
+*) echo `uname`-`uname -m` ;;
+esac

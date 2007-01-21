@@ -1,0 +1,15 @@
+#!/usr/local/bin/python
+
+import sys, re
+
+if len(sys.argv) != 3:
+	sys.stderr.write('usage: %s id replacement\n' % sys.argv[0])
+	for line in sys.stdin: sys.stdout.write(line)
+	sys.exit(1)
+
+ident = sys.argv[1]
+sub = sys.argv[2]
+ire = re.compile(r'\b' + re.escape(ident) + r'\b')
+
+for line in sys.stdin:
+	sys.stdout.write(ire.sub(sub, line))

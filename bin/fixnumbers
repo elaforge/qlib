@@ -1,0 +1,34 @@
+#!/usr/local/bin/python
+
+import sys, os, re
+
+def main():
+    n_re = re.compile(r'(\d+)')
+    files = sys.argv[1:]
+    verbose = 0
+    if files and files[0] == '-v':
+        del files[0]
+        verbose = 1
+    numbers = {}
+    ndigits = 1
+    for f in files:
+        m = n_re.search(f)
+        if m is None:
+            if verbose:
+                print 'File %r has no number, skipping.' % f
+            continue
+        ndigits = max(ndigits, len(m.group(1)))
+        numbers[f] = m.group(1)
+    rename = {}
+    for f, n in numbers.items():
+        rename[n_re.sub('%0*d' %(ndigits, int(n)), f)] = f
+    ks = rename.keys()
+    ks.sort()
+    for k in ks:
+        if verbose:
+            print 'rename', rename[k], '->', k
+        else:
+            os.rename(rename[k], k)
+
+if __name__ == '__main__':
+    main()

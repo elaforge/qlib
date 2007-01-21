@@ -1,0 +1,27 @@
+#!/usr/local/bin/python
+
+import sys, re
+
+def main():
+	if len(sys.argv) != 3:
+		sys.stderr.write('usage: %s id replacement\n' % sys.argv[0])
+		for line in sys.stdin: sys.stdout.write(line)
+		sys.exit(1)
+
+	ident = sys.argv[1]
+	sub = sys.argv[2]
+	ident_re = re.compile(r'\b' + re.escape(ident) + r'\b')
+	sub_re = re.compile(r'\b' + re.escape(sub) + r'\b')
+
+	errs = []
+	for line in sys.stdin:
+		if sub_re.search(line):
+			errs.append('ident %s in line %r' % (sub, line.strip()))
+		sys.stdout.write(ident_re.sub(sub, line))
+	if errs:
+		print
+		for e in errs:
+			print '*', e
+
+if __name__ == '__main__':
+	main()

@@ -1,0 +1,7 @@
+#!/bin/zsh
+start=$(date +%s.%N)
+cd $(command pwd)
+if /usr/local/symlinks/g4 "$@"; then
+  end=$(date +%s.%N)
+  echo $(($end - $start)) g4 "$@" >>~/.g4_time_wastage
+fi

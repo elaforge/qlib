@@ -1,0 +1,9 @@
+#!/bin/zsh
+cd
+for fn in .zshenv .zlogin .zshrc .vim .vimrc; do
+	rm -rf $fn
+	ln -s qlib/dotfiles/$fn
+done
+
+rm -rf bin
+ln -s qlib/bin

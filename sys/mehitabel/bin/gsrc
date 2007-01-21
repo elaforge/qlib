@@ -1,0 +1,2 @@
+#!/bin/zsh
+exec fgrep -n $1 **/*.py **/*.ptl

@@ -1,0 +1,6 @@
+alias s='ls -FG'
+alias blog='vi ~/n/blog/$(y-m-d)'
+
+export TEST_R3DB_USER=root
+export TEST_R3DB_PASSWD=test
+export TEST_R3DB_DBNAME=test_r3

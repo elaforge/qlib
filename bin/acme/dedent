@@ -1,0 +1,3 @@
+#!/bin/sh
+# not really right since it will delete tab + spaces, but I don't mind that
+exec cmt -u "	"

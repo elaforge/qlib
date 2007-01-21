@@ -1,0 +1,7 @@
+function a {
+	if xmodmap -pke | grep -q 'keycode *27 = p'; then
+		xmodmap ~/qlib/kbd/qwerty.xmodmap
+	else
+		xmodmap ~/qlib/kbd/dvorak.xmodmap
+	fi
+}

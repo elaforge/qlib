@@ -1,0 +1,2 @@
+path=(/opt/local/bin /usr/local/mysql/bin $path)
+pythonpath=($pythonpath ~/p/src)

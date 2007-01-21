@@ -1,0 +1,2 @@
+#!/bin/sh
+exec python2.3 /home/build/buildtools/python/pychecker-0.8.11/lib/pychecker-0.8.11/pychecker/checker.py "$@"
