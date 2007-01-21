@@ -1,0 +1,18 @@
+set editing-mode vi
+set horizontal-scroll-mode On
+set bell-style none
+
+$if python
+    tab: "    "
+$endif
+
+$if rbc
+    tab: "    "
+$endif
+
+$if rdln
+    set keymap vi-command
+    C-u: dump-functions
+    set keymap vi-insert
+    "\'": smart-quote
+$endif

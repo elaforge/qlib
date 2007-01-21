@@ -1,0 +1,31 @@
+#!/usr/local/bin/python
+
+import sys, os
+
+def main():
+    for fn in sys.argv[1:]:
+        try:
+            lc(fn)
+        except Error, exc:
+            print 'skipped %r: %s' % (fn, exc)
+
+def lc(fn):
+    tmpnam = 'aaa'
+    if os.path.exists(tmpnam):
+        raise Error('tmpnam %r exists' % tmpnam)
+    if fn.islower():
+        return
+    rename(fn, tmpnam)
+    if os.path.exists(fn.lower()):
+        rename(tmpnam, fn)
+        raise Error('%r exists' % fn.lower())
+    rename(tmpnam, fn.lower())
+
+
+def rename(fn1, fn2):
+    return os.rename(fn1, fn2)
+
+class Error(Exception): pass
+
+if __name__ == '__main__':
+    main()

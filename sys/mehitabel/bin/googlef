@@ -1,0 +1,8 @@
+#!/bin/zsh
+tmp=/tmp/googleize-tmp.$$
+for f in $*; do
+	echo $f
+	redent.py '	' '  ' <$f >$tmp
+	cp $tmp $f
+	check-lines $f
+done

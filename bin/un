@@ -1,0 +1,153 @@
+#!/usr/bin/env python2.3
+'''usage: %s [ -v ] x(%s) ...
+	-v	verbose: print all extracted filenames
+Archives that want to spew lots of files get stashed in a subdir.
+Unlike std tar, the archive will *not* be merged with a pre-existing
+directory, but renamed into dir.n.
+'''
+# BUGS: if both tmp and extract dir exist?  or just extract dir?  fn not moved
+# from tdir
+
+import sys, os
+import popen2, itertools
+
+False, True = range(2)
+
+# yay for manual currying
+def curry_run(*cmd):
+	return lambda f, verbose: run(cmd + (f,), pass_stdout=verbose)
+
+# (suf, cmd_fun(fname, verbose))
+cmds = (
+	('.tar.gz', curry_run('tar', 'zxvf')),
+	('.tgz', curry_run('tar', 'zxvf')),
+	('.tar.bz2', curry_run('tar', 'jxvf')),
+	('.tbz', curry_run('tar', 'zxvf')),
+)
+suffixes = [ c[0] for c in cmds ]
+# TODO add: .zip, .rar, ...
+
+def main():
+	verbose = False
+	if len(sys.argv) > 1 and sys.argv[1] == '-v':
+		verbose = True
+		fs = sys.argv[2:]
+	else:
+		fs = sys.argv[1:]
+	fs = filter(None, fs) # lose the bogus empty args
+	if not fs:
+		print __doc__.strip() %(os.path.basename(sys.argv[0]),
+			'|'.join(suffixes))
+	errs = 0
+	for f in fs:
+		tdir = mk_tmpdir('tmp')
+		try:
+			try:
+				unpack(f, tdir, verbose)
+			except OSError, exc:
+				print '%s, skipping...' % exc
+				errs += 1
+				continue
+			files = os.listdir(tdir)
+			# if multiple files in 'tdir', mk new dir based on 'f' and move
+			# them there.  otherwise, move 1 or 0 files from 'tdir' to '.'
+			if len(files) > 1:
+				ndir = os.path.basename(strip_suffixes(f, suffixes))
+				if not ndir: # file was just extension?
+					ndir = '?'
+				toplevel = ndir = mk_tmpdir(ndir)
+			else:
+				ndir = '.'
+				toplevel = files and files[0]
+			for fn in files:
+				os.rename(os.path.join(tdir, fn), os.path.join(ndir, fn))
+
+			# osz = run(('du', '-sh', f)).split()[0].lower()
+			if toplevel:
+				sz = run(('du', '-sh', toplevel)).split()[0].lower()
+			print '%r %s' %(toplevel, sz)
+		finally:
+			os.rmdir(tdir)
+	return errs
+
+def unpack(f, tdir, verbose):
+	'''unpack 'f' into 'tdir', possibly 'verbose'ly'''
+	odir = os.getcwd()
+	os.chdir(tdir)
+	# print fname before unpacking so we can see how long it takes
+	if not verbose:
+		sys.stdout.write(f + ': ')
+		sys.stdout.flush()
+	try:
+		do_unpack(f[0] == '/' and f or os.path.join(odir, f),
+			cmds, verbose)
+	finally:
+		os.chdir(odir)
+	if verbose:
+		sys.stdout.write(f + ': ')
+
+def do_unpack(f, cmds, verbose):
+	'''find a way to unpack 'f' in 'cmds', possibly 'verbose'ly'''
+	v = find(lambda c: f.endswith(c[0]), cmds)
+	if v is None:
+		raise OSError, 'unknown package type'
+	suf, cmd = v
+	s = cmd(f, verbose)
+
+# functions below snarfed from my personal utility library
+
+def run(cmd, pass_stdout=False, errok=False):
+	'''Return 'cmd's stdout, passing stderr through.  If 'pass_stdout', pass
+		stdout through as well.  raise OSError if cmd returns non-zero and
+		not 'errok'.  'cmd' may be a tuple or string as per popen2.Popen3'''
+	p = popen2.Popen3(cmd, capturestderr=False, bufsize=0)
+	p.tochild.close()
+	if pass_stdout:
+		s = []
+		while 1:
+			line = p.fromchild.readline()
+			if not line: break
+			sys.stdout.write(line)
+			s.append(line)
+		s = ''.join(s)
+	else:
+		s = p.fromchild.read()
+	r = p.wait()
+	if r != 0 and not errok:
+		st = str(os.WEXITSTATUS(r))
+		if os.WIFSIGNALED(r):
+			st += ' (sig %d)' %(os.WTERMSIG(r))
+		raise OSError, 'cmd %s returned %s' %(cmd, st)
+	return s
+
+def strip_suffixes(s, sufs):
+	'''strip first suffix of 's' in 'sufs' from 's' '''
+	for suf in sufs:
+		if s.endswith(suf):
+			return s[:-len(suf)]
+	return s
+
+def mk_tmpdir(pref):
+	for t in tmp_fnames(pref):
+		try:
+			os.mkdir(t)
+		except OSError:
+			pass
+		else:
+			break
+	return t
+
+def tmp_fnames(pref):
+	yield pref
+	for i in itertools.count():
+		yield '%s.%d' %(pref, i)
+
+def find(pred, seq, errobj=None):
+	'''return first elt of 'seq' to match 'pred' or 'errobj' '''
+	for e in seq:
+		if pred(e):
+			return e
+	return errobj
+
+if __name__ == '__main__':
+	sys.exit(main())

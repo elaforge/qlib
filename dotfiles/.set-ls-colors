@@ -1,0 +1,64 @@
+function set_ls_colors {
+	case $1 in
+	xterm)
+        local exec='40;32;1'
+        local archive='01;31'
+        local gfx='40;33'
+        local snd='32;40'
+        local src='37;1;40'
+        local doc='35'
+        local obj='31'
+        local special='30;41'
+		;;
+	linux)
+        local exec='01;32'
+        local archive='01;31'
+        local gfx='00;33'
+        local snd='32'
+        local src='37;1'
+        local doc='35'
+        local obj='31'
+        local special='30;41'
+		;;
+	*)
+        # echo "set_ls_colors: don't know about $1"
+        return 0
+		;;
+	esac
+
+    export LS_COLORS=\
+"no=00:fi=00:di=01;34:ln=40;01;36:or=40;36:pi=40;33:so=01;35:bd=40;33;01:\
+cd=40;33;01:ex=$exec:\
+*.tar=$archive:*.tgz=$archive:*.tz=$archive:*.arj=$archive:*.taz=$archive:\
+*.lzh=$archive:*.zip=$archive:*.z=$archive:*.Z=$archive:*.gz=$archive:\
+*.a=$archive:*.lha=$archive:*.lzh=$archive:*.hjx=$archive:*.sit=$archive:\
+*.bz2=$archive:*.rpm=$archive:\
+*.cma=$archive:*.cmxa=$archive:\
+\
+*.jpg=$gfx:*.gif=$gfx:*.bmp=$gfx:*.xbm=$gfx:*.xpm=$gfx:*.tif=$gfx:*.tga=$gfx:\
+*.png=$gfx:*.pcx=$gfx:\
+*.pbm=$gfx:*.pgm=$gfx:*.ppm=$gfx:*.pnm=$gfx:\
+\
+*.aiff=$snd:*.aif=$snd:*.au=$snd:*.wav=$snd:*.mpg=$snd:*.snd=$snd:*.mid=$snd:\
+*.s3m=$snd:*.mod=$snd:*.mp3=$snd:*.flac=$snd:*.ogg=$snd:\
+\
+*.c=$src:*.cxx=$src:*.C=$src:*.cc=$src:*.cpp=$src:*.m=$src:*.y=$src:\
+*.hs=$src:*.lhs=$src:\
+*.lisp=$src:*.lsp=$src:*.cl=$src:*.clm=$src:*.scm=$src:\
+*.ml=$src:*.mli=$src:*.m4=$src:*.pl=$src:*.pm=$src:*.py=$src:*.rb=$src:\
+*.pov=$src:*.java=$src:*.html=$src:*.htm=$src:*.dtml=$src:*.ptl=$src:\
+*.tcl=$src:\
+*Makefile=$src:*makefile=$src:*.tex=$src:*.ps=$src:\
+*.sa=$src:*.e=$src:\
+*.orc=$src:*.sco=$src:\
+\
+*.doc=$doc:*.txt=$doc:*.pdf=$doc:*.dvi=$doc:*.man=$doc:*.faq=$doc:*.stx=$doc:\
+*-faq=$doc:*README=$doc:*INSTALL=$doc:*TODO=$doc:\
+\
+*.class=$obj:\
+*.o=$obj:*.fasl=$obj:*.cmo=$obj:*.cmi=$obj:*.cmx=$obj:*.pyc=$obj:*.pyo=$obj:\
+*dud=$special"
+}
+
+set_ls_colors $2
+unfunction set_ls_colors

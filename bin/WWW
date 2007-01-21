@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+url=$1
+
+if [ -z "$url" ]; then
+	echo empty url
+	exit 1
+elif [ ! -f $url ]; then
+	echo not a file: $url
+	exit 1
+fi
+
+if [[ $url == http:* ]]; then
+	true
+elif [[ $url == /* ]]; then
+	url="file://$url"
+else
+	url="file://$PWD/$url"
+fi
+
+bin=firefox
+if $bin -remote 'ping()'; then
+	$bin -remote "openurl($url, new-tab)" &
+else
+	$bin $url &
+fi

@@ -1,0 +1,11 @@
+#!/usr/local/bin/python
+import socket, sys, re
+
+def main():
+	name = sys.argv[1]
+	if re.match(r'\d+\.\d+\.\d+\.\d+', name):
+		print socket.gethostbyaddr(name)
+	else:
+		print socket.gethostbyname(name)
+
+main()

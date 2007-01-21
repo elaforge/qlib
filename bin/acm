@@ -1,0 +1,16 @@
+#!/bin/sh
+if [ -z "$PLAN9" ]; then
+	echo '$PLAN9 not set'
+	exit 1
+fi
+if ps -C plumber >/dev/null; then
+	true
+else
+	$PLAN9/bin/plumber
+fi
+
+exec >/dev/null 2>&1
+
+cd /
+home=$HOME PATH=$HOME/bin/acme:$PATH \
+	$PLAN9/bin/acme -l $HOME/acme.dump -a $* &

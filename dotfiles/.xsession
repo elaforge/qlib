@@ -1,0 +1,57 @@
+#!/bin/sh
+
+qlib=$HOME/qlib
+res=1920x1200
+xmodmap $qlib/kbd/dvorak.xmodmap
+xmodmap $HOME/.xmodmap
+
+if cd $qlib/Xresources; then
+	for f in *; do xrdb -quiet $f; done
+fi
+xrdb -merge $HOME/.Xresources
+
+cd
+
+# xset m 6  # mouse accelleration
+xset dpms 600 1200 0
+xset b off
+
+# bggen black red yellow green cyan blue purple black | xv -root -quit  - &
+xsetroot -solid gray30
+# xsetroot -cursor ~/gfx/x-cursor ~/gfx/x-cursor-mask
+
+log_tails="/var/log/messages $HOME/.xsession-errors"
+case $res in
+  1600x1200)
+    xterms="80x74+0+74 80x40+566+74 80x23+566+678 80x79+1033+0"
+    log_xterm=171x13+565+1028
+    ;;
+  1920x1200)
+    xterms="80x75+0+71 80x40+566+71 80x34+566+676 80x79+1132+0"
+    log_xterm=269x15+566+1028
+    ;;
+  *)
+    xterms="80x74+0+74 80x40+566+74 80x23+566+678 80x79+1033+0"
+    log_xterm=171x13+565+1028
+    ;;
+esac
+
+# setting main xterm as login shell doesn't seem to do anything
+for geo in $xterms; do
+	xterm -geometry $geo &
+done
+xterm -fs 7 -title log_tail -geometry $log_xterm -e tail --follow=name \
+	$log_tails &
+
+# xdaliclock -transparent -oink -fg red -font 12x24 -geometry +542+6 &
+xload -nolabel -update 3 -hl red -geometry 255x74+0+0 &
+xsysinfo -geometry 198x74+692+0 &
+xclock -padding 4 -d -strftime '%I:%M %a %d' -geometry +0+0 &
+
+# nvidia-settings --load-config-only &
+
+xscreensaver -no-splash &
+
+fvwm2
+# next login will clobber .xsession-errors
+mv ~/.xsession-errors ~/.xsession-errors.last
