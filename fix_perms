@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+chmod 755 bin/**/*(.) sys/*/bin/**/*(.)
+chmod 755 mksym fix_perms
