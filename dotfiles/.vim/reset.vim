@@ -34,6 +34,10 @@ nm ,o	:buffer
 nm ,l	:ls<cr>
 nm ,u	:bdelete<cr>
 
+" fix traditional vi annoyances
+nm Y	y$
+nm ''	``
+
 nmap <down> <c-e>
 nmap <up> <c-y>
 

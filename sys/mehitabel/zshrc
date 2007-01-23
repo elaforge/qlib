@@ -9,8 +9,17 @@ export PLAN9=$stash/plan9
 path=($path $stash/plan9/bin)
 export PRINTER=thomasmoore
 
-alias python=python2.3
+export TEST_MDB_DBNAME=mdb
+export TEST_MDB_USER=root
+export TEST_MDB_PASSWD=test
+
+export TEST_R3DB_DBNAME=test_r3
+export TEST_R3DB_USER=root
+export TEST_R3DB_PASSWD=test
+
+alias python=python2.4
 alias blog='vi ~/archie-n/blog/$(y-m-d)'
+alias ct='ctags --language-force=python **/*.py **/*.ptl'
 
 function mdbro {
   if [ "$1" = "m*" ]; then
