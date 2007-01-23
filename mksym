@@ -1,9 +1,11 @@
 #!/bin/zsh
 cd
-for fn in .zshenv .zlogin .zshrc .vim .vimrc; do
+for fn in .fvwm2rc .inputrc .vim .vimrc .zlogin .zshenv .zshrc; do
 	rm -rf $fn
 	ln -s qlib/dotfiles/$fn
 done
 
 rm -rf bin
 ln -s qlib/bin
+
+ln -sf qlib/sys/$host/xsession .xsession

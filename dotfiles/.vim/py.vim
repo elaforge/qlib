@@ -3,9 +3,11 @@ setl foldnestmax=3 " class, method, if
 " setl foldignore=# " ignore comments
 
 setl ai smarttab
+setl ts=4 sw=4 noet softtabstop=4
 
 " google settings
-setl ts=2 sw=2 et softtabstop=2
+" setl ts=2 sw=2 et softtabstop=2
+
 
 ino ;di     def __init__(self):<left><left>
 ino ;m		if __name__ == '__main__':<cr><tab>

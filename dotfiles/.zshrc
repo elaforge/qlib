@@ -13,7 +13,7 @@ alias pwd='command pwd'
 PS1='%B%(?..%?)%#%b '
 RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
-_trydot $qlib/dotfiles/.set-ls-colors $TERM
+_trydot $qlib/dotfiles/set-ls-colors $TERM
 
 fignore=(.o .pyc .pyo .class)
 
@@ -44,7 +44,7 @@ setopt nobeep
 
 HISTSIZE=300
 
-host_complete=($(<$qlib/dotfiles/.hosts))
+host_complete=($(<$qlib/dotfiles/hosts))
 if [[ -r $qlib/sys/$host/hosts ]]; then
 	host_complete=($(<$qlib/sys/$host/hosts) $host_complete)
 fi

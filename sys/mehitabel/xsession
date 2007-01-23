@@ -8,7 +8,7 @@ xmodmap $HOME/.xmodmap
 if cd $qlib/Xresources; then
 	for f in *; do xrdb -quiet $f; done
 fi
-xrdb -merge $HOME/.Xresources
+xrdb -merge $qlib/dotfiles/Xresources
 
 cd
 
