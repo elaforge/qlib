@@ -12,11 +12,11 @@ typeset -U path pythonpath
 export PYTHONSTARTUP=$HOME/.pythonstartup.py
 
 host=$(/bin/hostname -s)
-# if which dnsdomainname; then
-# 	domain=$(dnsdomainname)
-# else
+if which dnsdomainname >/dev/null; then
+	domain=$(dnsdomainname)
+else
 	domain=none
-# fi
+fi
 oname=$(~/bin/oname)
 qlib=~/qlib
 

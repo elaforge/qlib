@@ -1,0 +1,52 @@
+#!/usr/bin/python2.4
+"""rdiff dir1 dir2 [ pattern ]
+
+Tkdiff all the files matching 'pattern' in dir1 and dir2 recursively.
+'pattern' defaults to *.
+"""
+
+import sys
+import os
+import fnmatch
+import subprocess
+
+from google3.ops.common import seq
+
+always_skip = ['*.pyc', '*.o', '*.hi', '.*']
+
+def main():
+  dir1, dir2, pattern = (sys.argv[1:] + [None, None, None])[:3]
+  pattern = pattern or '*'
+  if not dir1 or not dir2:
+    print __doc__
+    return 1
+  fns1 = [fn[len(dir1)+1:] for fn in ListAll(dir1, pattern)]
+  fns2 = [fn[len(dir2)+1:] for fn in ListAll(dir2, pattern)]
+  pairs = seq.PairWith(fns1, fns2)
+  dpairs = []
+  for fn1, fn2 in sorted(pairs):
+    fn1 = fn1 and os.path.join(dir1, fn1) or '/dev/null'
+    fn2 = fn2 and os.path.join(dir2, fn2) or '/dev/null'
+    if open(fn1).read() == open(fn2).read():
+      print '%s and %s are the same' % (fn1, fn2)
+    else:
+      dpairs.append((fn1, fn2))
+
+  print '%d/%d files diffed' % (len(dpairs), len(pairs))
+
+  args = seq.Concat([':'] + list(pair) for pair in dpairs)[1:]
+  if args:
+    subprocess.call(['tkdiff'] + args)
+
+
+def ListAll(dir, pattern):
+  fns = []
+  os.path.walk(dir, lambda arg, dirname, fnames:
+    fns.extend(os.path.join(dirname, fn) for fn in fnames), None)
+  return [path for (path, fn) in zip(fns, map(os.path.basename, fns))
+    if not seq.Some(lambda skip: fnmatch.fnmatch(fn, skip), always_skip)
+    if os.path.isfile(path)]
+
+
+if __name__ == '__main__':
+  main()

@@ -1,24 +1,11 @@
-path=($path /home/build/public/google/tools /home/build/public/eng/perforce)
-path=($path /usr/local/scripts /usr/local/symlinks)
-path=($path /usr/local/stash/src/ghc-6.4/bin/i386-unknown-linux)
-
-path=(~/bin/$host ~/bin ~/bin/$(~/bin/oname) /usr/local/bin $path)
-
-export P4CONFIG=.p4config
-export P4DIFF="/home/build/public/google/tools/p4diff -w"
-export P4MERGE=/home/build/public/eng/perforce/mergep4.tcl 
-export P4EDITOR=$EDITOR
-
-unset GREP_OPTIONS GREP_COLOR # kill google default env
-
-pythonpath=($HOME/lib/python /home/build)
-
 function mldb {
   mysql -hmdbsqlro -P9200 -A mdb
 }
 
 # don't check for silly X, and don't use silly google vimrc
 alias vi='vim -X -u $HOME/.vimrc'
+
+alias runtests='tools/make-dbg runtests'
 
 # function g4 {
 # 	(cd $(command pwd); command g4 "$@")
