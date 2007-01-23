@@ -9,7 +9,7 @@ bindkey -d
 typeset -T PYTHONPATH pythonpath
 export PYTHONPATH
 typeset -U path pythonpath
-export PYTHONSTARTUP=$HOME/.pythonstartup.py
+export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 
 host=$(/bin/hostname -s)
 if which dnsdomainname >/dev/null; then

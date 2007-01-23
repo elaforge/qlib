@@ -44,11 +44,19 @@ Key F1  A   N   Desk 0 0
 Key F2  A   N   Desk 0 1
 Key F3  A   N   Desk 0 2
 Key F4  A   N   Desk 0 3
+Key 1	A	5	Desk 0 0
+Key 2	A	5	Desk 0 1
+Key 3	A	5	Desk 0 2
+Key 4	A	5	Desk 0 3
 
 Key F1  A   S   MoveToDesk 0 0
 Key F2  A   S   MoveToDesk 0 1
 Key F3  A   S   MoveToDesk 0 2
 Key F4  A   S   MoveToDesk 0 3
+Key F1  A   S5  MoveToDesk 0 0
+Key F2  A   S5  MoveToDesk 0 1
+Key F3  A   S5  MoveToDesk 0 2
+Key F4  A   S5  MoveToDesk 0 3
 
 Key F3  A   C   WindowList
 # Key F5  TSFW    A   Move
