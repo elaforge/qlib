@@ -160,4 +160,4 @@ AddToMenu   Ops         "ops"      Title
 
 ### buttons
 *FvwmButtons: Geometry +125+0
-*FvwmButtons: (Title "foil evil hackers", Action "Exec /home/elaforge/bin/mehitabel/xlock")
+*FvwmButtons: (Title "foil evil hackers", Action "Exec /home/elaforge/qlib/sys/mehitabel/bin/xlock")
