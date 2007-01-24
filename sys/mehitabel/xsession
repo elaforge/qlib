@@ -3,7 +3,7 @@
 qlib=$HOME/qlib
 res=1920x1200
 xmodmap $qlib/kbd/dvorak.xmodmap
-xmodmap $HOME/.xmodmap
+xmodmap $qlib/dotfiles/xmodmap
 
 if cd $qlib/Xresources; then
 	for f in *; do xrdb -quiet $f; done

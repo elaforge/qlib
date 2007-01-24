@@ -1,0 +1,1 @@
+:0 local /usr/X11R6/bin/X -dpi 100 -nolisten tcp -kb vt11
