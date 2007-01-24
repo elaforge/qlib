@@ -1,0 +1,8 @@
+! only set keys that differ from apple dvorak
+keycode 35 = minus underscore endash emdash
+keycode 32 = equal plus notequal plusminus
+
+keycode 41 = bracketleft braceleft
+keycode 38 = bracketright braceright
+
+keycode 47 = slash question
