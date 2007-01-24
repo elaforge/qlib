@@ -25,3 +25,4 @@ au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 au BufEnter	*/google3/*.py		setl ts=2 sw=2 et softtabstop=2
 " google BUILD files are also python syntax
 au BufEnter BUILD				so ~/.vim/py.vim
+au BufEnter BUILD				setl ts=2 sw=2 et softtabstop=2
