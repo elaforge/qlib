@@ -1,0 +1,35 @@
+keycode 24 = q
+keycode 25 = w
+keycode 26 = e
+keycode 27 = r
+keycode 28 = t
+keycode 29 = y
+keycode 30 = u
+keycode 31 = i
+keycode 32 = o
+keycode 33 = p
+keycode 34 = bracketleft braceleft
+keycode 35 = bracketright braceright
+
+keycode 38 = a
+keycode 39 = s
+keycode 40 = d
+keycode 41 = f
+keycode 42 = g
+keycode 43 = h
+keycode 44 = j
+keycode 45 = k
+keycode 46 = l
+keycode 47 = semicolon colon
+keycode 48 = apostrophe quotedbl
+
+keycode 52 = z
+keycode 53 = x
+keycode 54 = c
+keycode 55 = v
+keycode 56 = b
+keycode 57 = n
+keycode 58 = m
+keycode 59 = comma less
+keycode 60 = period greater
+keycode 61 = slash question

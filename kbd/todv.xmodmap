@@ -1,0 +1,40 @@
+keysym q = apostrophe quotedbl
+keysym w = comma less
+keysym e = period greater
+keysym r = p
+keysym t = y
+keysym y = f
+keysym u = g
+keysym i = c
+keysym o = r
+keysym p = l
+
+keysym a = a
+keysym s = o
+keysym d = e
+keysym f = u
+keysym g = i
+keysym h = d
+keysym j = h
+keysym k = t
+keysym l = n
+keysym semicolon = s
+keysym apostrophe = slash question
+
+keysym z = semicolon colon
+keysym x = q
+keysym c = j
+keysym v = k
+keysym b = x
+keysym n = b
+keysym m = m
+keysym comma = w
+keysym period = v
+keysym slash = z
+
+keysym Control_L = Caps_Lock
+keysym Lock = Control_L
+clear Control
+clear Lock
+add Control = Control_L Control_R
+add mod5 = Caps_Lock
