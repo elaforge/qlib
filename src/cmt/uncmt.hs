@@ -1,5 +1,6 @@
-module Main where
+module Uncmt where
 import qualified List
+import qualified Char
 import qualified System.Exit
 import qualified System.Environment
 
@@ -13,7 +14,8 @@ main = do
 			putStrLn usage
 			System.Exit.exitFailure
 
-string_uncmt cmt s = unlines $ map (line_uncmt cmt) (lines s)
+string_uncmt cmt = unlines . map despace . map (line_uncmt cmt) . lines
+despace s = if List.all Char.isSpace s then "" else s
 
 line_uncmt cmt line = pre ++ post'
 	where
