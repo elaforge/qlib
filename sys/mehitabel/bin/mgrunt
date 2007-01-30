@@ -1,0 +1,2 @@
+#!/bin/sh
+exec grunt -c --test_retry_limit=1 $1

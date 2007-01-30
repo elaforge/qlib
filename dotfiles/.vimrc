@@ -5,6 +5,7 @@ au BufRead,BufNewFile *         so ~/.vim/reset.vim
 
 " au BufRead,BufNewFile *.py      so ~/.vim/py.vim
 au BufEnter 		  *.py      so ~/.vim/py.vim
+au BufEnter 		  *.ptl     so ~/.vim/py.vim
 au BufRead,BufNewFile *.e       so ~/.vim/e.vim
 au BufRead,BufNewFile *.c       so ~/.vim/c.vim
 au BufRead,BufNewFile *.h       so ~/.vim/c.vim
@@ -21,8 +22,10 @@ au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 
-" googleish tiny indent
-au BufEnter	*/google3/*.py		setl ts=2 sw=2 et softtabstop=2
 " google BUILD files are also python syntax
 au BufEnter BUILD				so ~/.vim/py.vim
 au BufEnter BUILD				setl ts=2 sw=2 et softtabstop=2
+
+" googleish tiny indent
+au BufEnter	*/google3/*.py		setl ts=2 sw=2 et softtabstop=2
+au BufEnter */google3/*.ptl     setl ts=2 sw=2 et softtabstop=2
