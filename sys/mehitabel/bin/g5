@@ -1,0 +1,138 @@
+#!/usr/bin/python2.4
+"""Handy g4 wrapper.
+Do several things:
+
+Ask to automatically run tests on a submit.
+
+g4 doesn't like symlinks that make it look like it's not in a client.  cd to
+/bin/pwd and transform path-looking things to absolute.
+
+g4 mail wants you to name the CL and then does a diff, which is useless, so
+disable the diff in that case.
+
+TODO: kill g4 process when this one is killed
+"""
+
+import sys
+import os
+import re
+import subprocess
+import itertools
+
+from google3.ops.common.post_py_builtins import *
+from google3.ops.common import seq
+
+
+g4 = 'g4'
+
+grunt_cmd = ['grunt', '-c', '--test_retry_limit=0']
+
+def main():
+  cmd = sys.argv[1]
+  if cmd == 'submit':
+    m = re.search(r'-c +(\d+)', ' '.join(sys.argv[1:]))
+    if m is None:
+      print '-c CL not found in submit argv'
+      abort = True
+    else:
+      abort = MaybeRunTests(m.group(1))
+    if abort:
+      return 1
+  elif cmd == 'mail':
+    os.environ['P4DIFF'] = '/bin/true'
+  # get out of symlinks
+  os.chdir(os.getcwd())
+  argv = map(NormalizePath, sys.argv[2:])
+  Run([g4, cmd] + argv)
+
+
+def NormalizePath(arg):
+  cwd = os.getcwd().split('/')
+  if '/' in arg or os.path.exists(arg):
+    path = os.path.realpath(os.path.join(os.getcwd(), arg)).split('/')
+    elts_equal = len(list(itertools.takewhile(lambda (x, y): x==y,
+      zip(path, cwd))))
+    up = len(cwd) - elts_equal
+    newpath = ['..'] * up + path[elts_equal:]
+    return '/'.join(newpath)
+  else:
+    return arg
+
+
+def MaybeRunTests(cl):
+  dirs = seq.RemoveDups(BuildDirs(cl))
+  if raw_input('run tests in %s? ' % ' '.join(dirs)) == 'y':
+    rcode = Run(grunt_cmd + dirs)
+    if rcode != 0:
+      print 'tests failed'
+      return True
+  else:
+    print "ok, it's your CL..."
+  return False
+
+
+def BuildDirs(cl):
+  stdout = subprocess.Popen([g4, 'describe', '-s', '-c', cl],
+    stdout=subprocess.PIPE).communicate()[0]
+  # stdout = desc_out
+  fns = itertools.dropwhile(lambda s: not s.startswith('Affected files'),
+    (line for line in stdout.split('\n') if line.strip()))
+  fns.next()
+  google3, not_google3 = [], []
+  for fn in fns:
+    m = re.search(r'//depot/google3/(.*)\#\d+ ', fn)
+    if m:
+      google3.append(m.group(1))
+    else:
+      not_google3.append(fn)
+  if not_google3:
+    print 'not google3:', not_google3
+    return 1
+  cwd = os.getcwd()
+  if '/google3/' in cwd:
+    google3_dir = cwd[:cwd.index('/google3/')] + '/google3'
+  else:
+    google3_dir = '/home/build/google3'
+
+  return [BuildDirOf(os.path.join(google3_dir, dir))
+    for dir in set(map(os.path.dirname, google3))]
+
+
+_memo = set()
+def BuildDirOf(path):
+  for bpath in _memo:
+    if path.startswith(bpath):
+      return bpath
+  bpath = path
+  while not os.path.exists(os.path.join(bpath, 'BUILD')):
+    bpath = os.path.dirname(bpath)
+  _memo.add(bpath)
+  return bpath
+
+
+def Run(cmd):
+  print '-', ' '.join(cmd)
+  return subprocess.call(cmd)
+
+
+desc_out = """
+Change 3839115 by elaforge@elaforge-local on 2007/01/09 20:28:53 *pending*
+
+        - add misc tables that touchpad wants
+        - for r2 compatibility, swaps must have nullable date, case_id, and
+        user_name (r3 doesn't use these)
+
+        PRESUBMIT=passed
+        R=ksw,psolodov
+        OCL=3839115
+
+Affected files ...
+
+... //depot/google3/ops/hardware/r3/test/generate_unsharded.sh#4 edit
+... //depot/google3/ops/hardware/r3/test/unsharded_mldb.sql#6 edit
+
+"""
+
+
+if __name__ == '__main__':
+  sys.exit(main())
