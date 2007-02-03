@@ -1,6 +1,7 @@
 au!
 
 so ~/.vim/reset.vim
+" au BufEnter *         so ~/.vim/reset.vim
 au BufRead,BufNewFile *         so ~/.vim/reset.vim
 
 " au BufRead,BufNewFile *.py      so ~/.vim/py.vim
