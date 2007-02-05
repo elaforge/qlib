@@ -6,6 +6,7 @@ import qualified Char
 import qualified List
 import qualified Text.Regex as Regex
 import qualified System.Posix.Env as Env
+import qualified System.Directory as Directory
 import Control.Monad
 import Text.Printf (printf)
 
@@ -15,7 +16,7 @@ main = do
 		"submit" -> maybe_run_grunt (tail args)
 		"mail" -> Env.setEnv "P4DIFF" "/bin/true" True >> return True
 		_ -> return True
-	when run_cmd
+	when run_cmd $
 		printf "run %s\n" (show run_cmd)
 
 
@@ -38,11 +39,14 @@ build_dirs :: String -> IO [String]
 build_dirs cl = do
 	let stdout = desc_stdout
 	let (in_google3, not_google3) = partition_google3 (process_stdout stdout)
-	when (not (null not_google3))
+	when (not (null not_google3)) $
 		fail $ printf "not google3: %s" (show not_google3)
-	g3dir <- liftM google3_dir System.Directory.getCurrentDirectory
-	return $ (map (build_dir_of . (g3dir ++ "/" ++)) . List.nub . map dirname)
+	g3dir <- google3_dir `fmap` System.Directory.getCurrentDirectory
+	(mapM (build_dir_of . ((g3dir ++ "/") ++)) . List.nub . map dirname)
 		in_google3
+
+dirname = reverse . drop_slash . dropWhile (/='/') . drop_slash . reverse
+	where drop_slash s = if head s == '/' then tail s else s
 
 process_stdout = filter (not.blank) . drop 1
 	. dropWhile (not . ("Affected files " `List.isPrefixOf`)) . lines
@@ -66,7 +70,10 @@ google3_dir dir
 	where s = dropWhile (not . ("/google3/" `List.isSuffixOf`)) (List.inits dir)
 
 -- walk up path until I find one with a BUILD in it
-build_dir_of path = path
+build_dir_of path = do
+	exists <- Directory.doesFileExist (path ++ "/BUILD")
+	if exists then return (path ++ "/BUILD")
+		else build_dir_of (dirname path)
 
 
 subprocess_call cmd = return 0
