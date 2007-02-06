@@ -36,3 +36,7 @@ function mdbrw {
   fi
   mysql -h127.0.0.1 -P$port -umdlb_rw -p -A mdb
 }
+
+function pysearch {
+	gsearch -n -f '\.py$' "$@"
+}
