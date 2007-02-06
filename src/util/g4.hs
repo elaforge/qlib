@@ -7,6 +7,7 @@ import qualified List
 import qualified Text.Regex as Regex
 import qualified System.Posix.Env as Env
 import qualified System.Directory as Directory
+import qualified System.Process as Process
 import Control.Monad
 import Text.Printf (printf)
 
@@ -76,7 +77,27 @@ build_dir_of path = do
 		else build_dir_of (dirname path)
 
 
-subprocess_call cmd = return 0
+subprocess_call cmd = do
+	pid <- Process.runProcess (head cmd) cmd Nothing Nothing
+		Nothing Nothing Nothing -- stdin, stdout, stderr
+	Process.waitForProcess pid
+
+subprocess_capture cmd = do
+	(stdin, stdout, stderr, pid) <- Process.runInteractiveProcess
+		(head cmd) cmd Nothing Nothing
+	IO.hClose stdin
+	stdout_mv <- MVar.newMVar
+	stderr_mv <- MVar.newMVar
+	Concurrent.forkIO (reader stdout stdout_mv)
+	Concurrent.forkIO (reader stderr stderr_mv)
+	stdout_s <- MVar.readMVar stdout_mv
+	stderr_s <- MVar.readMVar stderr_mv
+	rcode <- Process.waitForProcess pid
+	return (rcode, stdout_s, stderr_s)
+	where
+	reader hdl mv = read_all hdl >>= MVar.writeMVar mv
+	read_all hdl = B.hGetContents hdl >>= return . B.unpack
+	
 
 desc_stdout = "\
 \Change 3839115 by elaforge@elaforge-local on 2007/01/09 20:28:53 *pending*\
