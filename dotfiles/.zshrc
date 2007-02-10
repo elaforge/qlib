@@ -15,7 +15,7 @@ RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
 _trydot $qlib/dotfiles/set-ls-colors $TERM
 
-fignore=(.o .pyc .pyo .class)
+fignore=(.o .pyc .pyo .hi .class)
 
 # stty erase '^H'
 stty erase ''
