@@ -20,7 +20,7 @@ set textwidth=78
 set wrap
 
 set wildmode=longest,list
-set wildignore=*.o,*.pyc,*.pyo,*.ptlc,*.class
+set wildignore=*.o,*.pyc,*.pyo,*.hi,*.class
 set hidden
 
 set term=$TERM
