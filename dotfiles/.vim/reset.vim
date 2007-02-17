@@ -60,7 +60,8 @@ nm ,d   :r !date<cr>
 nm ,D	:r !date +\%Y-\%m-\%d<cr>
 
 " ,w clear out lines with only whitespace in them
-nm ,w   :%s/^[\t ]\+$//<cr>``
+" and lines ending in whitespace
+nm ,w   :%s/^[\t ]\+$//<cr>``:%s/[\t ]\+$//<cr>``
 
 " ,p toggle paste mode
 nm ,p   :se invpaste<cr>:se paste?<cr>
