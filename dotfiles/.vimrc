@@ -23,6 +23,8 @@ au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 
+au BufRead,BufNewFile TODO    se foldmethod=indent sw=2 ts=2 et
+
 " google BUILD files are also python syntax
 au BufEnter BUILD				so ~/.vim/py.vim
 au BufEnter BUILD				setl ts=2 sw=2 et softtabstop=2
