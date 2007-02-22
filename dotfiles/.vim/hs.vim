@@ -1,10 +1,10 @@
 " options for haskell
 
-" for lhs files
-set comments=:>
+setl comments=:--
 " replace c with t since vi's idea of comments will be backwards
-set formatoptions=troq1
+setl formatoptions=troq1
 
-set ai
+setl ai
 
 vm ,c :!cmt --<cr>
+vm ,C :!uncmt --<cr>

@@ -16,7 +16,7 @@ set visualbell t_vb=
 set comments=
 set formatoptions=tcq1
 set nolisp
-set textwidth=78
+set textwidth=0
 set wrap
 
 set wildmode=longest,list
