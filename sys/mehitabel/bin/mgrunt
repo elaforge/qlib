@@ -1,2 +1,2 @@
 #!/bin/sh
-exec grunt -c --test_retry_limit=0 $1
+exec grunt -c --noserial_failures --test_retry_limit=0 $*
