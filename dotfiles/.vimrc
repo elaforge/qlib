@@ -20,6 +20,7 @@ au BufRead,BufNewFile *.lisp    so ~/.vim/lisp.vim
 
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
+au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 
