@@ -20,7 +20,7 @@ ColormapFocus FollowsFocus
 Style "**"           NoTitle, NoHandles, BorderWidth 1, StickyIcon, \
     RandomPlacement, SmartPlacement, SloppyFocus, Lenience, \
     Color white/gray40, \
-    IconBox 893 0 1600 1200
+    IconBox 891 0 1600 1200
     # IconBox 1295 0 1600 83
 # Icon "22.xpm"
 Style "Fvwm*"       NoTitle, NoHandles, Sticky, WindowListSkip, \
