@@ -6,3 +6,4 @@ export TEST_R3DB_PASSWD=test
 export TEST_R3DB_DBNAME=test_r3
 
 src=/usr/local/src
+dl=/usr/local/dl

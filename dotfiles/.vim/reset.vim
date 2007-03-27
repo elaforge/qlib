@@ -5,7 +5,7 @@ set foldignore=
 " for unknown reasons the all& above doesn't do this
 " colorscheme default
 
-set ts=4 sw=4 noet
+set ts=4 sw=4 expandtab smarttab
 " set ts=2 sw=2 et
 set bs=2 helpheight=99 showcmd ruler gdefault shortmess=aI
 set showmatch incsearch hlsearch

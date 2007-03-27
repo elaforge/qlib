@@ -25,6 +25,7 @@ au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 
 au BufRead,BufNewFile TODO    se foldmethod=indent sw=2 ts=2 et
+au BufRead,BufNewFile Makefile  setl noexpandtab
 
 " google BUILD files are also python syntax
 au BufEnter BUILD				so ~/.vim/py.vim
