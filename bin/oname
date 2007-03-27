@@ -3,7 +3,10 @@
 # targets, but I don't remember how to get them
 
 case `uname` in
-Darwin) echo darwin-ppc ;;
+Darwin) case `uname -p` in
+    i386) echo darwin-i386 ;;
+    *) echo darwin-ppc ;;
+    esac ;;
 [Ll]inux) case `uname -m` in
     i?86) echo linux-i386 ;;
     *) echo linux-`uname -m` ;;

@@ -5,6 +5,7 @@ setl comments=:--
 setl formatoptions=troq1
 
 setl ai
+setl smarttab
 
 vm ,c :!cmt --<cr>
 vm ,C :!uncmt --<cr>
