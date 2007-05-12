@@ -239,10 +239,10 @@ class Pdb(pdb.Pdb):
 
 # copy and paste from other local libs
 
-def Truncate(s, maxlen=25, with='...'):
+def Truncate(s, maxlen=25, trunc='...'):
   if len(s) > maxlen:
     if len(s) > maxlen:
-      s = s[:maxlen-len(with)] + with
+      s = s[:maxlen-len(trunc)] + trunc
   return s
 
 
