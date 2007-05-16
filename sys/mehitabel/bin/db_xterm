@@ -19,6 +19,10 @@ case $db in
     color=$blue
     args="-uroot -ptest mdb"
     ;;
+  r3)
+    color=$red
+    args='-uroot -pr3test -P9200 -hcgb25 mdb'
+	;;
   *)
     echo unknown db: $db
     exit 1
