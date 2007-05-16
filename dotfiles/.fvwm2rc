@@ -1,4 +1,4 @@
-ModulePath /usr/libexec/fvwm/2.4.15
+ModulePath /usr/lib/fvwm/2.5.14
 ImagePath /home/quinn/gfx
 # ModuleSynchronous Timeout 5 FvwmTheme # but I don't *want* themes!
 # *FvwmTheme: Colorset 0 fg red bg green
@@ -20,7 +20,7 @@ ColormapFocus FollowsFocus
 Style "**"           NoTitle, NoHandles, BorderWidth 1, StickyIcon, \
     RandomPlacement, SmartPlacement, SloppyFocus, Lenience, \
     Color white/gray40, \
-    IconBox 891 0 1600 1200
+    IconBox 694 0 1600 1200
     # IconBox 1295 0 1600 83
 # Icon "22.xpm"
 Style "Fvwm*"       NoTitle, NoHandles, Sticky, WindowListSkip, \
