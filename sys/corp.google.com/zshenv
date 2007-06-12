@@ -4,11 +4,12 @@ path=($path /usr/local/stash/src/ghc-6.4/bin/i386-unknown-linux)
 
 path=(~/bin/$host ~/bin ~/bin/$(~/bin/oname) /usr/local/bin $path)
 
-export P4CONFIG=.p4config
-export P4DIFF="/home/build/public/google/tools/p4diff -w"
-export P4MERGE=/home/build/public/eng/perforce/mergep4.tcl 
-export P4EDITOR=$EDITOR
-
 unset GREP_OPTIONS GREP_COLOR # kill google default env
 
 pythonpath=($HOME/lib/python /home/build)
+
+: ${P4CONFIG:=.p4config}
+: ${P4DIFF:=/home/build/public/google/tools/p4diff -w}
+: ${P4MERGE:=/home/build/public/eng/perforce/mergep4.tcl}
+: ${P4EDITOR:=$EDITOR}
+export P4CONFIG P4DIFF P4MERGE P4EDITOR

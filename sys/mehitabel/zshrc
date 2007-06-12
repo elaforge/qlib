@@ -23,6 +23,7 @@ export MOZ_DISABLE_PANGO=1
 alias python=python2.4
 alias blog='vi ~/archie-n/blog/$(y-m-d)'
 alias ct='ctags --language-force=python **/*.py **/*.ptl'
+alias q_test='~/p/common/quixote/q_test.py'
 
 function mdbro {
   if [ "$1" = "m*" ]; then
