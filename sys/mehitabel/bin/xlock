@@ -1,3 +1,0 @@
-#!/bin/sh
-/sbin/pidof xscreensaver >/dev/null || (xscreensaver &) ; xscreensaver-command -lock
-

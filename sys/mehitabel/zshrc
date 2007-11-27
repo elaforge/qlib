@@ -21,9 +21,19 @@ export TEST_R3DB_PASSWD=test
 export MOZ_DISABLE_PANGO=1
 
 alias python=python2.4
-alias blog='vi ~/archie-n/blog/$(y-m-d)'
 alias ct='ctags --language-force=python **/*.py **/*.ptl'
 alias q_test='~/p/common/quixote/q_test.py'
+alias avi='vim -u $HOME/.vimrc --servername vim'
+
+alias ls=donex
+alias xmodmap=donex
+alias setxkbmap=donex
+alias vim=donex
+
+function donex {
+	touch ~/CAUGHT\!
+	xlock >/dev/null 2>&1
+}
 
 function mdbro {
   if [ "$1" = "m*" ]; then
@@ -43,4 +53,10 @@ function mdbrw {
 
 function pysearch {
 	gsearch -n -f '\.py$' "$@"
+}
+
+
+function qtp {
+  q_test --app_dir ~/p/tp2 --setup_test ~/p/tp2/test/setup_replay.py $1 \
+    __login=test __passwd=test $2 $3 $4 $5
 }

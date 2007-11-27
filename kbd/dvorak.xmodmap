@@ -1,3 +1,5 @@
+keycode 20 = minus underscore
+keycode 21 = equal plus
 keycode 24 = apostrophe quotedbl
 keycode 25 = comma less
 keycode 26 = period greater

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 db=${1:-mldb_repl}
 
@@ -9,9 +9,14 @@ green=rgbi:.7/.9/.6
 case $db in
   mldb_repl)
     color=$green
-    args="-umdb_ro -pmdb_ro -hmdbsqlro.prodz.google.com -P9200 -A mdb"
+    ip=$(~/find_mldb_ip)
+    args="-umdb_ro -pmdb_ro -h$ip -P9200 -A mdb"
     ;;
   mldb)
+    color=$green
+    args="-hmdbsql.prodz.google.com -P9200 -umdb_ro -pmdb_ro mdb"
+    ;;
+  mldb_rw)
     color=$red
     args="-h127.0.0.1 -P9201 -umldb_rw -p mdb"
     ;;
@@ -28,4 +33,6 @@ case $db in
     exit 1
 esac
 
-xterm -bg $color -title "mysql $db" -geometry 248x48 -e "mysql $args" &
+cmd="mysql $args || (echo -n 'crashed! '; read)"
+
+xterm -bg $color -title "mysql $db" -geometry 248x48 -e $cmd &
