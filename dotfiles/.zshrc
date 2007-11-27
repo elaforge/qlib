@@ -1,11 +1,11 @@
-alias s='ls -F --color=tty'
+alias s='command ls -F --color=tty'
 alias ll='s -l'
 alias la='s -a'
 alias ss='s -Ss'
 alias l=less
 alias zreset='exec $SHELL'
 alias rr='rm -rf'
-alias vi='vim -X'
+alias vi='command vim -X'
 alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
