@@ -9,12 +9,13 @@ green=rgbi:.7/.9/.6
 case $db in
   mldb_repl)
     color=$green
-    ip=$(~/find_mldb_ip)
+    ip=$(~/find_mldb_ip mdbsqlro)
     args="-umdb_ro -pmdb_ro -h$ip -P9200 -A mdb"
     ;;
   mldb)
     color=$green
-    args="-hmdbsql.prodz.google.com -P9200 -umdb_ro -pmdb_ro mdb"
+	ip=$(~/find_mldb_ip mdbsql)
+    args="-h$ip -P9200 -umdb_ro -pmdb_ro mdb"
     ;;
   mldb_rw)
     color=$red
