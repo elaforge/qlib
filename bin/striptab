@@ -1,13 +1,23 @@
-#!/usr/bin/python2.3
+#!/usr/bin/python2.4
 import sys, re, operator
+import pprint
+
 
 def main():
   lines = [line.strip() for line in sys.stdin.readlines()]
+  if len(lines) >= 4 and IsTableLine(lines[0]) and IsTableLine(lines[2]):
+    lines = lines[3:]
   rows = [re.sub(r'\s*\|\s*', ' ', line).split()
-    for line in lines
-    if not re.match(r'^[+-]+$', line)]
-  rows = [tuple(map(InferType, row)) for row in rows]
-  print rows
+    for line in lines if not IsTableLine(line)]
+  rows = tuple(Flatten(map(InferType, row)) for row in rows)
+  if len(rows) == 1:
+    print '(%s)' % pprint.pformat(rows[0])
+  else:
+    pprint.pprint(rows)
+
+
+def IsTableLine(line):
+  return bool(re.match(r'^[+-]+$', line))
 
 
 def InferType(val):
@@ -17,6 +27,14 @@ def InferType(val):
     return None
   else:
     return val
+
+
+def Flatten(row):
+  if len(row) == 1:
+    return row[0]
+  else:
+    return tuple(row)
+
 
 if __name__ == '__main__':
   main()
