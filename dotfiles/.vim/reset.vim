@@ -7,7 +7,7 @@ set foldignore=
 
 set ts=4 sw=4 expandtab smarttab
 " set ts=2 sw=2 et
-set bs=2 helpheight=99 showcmd ruler gdefault shortmess=aI
+set bs=2 helpheight=99 showcmd ruler gdefault
 set showmatch incsearch hlsearch
 set nostartofline fileformats=unix,dos,mac
 " set autowrite
@@ -18,6 +18,10 @@ set formatoptions=tcq1
 set nolisp
 set textwidth=0
 set wrap
+
+" eliminate annoying press enter to continue msgs with long paths
+set shortmess=atI
+set cmdheight=2
 
 set wildmode=longest,list
 set wildignore=*.o,*.pyc,*.pyo,*.hi,*.class
@@ -62,9 +66,9 @@ vm ,C :!uncmt \\#<cr>
 nm ,d   :r !date<cr>
 nm ,D	:r !date +\%Y-\%m-\%d<cr>
 
-" ,w clear out lines with only whitespace in them
+" ,w clear out trailing whitespace
 " and lines ending in whitespace
-nm ,w   :%s/^[\t ]\+$//<cr>``:%s/[\t ]\+$//<cr>``
+nm ,w   :%s/[\t ]\+$//e<cr>
 
 " ,p toggle paste mode
 nm ,p   :se invpaste<cr>:se paste?<cr>
