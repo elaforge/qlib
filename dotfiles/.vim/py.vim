@@ -3,7 +3,7 @@ setl foldnestmax=3 " class, method, if
 " setl foldignore=# " ignore comments
 
 setl ai smarttab
-setl ts=4 sw=4 et softtabstop=4
+setl ts=4 sw=4 noet softtabstop=4
 
 " google settings
 " setl ts=2 sw=2 et softtabstop=2

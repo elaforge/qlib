@@ -10,6 +10,7 @@ au BufEnter 		  *.ptl     so ~/.vim/py.vim
 au BufRead,BufNewFile *.e       so ~/.vim/e.vim
 au BufRead,BufNewFile *.c       so ~/.vim/c.vim
 au BufRead,BufNewFile *.h       so ~/.vim/c.vim
+au BufRead,BufNewFile *.m       so ~/.vim/c.vim
 au BufRead,BufNewFile *.cc      so ~/.vim/cc.vim
 au BufRead,BufNewFile *.cpp     so ~/.vim/cc.vim
 au BufRead,BufNewFile *.cxx     so ~/.vim/cc.vim
@@ -23,8 +24,10 @@ au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
+au BufRead,BufNewFile *.xml     so ~/.vim/xml.vim
 
-au BufRead,BufNewFile TODO    se foldmethod=indent sw=2 ts=2 et
+
+" au BufRead,BufNewFile TODO    se foldmethod=indent sw=2 ts=2 et
 au BufRead,BufNewFile Makefile  setl noexpandtab
 
 " google BUILD files are also python syntax
