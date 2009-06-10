@@ -1,9 +1,13 @@
 alias s='ls -FG'
 alias blog='vi ~/n/blog/$(y-m-d)'
 
+alias make='make -j3' # dual core!
+
 export TEST_R3DB_USER=root
 export TEST_R3DB_PASSWD=test
 export TEST_R3DB_DBNAME=test_r3
 
+export XLISPPATH=/usr/local/src/nyquist/runtime:/usr/local/src/nyquist/lib
+
 src=/usr/local/src
-dl=/usr/local/dl
+dl=/Users/Shared/elaforge/dl

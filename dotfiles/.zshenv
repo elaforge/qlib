@@ -3,6 +3,8 @@
 unhash -am '*'
 unhash -fm '*'
 bindkey -d
+# not sure where or how this gets set, but it messes up automatic path stuff
+unset MANPATH
 
 host=$(/bin/hostname -s)
 if which dnsdomainname >/dev/null; then
