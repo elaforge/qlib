@@ -3,7 +3,7 @@ set all&
 set nocompatible " no vi compatibility
 set foldignore=
 " for unknown reasons the all& above doesn't do this
-colorscheme default
+" colorscheme default
 
 set ts=4 sw=4 noet
 " set ts=2 sw=2 et
@@ -25,6 +25,9 @@ set hidden
 
 set term=$TERM
 syntax clear
+
+set completeopt=preview " vim started adding an annoying menu by default
+" let loaded_matchparen = 1 " stop auto paren highlighting
 
 mapclear
 mapclear!

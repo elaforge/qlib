@@ -35,6 +35,8 @@ au BufEnter	*/google3/*.py		setl ts=2 sw=2 et softtabstop=2
 au BufEnter */google3/*.ptl     setl ts=2 sw=2 et softtabstop=2
 au BufEnter */google3/*.proto   setl ts=2 sw=2 et softtabstop=2
 au BufEnter */google3/*.js      setl ts=2 sw=2 et softtabstop=2 foldmethod=indent
+au BufEnter */google3/*.h       setl ts=2 sw=2 et softtabstop=2
+au BufEnter */google3/*.cc      setl ts=2 sw=2 et softtabstop=2
 
 " python with indent and folding works nicely for outline
 au BufEnter TODO				so ~/.vim/py.vim
