@@ -1,34 +1,26 @@
 #!/bin/zsh
 
 db=${1:-mldb_repl}
+port=8102
 
 red=rgbi:.9/.7/.6
 blue=rgbi:.7/.7/.9
 green=rgbi:.7/.9/.6
 
 case $db in
-  mldb_repl)
+  repl)
     color=$green
     ip=$(~/find_mldb_ip mdbsqlro)
-    args="-umdb_ro -pmdb_ro -h$ip -P9200 -A mdb"
+    args="-umdb_ro -pmdb_ro -h$ip -P$port -A mdb"
     ;;
-  mldb)
-    color=$green
-	ip=$(~/find_mldb_ip mdbsql)
-    args="-h$ip -P9200 -umdb_ro -pmdb_ro mdb"
-    ;;
-  mldb_rw)
+  rw)
     color=$red
-    args="-h127.0.0.1 -P9201 -umldb_rw -p mdb"
+    args="-hmdb3db.prodz.google.com -P$port -uhwops-systems -p -A -D mdb"
     ;;
   local)
     color=$blue
     args="-uroot -ptest mdb"
     ;;
-  r3)
-    color=$red
-    args='-uroot -pr3test -P9200 -hcgb25 mdb'
-	;;
   *)
     echo unknown db: $db
     exit 1
@@ -36,4 +28,5 @@ esac
 
 cmd="mysql $args || (echo -n 'crashed! '; read)"
 
+echo $cmd
 xterm -bg $color -title "mysql $db" -geometry 248x48 -e $cmd &

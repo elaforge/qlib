@@ -1,5 +1,7 @@
 g3=/home/build/google3
 
+export qtraceback_truncate=128 # display lots of arglist context
+
 function mldb {
   mysql -hmdbsqlro -P9200 -A mdb
 }
@@ -8,6 +10,8 @@ function mldb {
 alias vi='command vim -X -u $HOME/.vimrc'
 
 alias runtests='tools/make-dbg runtests'
+
+alias submit-queue=/home/build/google3/ops/hardware/r3/test/submit-queue
 
 # 'friends' is empty, so disable ~ completion since it's so slow
 compctl -T -x 's[~] C[0,[^/]#]' -k friends -S/ -tn
