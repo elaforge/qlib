@@ -1,1 +1,8 @@
-source $VIMRUNTIME/indent/java.vim
+setl cindent
+
+setl foldmethod=indent
+setl foldnestmax=3
+
+setl comments=s1:/*,mb:*,ex:*/,://
+vm ,c :!cmt //<cr>
+vm ,C :!uncmt //<cr>
