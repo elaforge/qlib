@@ -1,6 +1,13 @@
 #!/bin/zsh
+
 start=$(date +%s.%N)
-cd $(command pwd)
+# cd $(command pwd)
+# g4 insists on a /home/me/ path, but compute machines for whatever reason
+# give you /auto/filer/something
+mangle=$(command pwd)
+mangle="${mangle/\/auto\/*\/elaforge\///home/elaforge/}"
+cd $mangle
+
 if /usr/local/symlinks/g4 "$@"; then
   end=$(date +%s.%N)
   echo $(($end - $start)) g4 "$@" >>~/.g4_time_wastage

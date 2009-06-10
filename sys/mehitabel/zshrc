@@ -22,7 +22,7 @@ export MOZ_DISABLE_PANGO=1
 
 alias python=python2.4
 alias ct='ctags --language-force=python **/*.py **/*.ptl'
-alias q_test='~/p/common/quixote/q_test.py'
+alias q_test='~/p/1common/quixote/q_test.py'
 alias avi='vim -u $HOME/.vimrc --servername vim'
 
 alias ls=donex

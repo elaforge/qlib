@@ -1,2 +1,3 @@
 #!/bin/sh
-exec grunt -c --noserial_failures --test_retry_limit=0 $*
+exec grunt -z --nofallback $* # -r would turn on forge
+# exec grunt -c --noserial_failures --test_retry_limit=0 $*

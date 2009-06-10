@@ -1,3 +1,7 @@
 if [ "$DISPLAY" ]; then
   xset b 100 100 30
 fi
+
+if test -d /google/src/status; then
+	srcfs login >/dev/null
+fi
