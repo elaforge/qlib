@@ -2,6 +2,12 @@ set editing-mode vi
 set horizontal-scroll-mode On
 set bell-style none
 
+# make chinese input work in iterm
+set meta-flag on
+set input-meta on
+set output-meta on
+set convert-meta off
+
 $if python
     tab: "    "
 $endif
