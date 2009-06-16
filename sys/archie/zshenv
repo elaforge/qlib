@@ -1,3 +1,6 @@
+# make chinese display correctly in iterm
+export LANG=en_US.UTF-8
+
 path=(/opt/local/bin /usr/local/mysql/bin ~/.cabal/bin $path)
 pythonpath=($pythonpath ~/p/src)
 
