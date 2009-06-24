@@ -17,8 +17,7 @@ _trydot $qlib/dotfiles/set-ls-colors $TERM
 
 fignore=(.o .pyc .pyo .hi .class)
 
-# stty erase '^H'
-stty erase ''
+stty erase '^H'
 # stty susp '^Z'
 # stty intr '^C'
 stty -ixon # turn off annoying software flow control
