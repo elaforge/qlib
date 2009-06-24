@@ -1,8 +1,0 @@
-#!/bin/zsh
-
-cmd=${1%.py}
-shift
-path=$(pwd -r)/$cmd
-binpath=${path/google3/google3\/bin}
-
-exec $binpath "$@"

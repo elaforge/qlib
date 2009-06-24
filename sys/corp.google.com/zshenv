@@ -1,3 +1,6 @@
+# Turn off google setup crap.
+google_zsh_flysolo=true
+
 # path=($path /home/build/public/google/tools /home/build/public/eng/perforce)
 path=($path /usr/local/scripts /usr/local/symlinks)
 path=($path /usr/local/stash/src/ghc-6.4/bin/i386-unknown-linux)
