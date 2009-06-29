@@ -21,7 +21,7 @@ set wrap
 
 " eliminate annoying press enter to continue msgs with long paths
 set shortmess=atI
-set cmdheight=1
+set cmdheight=2
 
 set wildmode=longest,list
 set wildignore=*.o,*.pyc,*.pyo,*.hi,*.class
@@ -70,6 +70,7 @@ vm ,C :!uncmt \\#<cr>
 " ,d insert current date
 nm ,d   :r !date<cr>
 nm ,D	:r !date +\%Y-\%m-\%d<cr>
+nm ,t   :r !date +\%H:\%M:\%S<cr>
 
 " ,w clear out trailing whitespace
 " and lines ending in whitespace
