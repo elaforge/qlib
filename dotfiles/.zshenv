@@ -35,6 +35,6 @@ function _trydot {
 _trydot $qlib/sys/$host/zshenv
 _trydot $qlib/sys/$domain/zshenv
 
-export PAGER='less -is'
+export PAGER=less
 export EDITOR=vim
 export LESS=-f

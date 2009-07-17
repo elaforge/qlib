@@ -21,7 +21,7 @@ set wrap
 
 " eliminate annoying press enter to continue msgs with long paths
 set shortmess=atI
-set cmdheight=2
+set cmdheight=1
 
 set wildmode=longest,list
 set wildignore=*.o,*.pyc,*.pyo,*.hi,*.class
@@ -29,6 +29,11 @@ set hidden
 
 set term=$TERM
 syntax clear
+" trailing spaces are always bad
+syntax match ErrorMsg   display "\s\+$"
+" mixed tabs and spaces
+syntax match ErrorMsg   display " \+\t"
+syntax match ErrorMsg   display "\t\+ "
 
 set completeopt=preview " vim started adding an annoying menu by default
 " let loaded_matchparen = 1 " stop auto paren highlighting

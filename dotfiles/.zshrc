@@ -10,6 +10,13 @@ alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
 
+# cd to copy and pasted prompt
+function ccd {
+    # skip over % prompt and get the first word afterwards
+    if [[ $1 = *% ]]; then shift; fi
+    cd $1
+}
+
 PS1='%B%(?..%?)%#%b '
 RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
