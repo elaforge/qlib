@@ -11,3 +11,11 @@ export XLISPPATH=/usr/local/src/nyquist/runtime:/usr/local/src/nyquist/lib
 
 src=/usr/local/src
 dl=/Users/Shared/elaforge/dl
+
+function darcs {
+    if [[ -e tools/darcs ]]; then
+        tools/darcs "$@"
+    else
+        command darcs "$@"
+    fi
+}
