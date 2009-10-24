@@ -11,11 +11,11 @@ setl smarttab
 " haskell has lots of \(...) so don't do the special \ treatment
 setl cpoptions+=M
 
-vm ,c :!cmt --<cr>
-vm ,C :!uncmt --<cr>
+vm <buffer> ,c :!cmt --<cr>
+vm <buffer> ,C :!uncmt --<cr>
 
 " intentional trailing space
-ino ;i import qualified 
+ino <buffer> ;i import qualified 
 
 " Make gf work on module import lines.
 setl includeexpr=substitute(v:fname,'\\.','/','g')

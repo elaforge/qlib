@@ -1,14 +1,14 @@
 setl cindent
-iabbr #i #include
-iabbr #d #define
+iabbr <buffer> #i #include
+iabbr <buffer> #d #define
 
 setl foldmethod=indent
 setl foldnestmax=3
 setl foldignore=# " ignore preprocessor
 
 setl comments=s1:/*,mb:*,ex:*/,://
-vm ,c :!cmt //<cr>
-vm ,C :!uncmt //<cr>
+vm <buffer> ,c :!cmt //<cr>
+vm <buffer> ,C :!uncmt //<cr>
 
 " setl foldmethod=marker
 " setl foldmarker={,}
