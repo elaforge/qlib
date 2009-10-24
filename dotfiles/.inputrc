@@ -2,6 +2,9 @@ set editing-mode vi
 set horizontal-scroll-mode On
 set bell-style none
 
+# by default "vi mode" ^w does a non-vi-ish delete until whitespace
+"\C-w": backward-kill-word
+
 # make chinese input work in iterm
 set meta-flag on
 set input-meta on
@@ -10,15 +13,4 @@ set convert-meta off
 
 $if python
     tab: "    "
-$endif
-
-$if rbc
-    tab: "    "
-$endif
-
-$if rdln
-    set keymap vi-command
-    C-u: dump-functions
-    set keymap vi-insert
-    "\'": smart-quote
 $endif
