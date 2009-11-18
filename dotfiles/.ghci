@@ -1,0 +1,2 @@
+-- :R is the same as :r
+:def R (\args -> return (":r " ++ args))
