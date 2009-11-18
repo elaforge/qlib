@@ -1,6 +1,9 @@
 #!/bin/zsh
 cd
-for fn in .fvwm2rc .inputrc .vim .vimrc .zlogin .zshenv .zshrc .haskeline; do
+dotfiles=(
+    .fvwm2rc .inputrc .vim .vimrc .zlogin .zshenv .zshrc .haskeline .ghci
+)
+for fn in $dotfiles; do
 	rm -rf $fn
 	ln -s qlib/dotfiles/$fn
 done
