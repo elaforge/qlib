@@ -1,8 +1,0 @@
-#!/bin/sh
-
-export MDB_REMOTE_HOST=`hostname`
-export MDB_REMOTE_USER=elaforge
-export MDB_REMOTE_SHELL=$stash/google3/production/mdb/mdb_shell.dev
-export MDB_BIN=$stash/google3/linux-dbg/production/mdb/mdb.par
-exec $MDB_BIN "$@"
-

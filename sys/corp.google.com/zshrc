@@ -3,7 +3,21 @@ g3=/home/build/google3
 export qtraceback_truncate=128 # display lots of arglist context
 
 function mldb {
-  mysql -hmdbsqlro -P9200 -A mdb
+    mysql -hmdbsqlro -P9200 -A mdb
+}
+
+function crd {
+    local pwd=`pwd`
+    if [[ $PWD = */google3/* || $PWD = */google3 ]]; then
+        if [[ $PWD = */READONLY/* || $PWD = */READONLY ]]; then
+            cd READONLY ''
+        else
+            cd google3 READONLY/google3
+        fi
+    else
+        echo not in google3
+        return 1
+    fi
 }
 
 # don't check for silly X, and don't use silly google vimrc
