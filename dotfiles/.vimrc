@@ -1,7 +1,10 @@
-set t_ku=[A
-set t_kd=[B
-set t_kr=[C
-set t_kl=[D
+if $host == "archie"
+    " I don't know why arrow keys are broken on the mac terminal.
+    set t_ku=[A
+    set t_kd=[B
+    set t_kr=[C
+    set t_kl=[D
+endif
 
 au!
 
@@ -33,18 +36,7 @@ au BufEnter *_todo              so ~/.vim/todo.vim
 
 au BufRead,BufNewFile Makefile  setl noexpandtab
 
-" google BUILD files are also python syntax
-au BufEnter BUILD               so ~/.vim/py.vim
-au BufEnter BUILD               setl ts=2 sw=2 et softtabstop=2
-
-" googleish tiny indent
-au BufEnter */google3/*.py      setl ts=2 sw=2 et softtabstop=2
-au BufEnter */google3/*.ptl     setl ts=2 sw=2 et softtabstop=2
-au BufEnter */google3/*.proto   setl ts=2 sw=2 et softtabstop=2
-au BufEnter */google3/*.js      setl ts=2 sw=2 et softtabstop=2 foldmethod=indent
-au BufEnter */google3/*.h       setl ts=2 sw=2 et softtabstop=2
-au BufEnter */google3/*.cc      setl ts=2 sw=2 et softtabstop=2
-
+au BufRead,BufNewFile */google3/* so ~/.vim/google.vim
 
 " reset everything to defaults
 set all&
@@ -133,3 +125,11 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 nm ,4   :se ts=4 sw=4 noet nosmarttab sts=4<cr>
 
 so ~/.vim/global.vim
+
+if $domain =~ '.*\.corp\.google\.com'
+    " gtags script doesn't like to be called twice, so I can't call from
+    " google.vim
+    source /home/build/nonconf/google3/tools/tags/gtags.vim
+    nmap <silent> <c-j> :exec 'Gtag ' . expand('<cword>')<cr>
+    " :Gtlistcallers to search for callers
+endif

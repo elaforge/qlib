@@ -12,6 +12,7 @@ if which dnsdomainname >/dev/null; then
 else
 	domain=none
 fi
+export host domain
 oname=$(~/bin/oname)
 qlib=~/qlib
 
