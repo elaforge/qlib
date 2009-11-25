@@ -2,7 +2,7 @@
 
 cmd=${1%.py}
 shift
-cwd=$(pwd -r)/$cmd
-binpath=${cwd/google3/google3\/blaze-bin}
+cwd=$(builtin pwd -r)/$cmd
+binpath=${cwd/\/google3\//\/google3\/blaze-bin\/}
 
 exec $binpath "$@"
