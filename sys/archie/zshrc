@@ -2,6 +2,7 @@ alias s='ls -FG'
 alias blog='vi ~/n/blog/$(y-m-d)'
 
 alias make='make -j3' # dual core!
+alias d=darcs
 
 export TEST_R3DB_USER=root
 export TEST_R3DB_PASSWD=test
@@ -10,7 +11,7 @@ export TEST_R3DB_DBNAME=test_r3
 export XLISPPATH=/usr/local/src/nyquist/runtime:/usr/local/src/nyquist/lib
 
 src=/usr/local/src
-dl=/Users/Shared/elaforge/dl
+dl=$HOME/Downloads
 
 function darcs {
     if [[ -e tools/darcs ]]; then

@@ -1,3 +1,5 @@
+unset MANPATH
+
 alias s='command ls -F --color=tty'
 alias ll='s -l'
 alias la='s -a'
@@ -22,12 +24,12 @@ RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
 _trydot $qlib/dotfiles/set-ls-colors $TERM
 
-fignore=(.o .pyc .pyo .hi .class)
+fignore=(.o .pyc .pyo .hi .hi-boot .o-boot .class)
 
 stty erase '^H'
 # stty susp '^Z'
 # stty intr '^C'
-stty -ixon # turn off annoying software flow control
+stty -ixon -ixoff # turn off annoying software flow control
 
 bindkey -v
 bindkey		'' backward-delete-char
