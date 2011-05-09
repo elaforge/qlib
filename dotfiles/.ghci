@@ -1,2 +1,17 @@
+:set stop :list
+
+:set -fno-warn-overlapping-patterns -w -fwarn-unused-binds -fwarn-unused-imports
+:set -fwarn-incomplete-patterns
+:set -fno-monomorphism-restriction
+
 -- :R is the same as :r
 :def R (\args -> return (":r " ++ args))
+
+-- :L loads the file currently edited in vim
+
+-- Foo/Bar.hs -> Foo.Bar
+let mangle_file = map (\c -> if c == '/' then '.' else c) . System.FilePath.dropExtension
+
+let load_vim = do { home <- System.Environment.getEnv "HOME"; file <- readFile (home ++ "/.vim/current_hs"); return (":load " ++ mangle_file file) }
+
+:def L (\_ -> load_vim)
