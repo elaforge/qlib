@@ -1,9 +1,9 @@
 if $host == "archie"
     " I don't know why arrow keys are broken on the mac terminal.
-    set t_ku=[A
-    set t_kd=[B
-    set t_kr=[C
-    set t_kl=[D
+    " set t_ku=[A
+    " set t_kd=[B
+    " set t_kr=[C
+    " set t_kl=[D
 endif
 
 au!
@@ -16,6 +16,8 @@ au BufRead,BufNewFile *.c       so ~/.vim/c.vim
 au BufRead,BufNewFile *.h       so ~/.vim/c.vim
 au BufRead,BufNewFile *.m       so ~/.vim/c.vim
 au BufRead,BufNewFile *.cc      so ~/.vim/c.vim
+au BufRead,BufNewFile *.mm      so ~/.vim/c.vim
+au BufRead,BufNewFile *.m       so ~/.vim/c.vim
 au BufRead,BufNewFile *.cpp     so ~/.vim/c.vim
 au BufRead,BufNewFile *.cxx     so ~/.vim/c.vim
 
@@ -34,7 +36,7 @@ au BufRead,BufNewFile *.xml     so ~/.vim/xml.vim
 au BufEnter TODO                so ~/.vim/todo.vim
 au BufEnter *_todo              so ~/.vim/todo.vim
 
-au BufRead,BufNewFile Makefile  setl noexpandtab
+au BufRead,BufNewFile Makefile  setl noexpandtab sw=4 ts=4
 
 au BufRead,BufNewFile */google3/* so ~/.vim/google.vim
 
@@ -50,12 +52,16 @@ set foldignore=
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
 
-set ts=4 sw=4 expandtab smarttab
-" set ts=2 sw=2 et
+set ts=8 sw=4 expandtab smarttab
 set bs=2 helpheight=99 showcmd ruler gdefault
 set showmatch incsearch hlsearch
 set nostartofline fileformats=unix,dos,mac
 " set autowrite
+
+" only one indent in parens, but I actually like the 2*
+" set cinoptions=(4
+" c indent continuation lines are just a single indent + 0 spaces
+" set cinoptions=+0
 
 set visualbell t_vb=
 set comments=
@@ -74,14 +80,16 @@ set shortmess=atI
 set cmdheight=1
 
 set wildmode=longest,list
-set wildignore=*.o,*.pyc,*.pyo,*.hi,*.class
+set wildignore=*.o,*.pyc,*.pyo,*.hi,*.hi-boot,*.o-boot,*.class
 set hidden
 
 mapclear
 mapclear!
 
 nm ,e	:edit 
+nm ;e   :edit <C-R>=expand("%:h") . "/" <CR>
 nm ,o	:buffer 
+nm ;o   :buffer <C-R>=expand("%:h") . "/" <CR>
 nm ,l	:ls<cr>
 nm ,u	:bdelete<cr>
 
@@ -102,11 +110,9 @@ nm <silent> ,s :nohlsearch<cr>:match<cr>
 nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
 
 nm ,c V,c
-nm ,C V,C
 
 " # is default comment
 vm ,c :!cmt \\#<cr>
-vm ,C :!uncmt \\#<cr>
 
 
 " ,d insert current date
@@ -125,6 +131,7 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 nm ,4   :se ts=4 sw=4 noet nosmarttab sts=4<cr>
 
 so ~/.vim/global.vim
+so ~/.vim/plugin/*.vim
 
 if $domain =~ '.*\.corp\.google\.com'
     " gtags script doesn't like to be called twice, so I can't call from
