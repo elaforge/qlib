@@ -8,7 +8,6 @@ setl foldignore=# " ignore preprocessor
 
 setl comments=s1:/*,mb:*,ex:*/,://
 vm <buffer> ,c :!cmt //<cr>
-vm <buffer> ,C :!uncmt //<cr>
 
 " setl foldmethod=marker
 " setl foldmarker={,}
