@@ -45,9 +45,9 @@ set all&
 syntax clear
 
 set completeopt=preview " vim started adding an annoying menu by default
-" let loaded_matchparen = 1 " stop auto paren highlighting
 
 set nocompatible " no vi compatibility
+set cpoptions= " turn off more vi compatibility
 set foldignore=
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
@@ -55,7 +55,6 @@ set ts=8 sw=4 expandtab smarttab
 set bs=2 helpheight=99 showcmd ruler gdefault
 set showmatch incsearch hlsearch
 set nostartofline fileformats=unix,dos,mac
-set cpoptions= " don't need no annoying vi compatibility
 
 " only one indent in parens, but I actually like the 2*
 " set cinoptions=(4
@@ -119,8 +118,7 @@ nm <silent> ,d   :r !date<cr>
 nm <silent> ,D	:r !date +\%Y-\%m-\%d<cr>
 nm <silent> ,t   :r !date +\%H:\%M:\%S<cr>
 
-" ,w clear out trailing whitespace
-" and lines ending in whitespace
+" clear out trailing whitespace and lines ending in whitespace
 nm <silent> ,w   :%s/[\t ]\+$//e<cr>
 
 " ,p toggle paste mode
