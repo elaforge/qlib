@@ -51,12 +51,11 @@ set nocompatible " no vi compatibility
 set foldignore=
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
-
 set ts=8 sw=4 expandtab smarttab
 set bs=2 helpheight=99 showcmd ruler gdefault
 set showmatch incsearch hlsearch
 set nostartofline fileformats=unix,dos,mac
-" set autowrite
+set cpoptions= " don't need no annoying vi compatibility
 
 " only one indent in parens, but I actually like the 2*
 " set cinoptions=(4
@@ -112,7 +111,7 @@ nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
 nm ,c V,c
 
 " # is default comment
-vm ,c :!cmt \\#<cr>
+vm ,c :!cmt '\\#'<cr>
 
 
 " ,d insert current date
@@ -139,4 +138,13 @@ if $domain =~ '.*\.corp\.google\.com'
     source /home/build/nonconf/google3/tools/tags/gtags.vim
     nmap <silent> <c-j> :exec 'Gtag ' . expand('<cword>')<cr>
     " :Gtlistcallers to search for callers
+endif
+
+if has('python')
+    py import sys, os, vim
+    py sys.path.insert(0, os.environ['HOME'] + '/.vim/py')
+    py import swapwords
+
+    nm <silent> <c-s> :py swapwords.vim_swap_word(vim)<cr>
+    nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
 endif
