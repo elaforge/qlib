@@ -3,6 +3,7 @@ alias blog='vi ~/n/blog/$(y-m-d)'
 
 alias make='make -j3' # dual core!
 alias d=darcs
+alias vim=/usr/local/bin/vim
 
 export TEST_R3DB_USER=root
 export TEST_R3DB_PASSWD=test

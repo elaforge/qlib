@@ -12,6 +12,8 @@ alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
 
+alias hlint="command hlint --ignore='Use camelCase'"
+
 # cd to copy and pasted prompt
 function ccd {
     # skip over % prompt and get the first word afterwards
