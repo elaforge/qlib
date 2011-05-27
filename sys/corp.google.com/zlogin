@@ -17,3 +17,7 @@ function start_agent {
 }
 
 start_agent
+
+# -q for quiet mode (only errors are printed out) and [ "$PS1" ] for running
+# only during interactive login shells
+# [ "$PS1" ] && /home/build/static/projects/loas/setup-corp-loasd.sh -q
