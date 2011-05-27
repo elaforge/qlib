@@ -30,15 +30,15 @@ au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
+" close enough...
+au BufRead,BufNewFile *.js      so ~/.vim/java.vim
 au BufRead,BufNewFile *.xml     so ~/.vim/xml.vim
-
+au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
 
 au BufEnter TODO                so ~/.vim/todo.vim
 au BufEnter *_todo              so ~/.vim/todo.vim
 
 au BufRead,BufNewFile Makefile  setl noexpandtab sw=4 ts=4
-
-au BufRead,BufNewFile */google3/* so ~/.vim/google.vim
 
 " reset everything to defaults
 set all&
@@ -106,6 +106,8 @@ nm gz   :wa<cr>
 
 nm <silent> ,s :nohlsearch<cr>:match<cr>
 nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
+" nm <Leader>* :let @/='\<'.expand('<cword>').'\>'<CR>
+
 
 nm ,c V,c
 
@@ -130,14 +132,6 @@ nm ,4   :se ts=4 sw=4 noet nosmarttab sts=4<cr>
 so ~/.vim/global.vim
 so ~/.vim/plugin/*.vim
 
-if $domain =~ '.*\.corp\.google\.com'
-    " gtags script doesn't like to be called twice, so I can't call from
-    " google.vim
-    source /home/build/nonconf/google3/tools/tags/gtags.vim
-    nmap <silent> <c-j> :exec 'Gtag ' . expand('<cword>')<cr>
-    " :Gtlistcallers to search for callers
-endif
-
 if has('python')
     py import sys, os, vim
     py sys.path.insert(0, os.environ['HOME'] + '/.vim/py')
@@ -145,4 +139,8 @@ if has('python')
 
     nm <silent> <c-s> :py swapwords.vim_swap_word(vim)<cr>
     nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
+endif
+
+if $domain =~ '.*\.corp\.google\.com'
+    so ~/.vim/google.vim
 endif
