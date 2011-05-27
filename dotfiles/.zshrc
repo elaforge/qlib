@@ -11,6 +11,7 @@ alias vi='command vim -X'
 alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
+alias d=darcs
 
 alias hlint="command hlint --ignore='Use camelCase'"
 
