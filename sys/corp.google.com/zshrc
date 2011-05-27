@@ -1,3 +1,5 @@
+umask 022  # google setup started setting umask of 027
+
 g3=/home/build/google3
 
 export qtraceback_truncate=128 # display lots of arglist context
@@ -6,8 +8,7 @@ function mldb {
     mysql -hmdbsqlro -P9200 -A mdb
 }
 
-function crd {
-    local pwd=`pwd`
+function cdr {
     if [[ $PWD = */google3/* || $PWD = */google3 ]]; then
         if [[ $PWD = */READONLY/* || $PWD = */READONLY ]]; then
             cd READONLY ''
@@ -20,12 +21,28 @@ function crd {
     fi
 }
 
+function cdt {
+    if [[ $PWD = */google3/java/* ]]; then
+        cd java javatests
+    elif [[ $PWD = */google3/javatests/* ]]; then
+        cd javatests java
+    else
+        echo not in google3/java
+        return 1
+    fi
+}
+
+local proxy=http://proxyconfig.corp.google.com/wpad.dat
+
 # don't check for silly X, and don't use silly google vimrc
 alias vi='command vim -X -u $HOME/.vimrc'
+alias google-chrome="command google-chrome --proxy-pac-url=$proxy"
+alias snip='vi ~/n/snip/$(y-m-d)'
 
-alias runtests='tools/make-dbg runtests'
-
-alias submit-queue=/home/build/google3/ops/hardware/r3/test/submit-queue
+# build with special flags for flume
+function fbuild {
+    blaze build --nolegacy_java_swigdeps $1_deploy.jar
+}
 
 # 'friends' is empty, so disable ~ completion since it's so slow
 compctl -T -x 's[~] C[0,[^/]#]' -k friends -S/ -tn
@@ -34,3 +51,15 @@ compctl -T -x 's[~] C[0,[^/]#]' -k friends -S/ -tn
 # function g4 {
 # 	(cd $(command pwd); command g4 "$@")
 # }
+
+function bpath {
+    local cmd=${1%.py}
+    local cwd=$(builtin pwd -r)/$cmd
+    echo ${cwd/\/google3\//\/google3\/blaze-bin\/}
+}
+
+function brun {
+    local cmd=$(bpath $1)
+    shift
+    $cmd "$@"
+}
