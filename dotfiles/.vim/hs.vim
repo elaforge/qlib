@@ -22,7 +22,7 @@ ino <buffer> ;i import qualified
 setl includeexpr=substitute(v:fname,'\\.','/','g')
 setl suffixesadd=.hsc,.hs
 
-nm <silent> ,t :call ToggleTest()<cr>
+nm <silent> ,t :exec ToggleTest()<cr>
 nm <silent> ,a :call FixImports()<cr>
 
 source ~/.vim/hs-syntax.vim
@@ -56,7 +56,7 @@ function FixImports()
     " Using a tmp file means I don't have to save the buffer, which the user
     " didn't ask for.
     execute 'write' tmp
-    execute 'silent !FixImports' expand('%') '<' tmp '>' out '2>' err
+    execute 'silent !FixImports -v' expand('%') '<' tmp '>' out '2>' err
     let errs = readfile(err)
     if v:shell_error == 0
         " Is there an easier way to replace the buffer with a file?
@@ -79,5 +79,3 @@ function FixImports()
 endfunction
 
 au BufEnter *.hs call SaveFile()
-
-

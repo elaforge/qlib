@@ -25,7 +25,7 @@ considered a single token).
 import re, string
 
 # This may need to be adjusted for languages with other rules for identifiers.
-word_chars = string.letters + string.digits + '_'
+word_chars = string.letters + string.digits + '_.'
 
 # vim_* functions take the 'vim' module and try to adapt this to vim's awkward
 # list of lines API.  The tokenizer could probably be adapted to (row, col)
@@ -45,7 +45,7 @@ def vim_swap_delim(vim):
             swap_delim(text, start, '->', [DEDENT]))
     else:
         vim_call(vim, lambda text, start:
-            swap_delim(text, start, ',', '])}'))
+            swap_delim(text, start, ',', list('])}')))
 
 def type_signature(lines, i):
     """Guess if lines[i] is a type signature by looking for ::s, either on

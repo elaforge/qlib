@@ -1,4 +1,4 @@
 set lisp et ai
 set comments=:;
 
-vm ,c :!cmt \;<cr>
+vm ,c :!cmt '\\;'<cr>
