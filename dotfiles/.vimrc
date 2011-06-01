@@ -117,11 +117,11 @@ vm ,c :!cmt '\\#'<cr>
 
 " ,d insert current date
 nm <silent> ,d   :r !date<cr>
-nm <silent> ,D	:r !date +\%Y-\%m-\%d<cr>
-nm <silent> ,t   :r !date +\%H:\%M:\%S<cr>
+nm <silent> ,D	:r !date +\\%Y-\\%m-\\%d<cr>
+nm <silent> ,t   :r !date +\\%H:\\%M:\\%S<cr>
 
 " clear out trailing whitespace and lines ending in whitespace
-nm <silent> ,w   :%s/[\t ]\+$//e<cr>
+nm <silent> ,w   :%s/[\\t ]\\+$//e<cr>
 
 " ,p toggle paste mode
 nm ,p   :se invpaste<cr>:se paste?<cr>
