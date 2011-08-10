@@ -1,7 +1,7 @@
 unset MANPATH
 
 alias s='command ls -F --color=tty'
-alias ll='s -l'
+alias ll='s -lh'
 alias la='s -a'
 alias ss='s -Ss'
 alias l=less
@@ -13,7 +13,8 @@ alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
 alias d=darcs
 
-alias hlint="command hlint --ignore='Use camelCase'"
+alias hlint="command hlint --ignore='Use camelCase' --ignore='Use fromMaybe' \
+    --ignore='Use &&&' --ignore='Use ***' --ignore='Use uncurry'"
 
 # cd to copy and pasted prompt
 function ccd {
@@ -22,7 +23,8 @@ function ccd {
     cd $1
 }
 
-PS1='%B%(?..%?)%#%b '
+# PS1='%B%(?..%?)%#%b '
+PS1='%K{cyan}%(?..%?)%# %k'
 RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
 _trydot $qlib/dotfiles/set-ls-colors $TERM
