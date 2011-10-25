@@ -73,12 +73,7 @@ function conf {
 	ac_cv_prog_cc_g=no ac_cv_prog_cxx_g=no ./configure $*
 }
 
-if [[ $TERM = linux ]]; then
-	LESS=-MqE
-else
-	LESS=-Mq
-fi
-export LESS
+export LESS=-Mq
 
 if [[ $TERM == xterm ]]; then
 	function chpwd {
