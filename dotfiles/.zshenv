@@ -8,9 +8,9 @@ unset MANPATH
 
 host=$(/bin/hostname -s)
 if which dnsdomainname >/dev/null; then
-	domain=$(dnsdomainname)
+    domain=$(dnsdomainname)
 else
-	domain=none
+    domain=none
 fi
 export host domain
 oname=$(~/bin/oname)
@@ -23,14 +23,15 @@ export PYTHONPATH
 typeset -U path pythonpath
 export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 
-path=($qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin ~/bin
-	/usr/local/bin $path)
+path=(/bin /sbin /usr/bin
+    $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
+    ~/bin ~/.cabal/bin /usr/local/bin)
 pythonpath=(~/lib/python)
 
 function _trydot {
-	if [[ -r $1 ]]; then
-		. $1
-	fi
+    if [[ -r $1 ]]; then
+        . $1
+    fi
 }
 
 _trydot $qlib/sys/$host/zshenv
