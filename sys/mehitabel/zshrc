@@ -7,56 +7,19 @@ dl=$stash/dl
 # interactive only shell vars and path elements go here
 export PLAN9=$stash/plan9
 path=($path $stash/plan9/bin)
-export PRINTER=thomasmoore
-
-export TEST_MDB_DBNAME=mdb
-export TEST_MDB_USER=root
-export TEST_MDB_PASSWD=test
-
-export TEST_R3DB_DBNAME=test_r3
-export TEST_R3DB_USER=root
-export TEST_R3DB_PASSWD=test
 
 # improve firefox performance
 export MOZ_DISABLE_PANGO=1
 
-alias python=python2.4
 alias ct='ctags --language-force=python **/*.py **/*.ptl'
-alias q_test='~/p/1common/quixote/q_test.py'
 alias avi='vim -u $HOME/.vimrc --servername vim'
 
-alias ls=donex
-alias xmodmap=donex
-alias setxkbmap=donex
-alias vim=donex
+# alias ls=donex
+# alias xmodmap=donex
+# alias setxkbmap=donex
+# alias vim=donex
 
 function donex {
 	touch ~/CAUGHT\!
 	xlock >/dev/null 2>&1
-}
-
-function mdbro {
-  if [ "$1" = "m*" ]; then
-    mysql -umdb_ro -pmdb_ro -h127.0.0.1 -P9201 mdb
-  else
-    mysql -umdb_ro -pmdb_ro -hmdbsqlro.prodz.google.com -P9200 mdb
-  fi
-}
-
-function mdbrw {
-  port=$1
-  if [ -z "$port" ]; then
-    port=9201
-  fi
-  mysql -h127.0.0.1 -P$port -umdlb_rw -p -A mdb
-}
-
-function pysearch {
-	gsearch -n -f '\.py$' "$@"
-}
-
-
-function qtp {
-  q_test --app_dir ~/p/tp2 --setup_test ~/p/tp2/test/setup_replay.py $1 \
-    __login=test __passwd=test $2 $3 $4 $5
 }
