@@ -20,3 +20,13 @@ function darcs {
         command darcs "$@"
     fi
 }
+
+function ghci {
+    if [[ -e tools/ghci ]]; then
+        tools/ghci "$@"
+    else
+        command ghci "$@"
+    fi
+}
+
+alias ghcit=tools/ghci-test
