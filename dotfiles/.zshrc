@@ -11,7 +11,11 @@ alias vi='vim -X'
 alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
+
 alias d=darcs
+alias cha='darcs changes | l'
+alias dw='darcs w -l'
+alias waf=./waf
 
 alias hlint="command hlint --ignore='Use camelCase' --ignore='Use fromMaybe' \
     --ignore='Use &&&' --ignore='Use ***' --ignore='Use uncurry'"
