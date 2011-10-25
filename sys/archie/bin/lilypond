@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ly=/app/mus/LilyPond.app/Contents/Resources/bin
+exec $ly/lilypond "$@"
