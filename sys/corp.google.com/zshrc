@@ -63,3 +63,9 @@ function brun {
     shift
     $cmd "$@"
 }
+
+function jrun {
+  local bin=$1
+  shift
+  brun $bin --jvm_flags='-Djava.util.logging.config.file=/home/elaforge/java-log-config' "$@"
+}
