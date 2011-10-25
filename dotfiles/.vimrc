@@ -11,6 +11,7 @@ au!
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
+au BufRead,BufNewFile wscript   so ~/.vim/py.vim
 au BufRead,BufNewFile *.e       so ~/.vim/e.vim
 au BufRead,BufNewFile *.c       so ~/.vim/c.vim
 au BufRead,BufNewFile *.h       so ~/.vim/c.vim
@@ -28,6 +29,8 @@ au BufRead,BufNewFile *.lisp    so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
+au BufNewFile *.hs              so ~/.vim/hs-new.vim
+au BufNewFile *.hsc             so ~/.vim/hs-new.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 " close enough...
@@ -38,7 +41,9 @@ au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
 au BufEnter TODO                so ~/.vim/todo.vim
 au BufEnter *_todo              so ~/.vim/todo.vim
 
-au BufRead,BufNewFile Makefile  setl noexpandtab sw=4 ts=4
+au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
+
+au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
 
 " reset everything to defaults
 set all&

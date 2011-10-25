@@ -50,5 +50,3 @@ hi hsDebug ctermbg=Cyan
 finish
 
 let b:current_syntax = "haskell"
-
-" Options for vi: ts=8 sw=2 sts=2 nowrap noexpandtab ft=vim
