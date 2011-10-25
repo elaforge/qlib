@@ -27,7 +27,7 @@ import inspect
 import re
 
 # each arg in the traceback is truncated to this many characters
-ARGLIST_TRUNCATE = 16
+ARGLIST_TRUNCATE = 128
 
 # regular expression to clean up file names in par's tracebacks
 # only clean up make-opt'd tracebacks.  Here's the result of this:
@@ -119,7 +119,7 @@ def print_list(extracted_list, file=None):
   _print(file, ''.join(format_list(extracted_list)))
 
 
-def print_exception(typ, val, tb, limit=None, file=None):
+def print_exception(typ, val, tb, limit=None, file=None, chain=None):
   if file is None:
     file = sys.stderr
   _print(file, ''.join(format_exception(typ, val, tb)))
