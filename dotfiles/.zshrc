@@ -11,6 +11,7 @@ alias vi='vim -X'
 alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
+alias od='od -A x -t a'
 
 alias d=darcs
 alias cha='darcs changes | l'
@@ -67,11 +68,7 @@ if [[ -r $qlib/sys/$host/hosts ]]; then
 fi
 scpary=(${^host_complete}:)
 compctl -k host_complete telnet ssh
-compctl -f + -k host_complete -S : scp
-
-function conf {
-	ac_cv_prog_cc_g=no ac_cv_prog_cxx_g=no ./configure $*
-}
+compctl -f + -k host_complete -S : scp darcs
 
 export LESS=-Mq
 
