@@ -1,8 +1,8 @@
 /* I have no idea how to tell what fonts I have, but monospace gets the
 default, which works
 */
-XTerm.vt100.faceName:			monospace:minspace=true
-XTerm.vt100.faceSize:			9
+XTerm.vt100.faceName:           monospace:minspace=true
+XTerm.vt100.faceSize:           9
 XTerm.vt100.font:               10x20
 XTerm.vt100.loginShell:         false
 XTerm.vt100.multiScroll:        true
@@ -14,7 +14,8 @@ XTerm.vt100.cursorColor:        Blue
 XTerm.vt100.background:         rgbi:.7/.7/.6
 XTerm.vt100.foreground:         Black
 XTerm.ttyModes:                 intr ^c susp ^z erase 
-XTerm.vt100.scrollBar:			false
+XTerm.vt100.scrollBar:          false
+XTerm*utf8:                     1
 
 XDvi.expert:                    true
 XDvi.keepPosition:              true
@@ -28,7 +29,7 @@ XSysinfo.showLoadAvg:           false
 XSysinfo*swap*bar.forground1:   white
 XSysinfo*swap*bar.forground2:   white
 
-GV.antialias:		true
+GV.antialias:           true
 
 Wily*p9font:            /usr/local/lib/prop.9.font
 Wily*p9fixed:           /usr/local/lib/fixed.9.font
