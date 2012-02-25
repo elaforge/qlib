@@ -135,7 +135,6 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 nm ,4   :se ts=4 sw=4 noet nosmarttab sts=4<cr>
 
 so ~/.vim/global.vim
-so ~/.vim/plugin/*.vim
 
 if has('python')
     py import sys, os, vim
