@@ -4,29 +4,9 @@ alias blog='vi ~/n/blog/$(y-m-d)'
 alias make='make -j3' # dual core!
 alias vim=/usr/local/bin/vim
 
-export TEST_R3DB_USER=root
-export TEST_R3DB_PASSWD=test
-export TEST_R3DB_DBNAME=test_r3
-
-export XLISPPATH=/usr/local/src/nyquist/runtime:/usr/local/src/nyquist/lib
-
 src=/usr/local/src
 dl=$HOME/Downloads
+doc=/usr/local/share/doc # haskell docs
 
-function darcs {
-    if [[ -e tools/darcs ]]; then
-        tools/darcs "$@"
-    else
-        command darcs "$@"
-    fi
-}
-
-function ghci {
-    if [[ -e tools/ghci ]]; then
-        tools/ghci "$@"
-    else
-        command ghci "$@"
-    fi
-}
-
-alias ghcit=tools/ghci-test
+# Look in $CWD for a bin directory.
+path=(bin $path)
