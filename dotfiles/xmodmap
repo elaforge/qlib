@@ -1,3 +1,8 @@
+! keycode 111 = Up
+! keycode 113 = Left
+! keycode 114 = Right
+! keycode 116 = Down
+
 keycode 66 = Control_L
 keycode 50 = Shift_L
 keycode 62 = Shift_R
@@ -9,14 +14,16 @@ keycode 107 = Delete
 keycode 115 = Hyper_L
 
 ! right windows key
-keycode 116 = Hyper_R
+! keycode 116 = Hyper_R
 
-clear shift
-clear control
-clear lock
-add shift = Shift_L Shift_R
-add mod5 = Hyper_L Hyper_R
-add control = Control_L Control_R
+! Recent X11s have an annoying bug that breaks this.
+! Instead use setxkbmap -option ctrl:nocaps
+! clear shift
+! clear control
+! clear lock
+! add shift = Shift_L Shift_R
+! add mod5 = Hyper_L Hyper_R
+! add control = Control_L Control_R
 
 ! make sure shift+space still inserts a space, since it's easy to type
 ! a shifted character followed by a shifted space
