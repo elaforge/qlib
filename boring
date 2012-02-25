@@ -1,0 +1,5 @@
+/__pycache__
+dotfiles/.vim/current_hs
+\.pyc$
+\.pyo
+\.swp$
