@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+ly=$1
+if lilypond $ly; then
+    xpdf -remote 127.0.0.1 ${ly%ly}pdf &
+fi
