@@ -1,12 +1,16 @@
 :set stop :list
 
-:set -fno-warn-overlapping-patterns -w -fwarn-unused-binds
-:set -fwarn-unused-imports
-:set -fwarn-incomplete-patterns
-:set -fno-monomorphism-restriction
+:set -W -fwarn-tabs
+
+-- These settings are nice, but as of ghc 7.4.1 they interfere with loading
+-- .o files, thanks to its strict recompilation checking.
+-- :set -fno-warn-overlapping-patterns -w -fwarn-unused-binds
+-- :set -fwarn-unused-imports
+-- :set -fwarn-incomplete-patterns
+-- :set -fno-monomorphism-restriction
 
 -- use (?foo x y z) in a sub-expression to get the type of the expr
-:set -XImplicitParams
+-- :set -XImplicitParams
 
 -- :R is the same as :r
 :def R (\args -> return (":r " ++ args))
