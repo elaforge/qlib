@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-exec q_test.py $1 __login=test __passwd=test $@[2,-1]
