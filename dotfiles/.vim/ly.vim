@@ -1,4 +1,5 @@
-nm gz :wa<cr>:!lilypond %<cr>
+se ai
+nm gz :wa<cr>:!relily %<cr>
 
 " lilypond has lots of \(...\) so don't do the special \ treatment
 setl cpoptions+=M
