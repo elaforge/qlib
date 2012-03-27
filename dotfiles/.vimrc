@@ -31,6 +31,8 @@ au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 au BufNewFile *.hs              so ~/.vim/hs-new.vim
 au BufNewFile *.hsc             so ~/.vim/hs-new.vim
+au BufWritePost *.hs            silent !FastTags %
+au BufWritePost *.hsc           silent !FastTags %
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 " close enough...
