@@ -6,14 +6,14 @@ XTerm.vt100.faceSize:           9
 XTerm.vt100.font:               10x20
 XTerm.vt100.loginShell:         false
 XTerm.vt100.multiScroll:        true
-XTerm.vt100.saveLines:          512
+XTerm.vt100.saveLines:          4096
 XTerm.vt100.scrollKey:          true
 XTerm.vt100.scrollTtyOutput:    false
 /* XTerm.visualBell:               true */
 XTerm.vt100.cursorColor:        Blue
 XTerm.vt100.background:         rgbi:.7/.7/.6
 XTerm.vt100.foreground:         Black
-XTerm.ttyModes:                 intr ^c susp ^z erase 
+XTerm.ttyModes:                 intr ^c susp ^z erase ^h
 XTerm.vt100.scrollBar:          false
 XTerm*utf8:                     1
 
