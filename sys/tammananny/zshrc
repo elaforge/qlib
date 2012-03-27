@@ -1,9 +1,16 @@
 src=/usr/local/src
 dl=/usr/local/src/dl
+doc=/usr/local/share/doc
 
-function o {
-	openvt -s "$@"
+function open {
+    local fn=$1
+    if [[ -e $fn/index.html ]]; then
+        fn=$fn/index.html
+    fi
+    chromium $fn
 }
 
 # Look in CWD for bin directory.
 path=(bin $path)
+
+alias make='make -j4'
