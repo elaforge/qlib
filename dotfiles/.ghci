@@ -1,6 +1,9 @@
 :set stop :list
 
 :set -W -fwarn-tabs
+-- TODO use :seti when the new ghc is out
+:set -XNoMonomorphismRestriction
+-- :set -XOverloadedStrings
 
 -- These settings are nice, but as of ghc 7.4.1 they interfere with loading
 -- .o files, thanks to its strict recompilation checking.
