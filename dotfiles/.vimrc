@@ -31,8 +31,6 @@ au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 au BufNewFile *.hs              so ~/.vim/hs-new.vim
 au BufNewFile *.hsc             so ~/.vim/hs-new.vim
-au BufWritePost *.hs            silent !FastTags %
-au BufWritePost *.hsc           silent !FastTags %
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 " close enough...
@@ -51,6 +49,7 @@ au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
 set all&
 syntax clear
 
+set exrc " read .vimrc from the current directory too
 set completeopt=preview " vim started adding an annoying menu by default
 
 set nocompatible " no vi compatibility
@@ -62,6 +61,9 @@ set ts=8 sw=4 expandtab smarttab
 set bs=2 helpheight=99 showcmd ruler gdefault
 set showmatch incsearch hlsearch
 set nostartofline fileformats=unix,dos,mac
+
+" or full,list
+set wildmode=longest,list
 
 " only one indent in parens, but I actually like the 2*
 " set cinoptions=(4
@@ -87,6 +89,8 @@ set cmdheight=1
 set wildmode=longest,list
 set wildignore=*.o,*.pyc,*.pyo,*.hi,*.hi-boot,*.o-boot,*.class
 set hidden
+
+set notagrelative " don't look for tags relative to the edited file
 
 mapclear
 mapclear!
