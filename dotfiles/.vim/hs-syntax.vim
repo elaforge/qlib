@@ -1,4 +1,4 @@
-" syntax sync fromstart " slow but accurate
+syntax sync fromstart " slow but accurate
 
 " why no need he=s+6 to restrict highlight to import string?
 syn keyword   hsKeyword   module
@@ -12,23 +12,35 @@ syn keyword   hsKeyword   do case of let in
 syn keyword   hsKeyword   if then else
 
 syn keyword   hsDebug     undefined
-syn keyword   Todo     contained TODO XXX
 
-syn match   hsLineComment      contains=Todo "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
-syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment
-syn region  hsPragma           start="{-#" end="#-}"
+syn keyword   todo     contained TODO XXX
+
+" trailing spaces are always bad
+syntax match warning   display "\s\+$"
+" mixed tabs and spaces
+syntax match warning   display " \+\t"
+syntax match warning   display "\t\+ "
+
+syn match hsLineComment contains=todo,warning
+    \ "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
+syn region  hsBlockComment contains=todo,warning,hsBlockComment
+    \ start="{-"  end="-}"
+syn region  hsPragma    start="{-#" end="#-}"
 
 " char, string (end on \n)
-syn match   hsSpecialChar contained "\\\([0-9]\+\|o[0-7]\+\|x[0-9a-fA-F]\+\|[\"\\'&\\abfnrtv]\|^[A-Z^_\[\\\]]\)"
-" crap no one uses
-" syn match   hsSpecialChar contained "\\\(NUL\|SOH\|STX\|ETX\|EOT\|ENQ\|ACK\|BEL\|BS\|HT\|LF\|VT\|FF\|CR\|SO\|SI\|DLE\|DC1\|DC2\|DC3\|DC4\|NAK\|SYN\|ETB\|CAN\|EM\|SUB\|ESC\|FS\|GS\|RS\|US\|SP\|DEL\)"
-syn region  hsString      start=+"+  skip=+\\\\\|\\"+  end=+"\|$+  contains=hsSpecialChar
+syn match   hsSpecialChar contained
+    \ "\\\([0-9]\+\|o[0-7]\+\|x[0-9a-fA-F]\+\|[\"\\'&\\abfnrtv]\|^[A-Z^_\[\\\]]\)"
+syn region  hsString      start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
+    \ contains=hsSpecialChar
 
 " complicated and I don't understand but it works
-syn match   hsChar         "[^a-zA-Z0-9_']'\([^\\]\|\\[^']\+\|\\'\)'"lc=1 contains=hsSpecialChar
-syn match   hsChar         "^'\([^\\]\|\\[^']\+\|\\'\)'" contains=hsSpecialChar
+syn match   hsChar      "[^a-zA-Z0-9_']'\([^\\]\|\\[^']\+\|\\'\)'"lc=1
+    \ contains=hsSpecialChar
+syn match   hsChar      "^'\([^\\]\|\\[^']\+\|\\'\)'" contains=hsSpecialChar
 
 hi clear
+hi link warning ErrorMsg
+
 hi hsKeyword  cterm=underline
 hi link hsImportKeyword hsKeyword
 
@@ -42,7 +54,7 @@ hi hsString ctermfg=DarkBlue
 hi hsSpecialChar ctermfg=DarkRed
 hi link hsChar hsString
 
-hi Todo ctermbg=Cyan
+hi todo ctermbg=Cyan
 hi hsDebug ctermbg=Cyan
 
 " ctermbg=LightGray also looks good
