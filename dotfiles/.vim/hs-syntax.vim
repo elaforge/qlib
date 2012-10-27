@@ -21,6 +21,8 @@ syntax match warning   display "\s\+$"
 syntax match warning   display " \+\t"
 syntax match warning   display "\t\+ "
 
+" Backslash continues the previous line.  Vim is so bizarre.
+
 syn match hsLineComment contains=todo,warning
     \ "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
 syn region  hsBlockComment contains=todo,warning,hsBlockComment

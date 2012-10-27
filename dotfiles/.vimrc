@@ -102,6 +102,10 @@ nm ;o   :buffer <C-R>=expand("%:h") . "/" <CR>
 nm ,l	:ls<cr>
 nm ,u	:bdelete<cr>
 
+" I never actually want to look up a man page.
+nm K k
+vm K k
+
 " fix traditional vi annoyances
 nm Y	y$
 nm ''	``
@@ -114,6 +118,7 @@ ino <c-f>   <c-x><c-f>
 
 nm gqp  gqap
 nm gz   :wa<cr>
+nm Q gq
 
 nm <silent> ,s :nohlsearch<cr>:match<cr>
 nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
