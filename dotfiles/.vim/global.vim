@@ -6,3 +6,5 @@ syntax match ErrorMsg   display "\s\+$"
 " mixed tabs and spaces
 syntax match ErrorMsg   display " \+\t"
 syntax match ErrorMsg   display "\t\+ "
+
+set cpoptions=

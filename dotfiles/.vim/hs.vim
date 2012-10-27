@@ -35,8 +35,13 @@ function ToggleTest()
     let filename = expand('%')
     if match(filename, '_test\.hs$') != -1
         let filename = substitute(filename, '_test\.hs', '.hs', '')
+    elseif match(filename, '\.hsc$') != -1
+        let filename = substitute(filename, '\.hsc', '_test.hs', '')
     else
         let filename = substitute(filename, '\.hs', '_test.hs', '')
+    endif
+    if filereadable(filename . 'c')
+        let filename = filename . 'c'
     endif
     return ":edit " . filename
 endfunction
@@ -47,6 +52,7 @@ function SaveFile()
     call writefile([substitute(expand('%'), "//", "/", "g")], $HOME . "/.vim/current_hs")
 endfunction
 au BufEnter *.hs call SaveFile()
+au BufEnter *.hsc call SaveFile()
 
 " Run the contents of the current buffer through the fix-imports cmd.  Print
 " any stderr output on the status line.
