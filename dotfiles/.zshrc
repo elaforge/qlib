@@ -11,7 +11,7 @@ alias vi='vim -X'
 alias ssh='ssh -C'
 alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
-alias od='od -A x -t a'
+alias od='od -A x -taxC'
 
 alias d=darcs
 alias cha='darcs changes | l'
