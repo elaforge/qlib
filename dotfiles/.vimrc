@@ -6,8 +6,6 @@ if $host == "archie"
     " set t_kl=[D
 endif
 
-au!
-
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
@@ -52,6 +50,7 @@ au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
 set all&
 syntax clear
 
+set noloadplugins " don't read crap from $VIM/plugins
 set exrc " read .vimrc from the current directory too
 set completeopt=preview " vim started adding an annoying menu by default
 
@@ -144,9 +143,6 @@ nm <silent> ,w   :%s/[\\t ]\\+$//e<cr>
 
 " ,p toggle paste mode
 nm ,p   :se invpaste<cr>:se paste?<cr>
-
-" switch to unexpanded tabbing
-nm ,4   :se ts=4 sw=4 noet nosmarttab sts=4<cr>
 
 so ~/.vim/global.vim
 
