@@ -64,7 +64,7 @@ function FixImports()
     " Using a tmp file means I don't have to save the buffer, which the user
     " didn't ask for.
     silent execute 'write' tmp
-    silent execute '!fix-imports -ibuild/hsc -v' expand('%') '<' tmp '>' out '2>' err
+    silent execute '!fix-imports -v' expand('%') '<' tmp '>' out '2>' err
     let errs = readfile(err)
     if v:shell_error == 0
         " Don't replace the buffer if there's no change, this way I won't

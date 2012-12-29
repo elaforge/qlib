@@ -26,9 +26,12 @@ au BufRead,BufNewFile *.scm     so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.lsp     so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.lisp    so ~/.vim/lisp.vim
 
+" haskell
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
+" GHC profile output.
+au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
 au BufNewFile *.hs              so ~/.vim/hs-new.vim
 au BufNewFile *.hsc             so ~/.vim/hs-new.vim
 
