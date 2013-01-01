@@ -51,6 +51,8 @@ set all&
 syntax clear
 
 set noloadplugins " don't read crap from $VIM/plugins
+runtime plugin/matchparen.vim " wait, except I like this one
+
 set exrc " read .vimrc from the current directory too
 set completeopt=preview " vim started adding an annoying menu by default
 
