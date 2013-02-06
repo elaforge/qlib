@@ -8,8 +8,9 @@ dl=$stash/dl
 export PLAN9=$stash/plan9
 path=($path $stash/plan9/bin)
 
-# improve firefox performance
-export MOZ_DISABLE_PANGO=1
+function g5 {
+  (cwd && /google/data/ro/projects/shelltoys/g5.sar "$@")
+}
 
 alias ct='ctags --language-force=python **/*.py **/*.ptl'
 alias avi='vim -u $HOME/.vimrc --servername vim'
