@@ -39,7 +39,7 @@ au BufRead,BufNewFile *.js      so ~/.vim/java.vim
 au BufRead,BufNewFile *.xml     so ~/.vim/xml.vim
 au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
 
-au BufEnter TODO                so ~/.vim/todo.vim
+au BufEnter TODO*               so ~/.vim/todo.vim
 au BufEnter *_todo              so ~/.vim/todo.vim
 
 au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
@@ -113,6 +113,8 @@ vm K k
 " fix traditional vi annoyances
 nm Y	y$
 nm ''	``
+" Get rid of useless control-space behaviour.
+imap <Nul> <Space>
 
 nmap <down> <c-e>
 nmap <up> <c-y>
