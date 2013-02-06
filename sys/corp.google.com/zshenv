@@ -1,8 +1,12 @@
 # Turn off google setup crap.
 google_zsh_flysolo=true
 
-# path=($path /home/build/public/google/tools /home/build/public/eng/perforce)
-path=($path /usr/local/scripts /usr/local/symlinks)
+path=(
+    # java/jdk/bin expects to override /usr/bin/java
+    /usr/local/buildtools/java/jdk/bin
+    $path
+    /usr/local/scripts /usr/local/symlinks
+)
 path=($path ~/.cabal/bin)
 
 path=(~/bin/$host ~/bin ~/bin/$(~/bin/oname) /usr/local/bin $path)
@@ -11,8 +15,33 @@ unset GREP_OPTIONS GREP_COLOR # kill google default env
 
 pythonpath=($HOME/lib/python /home/build)
 
+if [[ -n "$DISPLAY" ]]; then
+  export G4MULTIDIFF=1
+fi
+
 : ${P4CONFIG:=.p4config}
-: ${P4DIFF:=/home/build/public/google/tools/p4diff -w}
+# : ${P4DIFF:=/home/build/public/google/tools/p4diff -w}
+: ${P4DIFF:=meldorgit.sh}
 : ${P4MERGE:=/home/build/public/eng/perforce/mergep4.tcl}
 : ${P4EDITOR:=$EDITOR}
 export P4CONFIG P4DIFF P4MERGE P4EDITOR
+
+# In zshenv so scripts get them.
+
+function bpath {
+    local cmd=${1%.py}
+    local cwd=$(builtin pwd -r)/$cmd
+    echo ${cwd/\/google3\//\/google3\/blaze-bin\/}
+}
+
+function brun {
+    local cmd=$(bpath $1)
+    shift
+    $cmd "$@"
+}
+
+function jrun {
+  local bin=$1
+  shift
+  brun $bin --jvm_flags='-Djava.util.logging.config.file=/home/elaforge/java-log-config' "$@"
+}
