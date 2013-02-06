@@ -39,6 +39,9 @@ alias vi='command vim -X -u $HOME/.vimrc'
 alias google-chrome="command google-chrome --proxy-pac-url=$proxy"
 alias snip='vi ~/n/snip/$(y-m-d)'
 
+alias f=fileutil
+alias ft='fileutil --gfs_user=gt-team'
+
 # build with special flags for flume
 function fbuild {
     blaze build --nolegacy_java_swigdeps $1_deploy.jar
@@ -51,21 +54,3 @@ compctl -T -x 's[~] C[0,[^/]#]' -k friends -S/ -tn
 # function g4 {
 # 	(cd $(command pwd); command g4 "$@")
 # }
-
-function bpath {
-    local cmd=${1%.py}
-    local cwd=$(builtin pwd -r)/$cmd
-    echo ${cwd/\/google3\//\/google3\/blaze-bin\/}
-}
-
-function brun {
-    local cmd=$(bpath $1)
-    shift
-    $cmd "$@"
-}
-
-function jrun {
-  local bin=$1
-  shift
-  brun $bin --jvm_flags='-Djava.util.logging.config.file=/home/elaforge/java-log-config' "$@"
-}
