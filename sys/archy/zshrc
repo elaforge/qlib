@@ -10,3 +10,13 @@ doc=/usr/local/share/doc # haskell docs
 
 # Look in $CWD for a bin directory.
 path=(bin $path)
+
+unalias d
+function d() {
+    if [[ $1 = g ]]; then
+        shift
+        darcs diff --diff-command 'opendiff %1 %2' "$@"
+    else
+        darcs "$@"
+    fi
+}

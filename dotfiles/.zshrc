@@ -68,7 +68,7 @@ if [[ -r $qlib/sys/$host/hosts ]]; then
 fi
 scpary=(${^host_complete}:)
 compctl -k host_complete telnet ssh
-compctl -f + -k host_complete -S : scp darcs
+compctl -f + -k host_complete -S : scp darcs d
 
 export LESS=-Mq
 
