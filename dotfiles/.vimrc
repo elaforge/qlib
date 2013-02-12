@@ -51,12 +51,12 @@ set all&
 syntax clear
 
 set noloadplugins " don't read crap from $VIM/plugins
+set nocompatible " no vi compatibility, matchparen requires this
 runtime plugin/matchparen.vim " wait, except I like this one
 
 set exrc " read .vimrc from the current directory too
 set completeopt=preview " vim started adding an annoying menu by default
 
-set nocompatible " no vi compatibility
 set cpoptions= " turn off more vi compatibility
 set foldignore=
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
