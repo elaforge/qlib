@@ -1,17 +1,17 @@
 syntax sync fromstart " slow but accurate
 
 " why no need he=s+6 to restrict highlight to import string?
-syn keyword   hsKeyword   module
-syn match     hsImport    "\<import\>.*" contains=hsImportKeyword
-syn keyword   hsImportKeyword contained  import as qualified hiding
+syn keyword hsKeyword   module
+syn match   hsImport    "\<import\>.*" contains=hsImportKeyword,hsLineComment
+syn keyword hsImportKeyword contained  import as qualified hiding
 
-syn keyword   hsKeyword   infix infixl infixr
-syn keyword   hsKeyword   class data deriving instance default where
-syn keyword   hsKeyword   type newtype
-syn keyword   hsKeyword   do case of let in
-syn keyword   hsKeyword   if then else
+syn keyword hsKeyword   infix infixl infixr
+syn keyword hsKeyword   class data deriving instance default where
+syn keyword hsKeyword   type newtype
+syn keyword hsKeyword   do case of let in
+syn keyword hsKeyword   if then else
 
-syn keyword   hsDebug     undefined
+syn keyword hsDebug     undefined error
 
 syn keyword   todo     contained TODO XXX
 
@@ -29,11 +29,12 @@ syn region  hsBlockComment contains=todo,warning,hsBlockComment
     \ start="{-"  end="-}"
 syn region  hsPragma    start="{-#" end="#-}"
 
-" char, string (end on \n)
 syn match   hsSpecialChar contained
     \ "\\\([0-9]\+\|o[0-7]\+\|x[0-9a-fA-F]\+\|[\"\\'&\\abfnrtv]\|^[A-Z^_\[\\\]]\)"
 syn region  hsString      start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
-    \ contains=hsSpecialChar
+    \ contains=hsSpecialChar,strContinuation
+" Backslash-continued string.
+syn match strContinuation contained "\\\n *\\"
 
 " complicated and I don't understand but it works
 syn match   hsChar      "[^a-zA-Z0-9_']'\([^\\]\|\\[^']\+\|\\'\)'"lc=1
@@ -54,6 +55,7 @@ hi hsPragma cterm=bold ctermfg=DarkRed
 
 hi hsString ctermfg=DarkBlue
 hi hsSpecialChar ctermfg=DarkRed
+hi strContinuation ctermfg=DarkRed
 hi link hsChar hsString
 
 hi todo ctermbg=Cyan
