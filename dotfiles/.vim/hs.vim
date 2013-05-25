@@ -34,11 +34,9 @@ endif
 function ToggleTest()
     let filename = expand('%')
     if match(filename, '_test\.hs$') != -1
-        let filename = substitute(filename, '_test\.hs', '.hs', '')
-    elseif match(filename, '\.hsc$') != -1
-        let filename = substitute(filename, '\.hsc', '_test.hs', '')
-    else
-        let filename = substitute(filename, '\.hs', '_test.hs', '')
+        let filename = substitute(filename, '_test\.hs$', '.hs', '')
+    elseif match(filename, '\.hsc\?$') != -1
+        let filename = substitute(filename, '\.hsc\?$', '_test.hs', '')
     endif
     if filereadable(filename . 'c')
         let filename = filename . 'c'

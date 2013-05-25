@@ -159,11 +159,12 @@ def token_end(text, start):
     else: # symbol
         while (i < len(text) and text[i] not in word_chars
                 and not text[i].isspace()
-                and text[i] not in '([{"\''):
+                and text[i] not in special):
             i += 1
         return i
 
 closing = { '(': ')', '{': '}', '[': ']'}
+special = set(closing.keys() + closing.values() + list('"\''))
 
 def tokens(text, start, end):
     """token_end just gives the index of the end of the token.  Figure out
