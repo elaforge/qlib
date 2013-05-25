@@ -21,3 +21,24 @@ vm <buffer> ,c :!cmt //<cr>
 " 		return "="
 " 	endif
 " endfunction
+
+nm <silent> ,h :exec ToggleHeader()<cr>
+nm <silent> ,a :call FixImports()<cr>
+
+if exists("*ToggleHeader")
+    finish
+endif
+
+function ToggleHeader()
+    let filename = expand('%')
+    if match(filename, '\.cc\?$') != -1
+        let filename = substitute(filename, '\.cc\?$', '.h', '')
+    elseif match(filename, '\.h$') != -1
+        let filename = substitute(filename, '\.h$', '.c', '')
+    endif
+    " Look for .cc
+    if filereadable(filename . 'c')
+        let filename = filename . 'c'
+    endif
+    return ":edit " . filename
+endfunction

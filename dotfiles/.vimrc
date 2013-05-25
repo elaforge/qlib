@@ -40,7 +40,7 @@ au BufRead,BufNewFile *.xml     so ~/.vim/xml.vim
 au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
 
 au BufEnter TODO*               so ~/.vim/todo.vim
-au BufEnter *_todo              so ~/.vim/todo.vim
+au BufEnter todo-*              so ~/.vim/todo.vim
 
 au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
 
@@ -56,6 +56,9 @@ runtime plugin/matchparen.vim " wait, except I like this one
 
 set exrc " read .vimrc from the current directory too
 set completeopt=preview " vim started adding an annoying menu by default
+
+" Key mappings timeout after 1 sec, key codes after .1 sec.
+set timeoutlen=1000 ttimeoutlen=100
 
 set cpoptions= " turn off more vi compatibility
 set foldignore=

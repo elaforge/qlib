@@ -21,6 +21,8 @@ alias waf=./waf
 alias hlint="command hlint --ignore='Use camelCase' --ignore='Use fromMaybe' \
     --ignore='Use &&&' --ignore='Use ***' --ignore='Use uncurry'"
 
+export DARCS_DONT_ESCAPE_8BIT=1
+
 # cd to copy and pasted prompt
 function ccd {
     # skip over % prompt and get the first word afterwards

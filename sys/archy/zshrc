@@ -2,7 +2,6 @@ alias s='ls -FG'
 alias blog='vi ~/n/blog/$(y-m-d)'
 
 alias make='make -j3' # dual core!
-alias vim=/usr/local/bin/vim
 
 src=/usr/local/src
 dl=$HOME/Downloads
