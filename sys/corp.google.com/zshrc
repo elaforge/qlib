@@ -49,8 +49,3 @@ function fbuild {
 
 # 'friends' is empty, so disable ~ completion since it's so slow
 compctl -T -x 's[~] C[0,[^/]#]' -k friends -S/ -tn
-
-
-# function g4 {
-# 	(cd $(command pwd); command g4 "$@")
-# }
