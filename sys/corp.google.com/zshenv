@@ -34,6 +34,15 @@ function bpath {
     echo ${cwd/\/google3\//\/google3\/blaze-bin\/}
 }
 
+# Convert com.google.whatever into google3 path.
+function jpath {
+    local sym=$1
+    if [[ $1 != com.google.* ]]; then
+        sym=com.google.$sym
+    fi
+    echo /home/build/google3/java/${sym//./\/}
+}
+
 function brun {
     local cmd=$(bpath $1)
     shift
