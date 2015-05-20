@@ -1,0 +1,2 @@
+! make xterm copy to the PRIMARY buffer
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
