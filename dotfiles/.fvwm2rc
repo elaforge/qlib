@@ -1,5 +1,4 @@
-ModulePath /usr/lib/fvwm/2.5.24
-ImagePath /home/quinn/gfx
+ModulePath /usr/local/libexec/fvwm/2.6.5
 # ModuleSynchronous Timeout 5 FvwmTheme # but I don't *want* themes!
 # *FvwmTheme: Colorset 0 fg red bg green
 
@@ -20,8 +19,7 @@ ColormapFocus FollowsFocus
 Style "**"           NoTitle, NoHandles, BorderWidth 1, StickyIcon, \
     RandomPlacement, SmartPlacement, SloppyFocus, Lenience, \
     Color white/gray40, \
-    IconBox 892 0 1134 1200
-    # IconBox 1295 0 1600 83
+    IconBox 852 0 1130 76
 # Icon "22.xpm"
 Style "Fvwm*"       NoTitle, NoHandles, Sticky, WindowListSkip, \
     CirculateSkipIcon
@@ -44,19 +42,19 @@ Key F1  A   N   Desk 0 0
 Key F2  A   N   Desk 0 1
 Key F3  A   N   Desk 0 2
 Key F4  A   N   Desk 0 3
-Key 1	A	5	Desk 0 0
-Key 2	A	5	Desk 0 1
-Key 3	A	5	Desk 0 2
-Key 4	A	5	Desk 0 3
+Key 1	A	4	Desk 0 0
+Key 2	A	4	Desk 0 1
+Key 3	A	4	Desk 0 2
+Key 4	A	4	Desk 0 3
 
 Key F1  A   S   MoveToDesk 0 0
 Key F2  A   S   MoveToDesk 0 1
 Key F3  A   S   MoveToDesk 0 2
 Key F4  A   S   MoveToDesk 0 3
-Key F1  A   S5  MoveToDesk 0 0
-Key F2  A   S5  MoveToDesk 0 1
-Key F3  A   S5  MoveToDesk 0 2
-Key F4  A   S5  MoveToDesk 0 3
+Key F1  A   S4  MoveToDesk 0 0
+Key F2  A   S4  MoveToDesk 0 1
+Key F3  A   S4  MoveToDesk 0 2
+Key F4  A   S4  MoveToDesk 0 3
 
 Key F3  A   C   WindowList
 # Key F5  TSFW    A   Move
@@ -64,36 +62,36 @@ Key F3  A   C   WindowList
 # Key F7  TSFWI   A   Iconify
 # Key F8  TSFW    A   RaiseLower
 
-Key t   A   5   Prev [CurrentDesk xterm] Focus
-Key n   A   5   Next [CurrentDesk xterm] Focus
-Key t   A   5S  Prev [CurrentDesk] Focus
-Key n   A   5S  Next [CurrentDesk] Focus
-Key c   A   5   Next [cmd_xterm] Focus
-Key r   A   5S  Restart
+Key t   A   4   Prev [CurrentDesk xterm] Focus
+Key n   A   4   Next [CurrentDesk xterm] Focus
+Key t   A   4S  Prev [CurrentDesk] Focus
+Key n   A   4S  Next [CurrentDesk] Focus
+Key c   A   4   Next [cmd_xterm] Focus
+Key r   A   4S  Restart
 
-Key i   FSTWI 5  Iconify
-Key m   FSTWI 5  Move
-Key r   FSTW  5  Resize
-Key z   FSTW  5  RaiseLower
-Key w   FSTW  5S Close
-Key s   FSTW  5  Stick
-Key a   FSTW  5  Maximize 0 100
-Key a   FSTW  5S Maximize
-Key q   FSTW  5  Module FvwmIdent
+Key i   FSTWI 4  Iconify
+Key m   FSTWI 4  Move
+Key r   FSTW  4  Resize
+Key z   FSTW  4  RaiseLower
+Key w   FSTW  4S Close
+Key s   FSTW  4  Stick
+Key a   FSTW  4  Maximize 0 100
+Key a   FSTW  4S Maximize
+Key q   FSTW  4  Module FvwmIdent
 
-Key v   A   5   WindowList
+Key v   A   4   WindowList
   # according to the man page, WindowList can take args, but it really doesn't
-Key x   A   5   Exec xterm
-Key x   A   5S  TwoXTerms
+Key x   A   4   Exec xterm
+Key x   A   4S  TwoXTerms
 
-Key h   A   5   CursorMove -10 0
-Key h   A   5S  CursorMove -1 0
-Key l   A   5   CursorMove 10 0
-Key l   A   5S  CursorMove 1 0
-Key k   A   5   CursorMove 0 -10
-Key k   A   5S  CursorMove 0 -1
-Key j   A   5   CursorMove 0 10
-Key j   A   5S  CursorMove 0 1
+Key h   A   4   CursorMove -10 0
+Key h   A   4S  CursorMove -1 0
+Key l   A   4   CursorMove 10 0
+Key l   A   4S  CursorMove 1 0
+Key k   A   4   CursorMove 0 -10
+Key k   A   4S  CursorMove 0 -1
+Key j   A   4   CursorMove 0 10
+Key j   A   4S  CursorMove 0 1
 
 Key Return I N  Iconify
 
@@ -105,11 +103,11 @@ Mouse 1     I   A   Iconify
 Mouse 2     I   A   Move
 Mouse 3     I   A   Move
 
-Mouse 4     FSTW A  Raise-and-Move
-Mouse 1     FSTW 5  Raise
+# Mouse 4     FSTW A  Raise-and-Move
+Mouse 1     FSTW 4  Raise
 
-Mouse 1     A   5   Popup Ops Nop
-Mouse 3     A   5   WindowList
+Mouse 1     A   4   Popup Ops Nop
+Mouse 3     A   4   WindowList
 
 ############################ Functions #######################################
 AddToFunc InitFunction      "I" Module FvwmPager 0 3
@@ -121,21 +119,22 @@ AddToFunc RestartFunction   "I" Module FvwmPager 0 3
 AddToFunc Raise-and-Move    "I" Raise
 +                           "I" Move
 
-AddToFunc TwoXTerms         "I" Exec xterm -geometry 80x74+0+76
-+                           "I" Exec xterm -geometry 80x74+566+76
+AddToFunc TwoXTerms         "I" Exec xterm -geometry 80x79+0+76
++                           "I" Exec xterm -geometry 80x79+566+76
 +                           "I" Exec xterm -geometry 80x60+1133+0
-+                           "I" Exec xterm -geometry 80x19+1133+905
++                           "I" Exec xterm -geometry 80x24+1133+847
 # AddToFunc TwoXTerms         "I" Exec xterm -geometry 80x50+0+0
 # +                           "I" Exec xterm -geometry 80x50+461+0
 
 ############################### Menus ########################################
 AddToMenu   Ops         "ops"      Title
++           "XTerm"     Exec xterm
 +           "Ident"     Module FvwmIdent
 +           "WinList"   Module FvwmWinList
 +           "Talk"      Module FvwmTalk
 +           "Close"     Close
-+           "Restart std fvwm"  Restart
-+           "Restart local-fvwm"    Restart /home/elaforge/bin/mehitabel/local-fvwm
++           "Restart std fvwm"  Restart /usr/local/bin/fvwm
++           "Quit"      Quit
 
 ########################### Pager #########################################
 *FvwmPagerHilight darkgreen
