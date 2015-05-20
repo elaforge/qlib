@@ -7,4 +7,7 @@ syntax match ErrorMsg   display "\s\+$"
 syntax match ErrorMsg   display " \+\t"
 syntax match ErrorMsg   display "\t\+ "
 
+" mark columns 80 and 81 in red for long lines...
+match ErrorMsg /\%80v.\%81v./
+
 set cpoptions=

@@ -1,5 +1,6 @@
 " options for haskell
 setl foldmethod=indent
+setl ts=4 sw=4 sts=4
 " this makes tags work on qualified names
 " setl iskeyword=a-z,A-Z,_,.,39
 

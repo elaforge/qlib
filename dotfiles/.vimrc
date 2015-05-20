@@ -62,6 +62,9 @@ set timeoutlen=1000 ttimeoutlen=100
 
 set cpoptions= " turn off more vi compatibility
 set foldignore=
+" Vim is buggy and won't open a fold if a search jumps into it, even if
+" 'search' is in foldopen.  'all' will make it open, but is otherwise useless
+" because it won't let you close a fold at all.
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
 
 set ts=8 sw=4 expandtab smarttab
@@ -102,6 +105,9 @@ set notagrelative " don't look for tags relative to the edited file
 mapclear
 mapclear!
 
+nm <silent> n /<cr>
+nm <silent> N ?<cr>
+
 nm ,e	:edit 
 nm ;e   :edit <C-R>=expand("%:h") . "/" <CR>
 nm ,o	:buffer 
@@ -129,8 +135,10 @@ nm gqp  gqap
 nm gz   :wa<cr>
 nm Q gq
 
-nm <silent> ,s :nohlsearch<cr>:match<cr>
-nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
+" nm <silent> ,s :nohlsearch<cr>:match<cr>
+nm <silent> ,s :nohlsearch<cr>
+" nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
+nm <silent> ,n :let @/='<C-R><C-W>'<CR>:set hls<CR>
 " nm <Leader>* :let @/='\<'.expand('<cword>').'\>'<CR>
 
 
