@@ -26,6 +26,10 @@ function cdt {
         cd java javatests
     elif [[ $PWD = */google3/javatests/* ]]; then
         cd javatests java
+    elif [[ $PWD = */p/atlas-test* ]]; then
+        cd atlas-test atlas
+    elif [[ $PWD = */p/atlas* ]]; then
+        cd atlas atlas-test
     else
         echo not in google3/java
         return 1
@@ -39,13 +43,7 @@ alias vi='command vim -X -u $HOME/.vimrc'
 alias google-chrome="command google-chrome --proxy-pac-url=$proxy"
 alias snip='vi ~/n/snip/$(y-m-d)'
 
-alias f=fileutil
-alias ft='fileutil --gfs_user=gt-team'
-
-# build with special flags for flume
-function fbuild {
-    blaze build --nolegacy_java_swigdeps $1_deploy.jar
-}
+alias prodaccess='prodaccess -g' # use security key
 
 # 'friends' is empty, so disable ~ completion since it's so slow
 compctl -T -x 's[~] C[0,[^/]#]' -k friends -S/ -tn
