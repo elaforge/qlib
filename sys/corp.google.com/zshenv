@@ -28,6 +28,13 @@ export P4CONFIG P4DIFF P4MERGE P4EDITOR
 
 # In zshenv so scripts get them.
 
+alias f='fileutil --gfs_user=gt-team'
+
+# build with special flags for flume
+function fbuild {
+    blaze build --nolegacy_java_swigdeps $1_deploy.jar
+}
+
 function bpath {
     local cmd=${1%.py}
     local cwd=$(builtin pwd -r)/$cmd
@@ -53,4 +60,34 @@ function jrun {
   local bin=$1
   shift
   brun $bin --jvm_flags='-Djava.util.logging.config.file=/home/elaforge/java-log-config' "$@"
+}
+
+function jtest {
+  # blaze test SomeTest --test_arg=com.google.geo.gt.toolbox.GenerateIssueDataForDremelTest#method
+  # jtest SomeTest TestClass.java testMethod
+}
+
+function g3 {
+  local pwd=$(command pwd)
+  echo ${pwd/google3*/}google3/
+}
+
+# magicjar
+
+function mjrun {
+  local cmd=$1
+  shift
+  if [[ -n $suspend ]]; then
+    export DEFAULT_JVM_DEBUG_SUSPEND=y
+  else
+    export DEFAULT_JVM_DEBUG_SUSPEND=n
+  fi
+  $(bpath $cmd) --debug \
+    --main_advice_classpath=$(magicjar --google3 $(g3) -pwd)/eclipse/bin \
+    "$@"
+}
+
+# magicbuild wants to be run from google3
+function magicbuild {
+  (cd $(g3) && command magicbuild "$@")
 }

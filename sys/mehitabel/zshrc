@@ -1,5 +1,5 @@
 # stick local stuff in stash to avoid going over nfs
-s=/usr/local/google/stash # easy to type interactive
+s=/usr/local/google # easy to type interactive
 stash=$s # more descriptive
 src=$stash/src
 dl=$stash/dl
