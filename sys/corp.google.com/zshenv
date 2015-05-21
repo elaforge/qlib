@@ -69,7 +69,12 @@ function jtest {
 
 function g3 {
   local pwd=$(command pwd)
-  echo ${pwd/google3*/}google3/
+  if [[ $pwd = */google3* ]]; then
+    echo ${pwd/google3*/}google3/
+  else
+    echo no google3 in $pwd >&2
+    return 1
+  fi
 }
 
 # magicjar

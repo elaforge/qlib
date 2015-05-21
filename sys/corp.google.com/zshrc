@@ -4,10 +4,6 @@ g3=/home/build/google3
 
 export qtraceback_truncate=128 # display lots of arglist context
 
-function mldb {
-    mysql -hmdbsqlro -P9200 -A mdb
-}
-
 function cdr {
     if [[ $PWD = */google3/* || $PWD = */google3 ]]; then
         if [[ $PWD = */READONLY/* || $PWD = */READONLY ]]; then
