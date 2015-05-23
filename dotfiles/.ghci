@@ -18,6 +18,6 @@
 -- Foo/Bar.hs -> Foo.Bar
 let mangle_file = map (\c -> if c == '/' then '.' else c) . System.FilePath.dropExtension
 
-let load_vim = do { home <- System.Environment.getEnv "HOME"; file <- readFile (home ++ "/.vim/current_hs"); return (":load " ++ mangle_file file) }
+let load_vim = do { home <- System.Environment.getEnv "HOME"; file <- readFile (home ++ "/.vim/current_hs"); return (":load *" ++ mangle_file file) }
 
 :def L (\_ -> load_vim)

@@ -1,5 +1,4 @@
 # make chinese display correctly in iterm
 export LANG=en_US.UTF-8
 
-# path=($path)
-pythonpath=($pythonpath ~/p/src)
+path=(~/homebrew/bin $path)
