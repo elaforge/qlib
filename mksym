@@ -2,10 +2,10 @@
 cd
 dotfiles=(
     .fvwm2rc .inputrc .vim .vimrc .zlogin .zshenv .zshrc .haskeline .ghci
+    .editrc
 )
 for fn in $dotfiles; do
-	rm -rf $fn
-	ln -s qlib/dotfiles/$fn
+    ln -fs qlib/dotfiles/$fn
 done
 
 rm -rf bin
