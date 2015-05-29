@@ -40,4 +40,4 @@ _trydot $qlib/sys/$domain/zshenv
 
 export PAGER=less
 export EDITOR=vim
-export LESS=-f
+export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'

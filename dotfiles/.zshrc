@@ -72,8 +72,6 @@ scpary=(${^host_complete}:)
 compctl -k host_complete telnet ssh
 compctl -f + -k host_complete -S : scp darcs d
 
-export LESS=-Mq
-
 if [[ $TERM == xterm ]]; then
 	function chpwd {
 		print -nP "\033]2;tty%l: %~\007\033]1;tty%l: %~\007"
