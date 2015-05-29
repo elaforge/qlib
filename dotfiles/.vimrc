@@ -41,6 +41,7 @@ au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
 
 au BufEnter TODO*               so ~/.vim/todo.vim
 au BufEnter todo-*              so ~/.vim/todo.vim
+au BufEnter */todo/*            so ~/.vim/todo.vim
 
 au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
 
