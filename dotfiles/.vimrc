@@ -33,6 +33,8 @@ au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set f
 au BufNewFile *.hs              so ~/.vim/hs-new.vim
 au BufNewFile *.hsc             so ~/.vim/hs-new.vim
 
+au BufRead,BufNewFile *.ky      so ~/.vim/ky.vim
+
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 " close enough...
 au BufRead,BufNewFile *.js      so ~/.vim/java.vim
@@ -106,8 +108,9 @@ set notagrelative " don't look for tags relative to the edited file
 mapclear
 mapclear!
 
-nm <silent> n /<cr>
-nm <silent> N ?<cr>
+" vim is buggy and doesn't open folds even though its set to
+" nm <silent> n /<cr>
+" nm <silent> N ?<cr>
 
 nm ,e	:edit 
 nm ;e   :edit <C-R>=expand("%:h") . "/" <CR>
