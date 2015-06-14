@@ -47,8 +47,12 @@ endfunction
 
 " A ghci command can use this to load the currently edited file.
 function SaveFile()
-    " how to wrap long lines in vim?
-    call writefile([substitute(expand('%'), "//", "/", "g")], $HOME . "/.vim/current_hs")
+    " :load on a lowercase directory name won't work anyway.
+    if match(expand('%'), '^[^/]\+\.hs$') != -1
+            \ || match(expand('%'), '[A-Z]') == 0
+        call writefile([substitute(expand('%'), "//", "/", "g")],
+            \ $HOME . "/.vim/current_hs")
+    endif
 endfunction
 au BufEnter *.hs call SaveFile()
 au BufEnter *.hsc call SaveFile()
