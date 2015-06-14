@@ -9,6 +9,6 @@ for fn in $dotfiles; do
 done
 
 rm -rf bin
-ln -s qlib/bin
+ln -s qlib/bin qlib/lib
 
 ln -sf qlib/sys/$host/xsession .xsession
