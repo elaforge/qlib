@@ -23,7 +23,6 @@ vm <buffer> ,c :!cmt //<cr>
 " endfunction
 
 nm <silent> ,h :exec ToggleHeader()<cr>
-nm <silent> ,a :call FixImports()<cr>
 
 if exists("*ToggleHeader")
     finish
