@@ -19,6 +19,7 @@ au BufRead,BufNewFile *.mm      so ~/.vim/c.vim
 au BufRead,BufNewFile *.m       so ~/.vim/c.vim
 au BufRead,BufNewFile *.cpp     so ~/.vim/c.vim
 au BufRead,BufNewFile *.cxx     so ~/.vim/c.vim
+au BufRead,BufNewFile *.rs      so ~/.vim/rs.vim
 
 au BufRead,BufNewFile *.scm     so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.lsp     so ~/.vim/lisp.vim
