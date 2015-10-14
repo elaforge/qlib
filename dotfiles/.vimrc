@@ -1,11 +1,3 @@
-if $host == "archie"
-    " I don't know why arrow keys are broken on the mac terminal.
-    " set t_ku=[A
-    " set t_kd=[B
-    " set t_kr=[C
-    " set t_kl=[D
-endif
-
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
@@ -33,6 +25,8 @@ au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
 au BufNewFile *.hs              so ~/.vim/hs-new.vim
 au BufNewFile *.hsc             so ~/.vim/hs-new.vim
+" close enough
+au BufRead,BufNewFile *.idr     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.ky      so ~/.vim/ky.vim
 
