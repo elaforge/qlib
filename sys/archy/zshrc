@@ -1,7 +1,10 @@
 alias s='ls -FG'
 alias blog='vi ~/n/blog/$(y-m-d)'
 
-alias make='make -j3' # dual core!
+alias make='make -j6'
+
+# for phabricator for ghc
+alias arc=$src/hs/arcanist/bin/arc
 
 src=/usr/local/src
 dl=$HOME/Downloads
