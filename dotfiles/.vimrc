@@ -29,6 +29,7 @@ au BufNewFile *.hsc             so ~/.vim/hs-new.vim
 au BufRead,BufNewFile *.idr     so ~/.vim/hs.vim
 
 au BufRead,BufNewFile *.ky      so ~/.vim/ky.vim
+au BufRead,BufNewFile *.ksp     so ~/.vim/ksp.vim
 
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 " close enough...
