@@ -2,7 +2,7 @@
 cd
 dotfiles=(
     .fvwm2rc .inputrc .vim .vimrc .zlogin .zshenv .zshrc .haskeline .ghci
-    .editrc
+    .editrc .gitconfig
 )
 for fn in $dotfiles; do
     ln -fs qlib/dotfiles/$fn
