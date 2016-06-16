@@ -12,15 +12,21 @@ function g5 {
   (cwd && /google/data/ro/projects/shelltoys/g5.sar "$@")
 }
 
-alias ct='ctags --language-force=python **/*.py **/*.ptl'
+function buildifier {
+  (cwd && command buildifier "$@")
+}
+
 alias avi='vim -u $HOME/.vimrc --servername vim'
+
+alias g4d=/usr/lib/piper-client/internal/g4d_command_impl.sh
+alias placer=/google/data/ro/projects/placer/placer
 
 # alias ls=donex
 # alias xmodmap=donex
 # alias setxkbmap=donex
 # alias vim=donex
 
-function donex {
-	touch ~/CAUGHT\!
-	xlock >/dev/null 2>&1
-}
+# function donex {
+#   touch ~/CAUGHT\!
+#   xlock >/dev/null 2>&1
+# }
