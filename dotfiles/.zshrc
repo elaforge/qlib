@@ -14,12 +14,10 @@ alias pwd='command pwd'
 alias od='od -A x -taxC'
 
 alias d=darcs
+alias g=git
+alias gog='git log | l'
 alias cha='darcs changes | l'
 alias dw='darcs w -l'
-alias waf=./waf
-
-alias hlint="command hlint --ignore='Use camelCase' --ignore='Use fromMaybe' \
-    --ignore='Use &&&' --ignore='Use ***' --ignore='Use uncurry'"
 
 export DARCS_DONT_ESCAPE_8BIT=1
 
