@@ -1,4 +1,4 @@
 #!/bin/zsh
 ls | (while read line; do
-    if [[ $line > $1 || $line = $1 ]]; then echo $line; fi
+    if [[ $line > $1 ]]; then echo $line; fi
 done)
