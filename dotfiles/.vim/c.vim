@@ -24,20 +24,20 @@ vm <buffer> ,c :!cmt //<cr>
 
 nm <silent> ,h :exec ToggleHeader()<cr>
 
-if exists("*ToggleHeader")
-    finish
+if !exists("*ToggleHeader")
+    function ToggleHeader()
+        let filename = expand('%')
+        if match(filename, '\.cc\?$') != -1
+            let filename = substitute(filename, '\.cc\?$', '.h', '')
+        elseif match(filename, '\.h$') != -1
+            let filename = substitute(filename, '\.h$', '.c', '')
+        else
+            return
+        endif
+        " Look for .cc
+        if filereadable(filename . 'c')
+            let filename = filename . 'c'
+        endif
+        return ":edit " . filename
+    endfunction
 endif
-
-function ToggleHeader()
-    let filename = expand('%')
-    if match(filename, '\.cc\?$') != -1
-        let filename = substitute(filename, '\.cc\?$', '.h', '')
-    elseif match(filename, '\.h$') != -1
-        let filename = substitute(filename, '\.h$', '.c', '')
-    endif
-    " Look for .cc
-    if filereadable(filename . 'c')
-        let filename = filename . 'c'
-    endif
-    return ":edit " . filename
-endfunction
