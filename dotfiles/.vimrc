@@ -16,6 +16,7 @@ au BufRead,BufNewFile *.rs      so ~/.vim/rs.vim
 au BufRead,BufNewFile *.scm     so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.lsp     so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.lisp    so ~/.vim/lisp.vim
+au BufRead,BufNewFile *.clj     so ~/.vim/lisp.vim
 
 " haskell
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
