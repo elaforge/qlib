@@ -1,5 +1,9 @@
 :set stop :list
 
+-- Make the prompt obvious.
+:set prompt "\ESC[46m\STX%s>\ESC[39;49m\STX "
+
+-- Doesn't seem to work... because loading a module overrides it?
 :seti -XNoMonomorphismRestriction
 
 -- Theoretically convenient, but makes many simple expressions become
