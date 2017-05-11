@@ -44,7 +44,7 @@ syn match   hsChar      "^'\([^\\]\|\\[^']\+\|\\'\)'" contains=hsSpecialChar
 hi clear
 hi link warning ErrorMsg
 
-hi hsKeyword  cterm=underline
+hi hsKeyword cterm=underline
 hi link hsImportKeyword hsKeyword
 
 hi link hsLineComment hsComment

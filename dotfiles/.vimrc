@@ -1,3 +1,5 @@
+let maplocalleader = ","
+
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
@@ -20,14 +22,18 @@ au BufRead,BufNewFile *.clj     so ~/.vim/lisp.vim
 
 " haskell
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
+" Hack to fix iskeyword after <c-]> changed it.
+au BufEnter           *.hs      set iskeyword&
+au BufRead,BufNewFile *.x       so ~/.vim/hs.vim " alex
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
+au BufRead,BufNewFile .ghci     so ~/.vim/hs.vim
 " GHC profile output.
 au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
 au BufNewFile *.hs              so ~/.vim/hs-new.vim
 au BufNewFile *.hsc             so ~/.vim/hs-new.vim
 " close enough
-au BufRead,BufNewFile *.idr     so ~/.vim/hs.vim
+au BufRead,BufNewFile *.idr     so ~/.vim/idr.vim
 
 au BufRead,BufNewFile *.ky      so ~/.vim/ky.vim
 au BufRead,BufNewFile *.ksp     so ~/.vim/ksp.vim
@@ -129,8 +135,11 @@ imap <Nul> <Space>
 nmap <down> <c-e>
 nmap <up> <c-y>
 
-ino <c-f>   <c-x><c-f>
-    " complete filenames
+" complete filenames
+inoremap <c-f>   <c-x><c-f>
+" complete tags
+inoremap <c-]> <c-x><c-]>
+
 
 nm gqp  gqap
 nm gz   :wa<cr>
@@ -159,6 +168,8 @@ nm <silent> ,w   :%s/[\\t ]\\+$//e<cr>
 
 " ,p toggle paste mode
 nm ,p   :se invpaste<cr>:se paste?<cr>
+
+nm <c-j> :next<cr>
 
 so ~/.vim/global.vim
 
