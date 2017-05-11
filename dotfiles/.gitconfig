@@ -11,12 +11,14 @@ email = qdunkan@gmail.com
 default = simple
 
 [alias]
+amend = commit --amend
 s = status --short
 b = branch
 co = checkout
 c = commit
 wip = commit -am wip
 unrec = reset HEAD^
-	pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
+pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
+
 [url "git://github.com/ghc/packages-"]
-	insteadOf = git://github.com/ghc/packages/
+insteadOf = git://github.com/ghc/packages/

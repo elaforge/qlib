@@ -13,4 +13,4 @@ setl smarttab
 
 vm <buffer> ,c :!cmt --<cr>
 
-source ~/.vim/hs-syntax.vim
+source ~/src/seq/main/ky-syntax.vim

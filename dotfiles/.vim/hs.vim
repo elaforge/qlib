@@ -2,7 +2,7 @@
 setl foldmethod=indent
 setl ts=4 sw=4 sts=4
 " this makes tags work on qualified names
-" setl iskeyword=a-z,A-Z,_,.,39
+" setl iskeyword=@,_,.,48-57,39 " digits, '
 
 setl comments=:--
 " replace c with t since vi's idea of comments will be backwards
@@ -23,14 +23,23 @@ ino <buffer> ;i import qualified
 setl includeexpr=substitute(v:fname,'\\.','/','g')
 setl suffixesadd=.hsc,.hs
 
-nm <silent> ,t :exec ToggleTest()<cr>
-nm <silent> ,a :call FixImports()<cr>
+nmap <silent> ,t :exec ToggleTest()<cr>
+nmap <silent> ,a :call FixImports()<cr>
+
+" I rely on :auto BufEnter *.hs to reset it.
+" Technically, ' (39) is in haskell keywords, but that makes tags on
+" haddock references like 'A.B' not work.
+nnoremap <silent> <c-]> :set iskeyword=@,_,.,48-57<cr><c-]>
+    \:set iskeyword=@,48-57,_,192-255<cr>
+" trailing :set fixes it for local jumps, autocmd fixes it for jumps to
+" different files.
 
 source ~/.vim/hs-syntax.vim
 
-if exists("*ToggleTest")
+if exists("b:did_hs_functions") || exists("*ToggleTest")
     finish
 endif
+let b:did_hs_functions = 1
 
 function ToggleTest()
     let filename = expand('%')
