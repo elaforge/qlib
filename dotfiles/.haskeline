@@ -2,3 +2,5 @@ editMode: Vi
 completionPaging: False
 listCompletionsImmediately: False
 historyDuplicates: IgnoreConsecutive
+
+bind: ctrl-p ctrl-r
