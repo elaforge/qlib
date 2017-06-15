@@ -1,0 +1,39 @@
+XTerm.vt100.faceName:           Inconsolata
+XTerm.vt100.faceSize:           12
+! XTerm.vt100.faceName:           monospace:minspace=true
+XTerm.vt100.font:               10x20
+XTerm.vt100.loginShell:         false
+XTerm.vt100.multiScroll:        true
+XTerm.vt100.saveLines:          4096
+XTerm.vt100.scrollKey:          true
+XTerm.vt100.scrollTtyOutput:    false
+/* XTerm.visualBell:               true */
+XTerm.vt100.cursorColor:        Blue
+XTerm.vt100.background:         rgbi:.7/.7/.6
+XTerm.vt100.foreground:         Black
+XTerm.ttyModes:                 intr ^c susp ^z erase ^h
+XTerm.vt100.scrollBar:          false
+XTerm*utf8:                     1
+
+! make xterm copy to the PRIMARY buffer
+XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+
+XDvi.expert:                    true
+XDvi.keepPosition:              true
+XDvi.shrinkFactor:              2
+XDvi.sideMargin:                10  /* a high number centers the page */
+XDvi.geometry:                  1016/* for shrink 2 and standand TeX margins */
+
+XSysinfo.showTitle:             false
+XSysinfo.showLoadAvg:           false
+
+XSysinfo*swap*bar.forground1:   white
+XSysinfo*swap*bar.forground2:   white
+
+GV.antialias:           true
+
+Wily*p9font:            /usr/local/lib/prop.9.font
+Wily*p9fixed:           /usr/local/lib/fixed.9.font
+Wily*geometry:          1600x1200+0+0
+
+*dndTextOps: false // see if this turns of annoying text dnd
