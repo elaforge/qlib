@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ -f $HOME/.xsession ]; then
-	. $HOME/.xsession
-else
-	. /etc/X11/Xsession
-fi
