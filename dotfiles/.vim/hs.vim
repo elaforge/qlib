@@ -34,6 +34,8 @@ nnoremap <silent> <c-]> :set iskeyword=@,_,.,48-57<cr><c-]>
 " trailing :set fixes it for local jumps, autocmd fixes it for jumps to
 " different files.
 
+iabbr <buffer> und undefined
+
 source ~/.vim/hs-syntax.vim
 
 if exists("b:did_hs_functions") || exists("*ToggleTest")

@@ -10,4 +10,8 @@ syntax match ErrorMsg   display "\t\+ "
 " mark columns 80 and 81 in red for long lines...
 match ErrorMsg /\%80v.\%81v./
 
-set cpoptions=
+set cpoptions= " turn off more vi compatibility
+
+if v:progname == 'nvim'
+    set cpoptions=_ " restore normal cw, neovim breaks this
+endif

@@ -1,5 +1,8 @@
 let maplocalleader = ","
 
+" clear all autocmds
+autocmd!
+
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
@@ -66,7 +69,6 @@ set completeopt=preview " vim started adding an annoying menu by default
 " Key mappings timeout after 1 sec, key codes after .1 sec.
 set timeoutlen=1000 ttimeoutlen=100
 
-set cpoptions= " turn off more vi compatibility
 set foldignore=
 " Vim is buggy and won't open a fold if a search jumps into it, even if
 " 'search' is in foldopen.  'all' will make it open, but is otherwise useless
