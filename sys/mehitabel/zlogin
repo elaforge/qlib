@@ -1,3 +1,0 @@
-if [ "$DISPLAY" ]; then
-  xset b 100 100 30
-fi
