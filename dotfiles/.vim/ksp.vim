@@ -12,7 +12,7 @@ setl smarttab
 syntax sync fromstart " slow but accurate
 
 " why no need he=s+6 to restrict highlight to import string?
-syn keyword kspKeyword  declare const polyphonic if end while select case
+syn keyword kspKeyword  declare const polyphonic if else end while select case
 syn keyword kspKeyword  call function on
 
 syn keyword   todo     contained TODO XXX

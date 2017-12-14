@@ -1,3 +1,5 @@
+# locally compiled vim 8 with clipboard support
+alias vi=/usr/local/bin/vim
 alias s='ls -FG'
 alias blog='vi ~/n/blog/$(y-m-d)'
 
