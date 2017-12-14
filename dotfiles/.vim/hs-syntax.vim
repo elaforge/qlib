@@ -1,3 +1,4 @@
+syn clear
 syntax sync fromstart " slow but accurate
 
 " why no need he=s+6 to restrict highlight to import string?
