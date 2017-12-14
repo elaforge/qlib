@@ -1,5 +1,5 @@
 se ai
-nm gz :wa<cr>:!relily %<cr>
+nm gs :wa<cr>:!relily %<cr>
 
 " lilypond has lots of \(...\) so don't do the special \ treatment
 setl cpoptions+=M

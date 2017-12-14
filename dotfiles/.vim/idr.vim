@@ -23,7 +23,7 @@ syn keyword idrisKeyword auto impossible static constructor
 syn keyword idrisKeyword do case of rewrite with
 syn keyword idrisKeyword let in
 
-syn match idrisMetaVar "?[a-z][A-Za-z0-9_']*"
+syn match idrisMetaVar "?[A-Za-z][A-Za-z0-9_']*"
 
 syn match idrisDirective "%\(access\|assert_total\|default\|elim\|error_reverse\|hide\|name\|reflection\|error_handlers\|language\|flag\|dynamic\|provide\|inline\|used\|no_implicit\|hint\|extern\|unqualified\|error_handler\)"
 

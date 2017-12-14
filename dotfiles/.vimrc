@@ -1,6 +1,7 @@
 let maplocalleader = ","
 
-" clear all autocmds
+" clear all filetypes autocmds
+augroup filetypes
 autocmd!
 
 au BufRead,BufNewFile *         so ~/.vim/global.vim
@@ -54,6 +55,9 @@ au BufEnter */todo/*            so ~/.vim/todo.vim
 au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
 
 au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
+au BufRead,BufNewFile *.ily     so ~/.vim/ly.vim
+
+augroup END
 
 " reset everything to defaults
 set all&
@@ -109,6 +113,8 @@ set wildignore=*.o,*.pyc,*.pyo,*.hi,*.hi-boot,*.o-boot,*.class
 set hidden
 
 set notagrelative " don't look for tags relative to the edited file
+" files and tab completion are case sensitive, even on OS X
+set nofileignorecase
 
 mapclear
 mapclear!

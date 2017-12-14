@@ -23,10 +23,12 @@ export PYTHONPATH
 typeset -U path pythonpath
 export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 
-path=(~/bin ~/.cabal/bin
+path=(
+    ~/bin ~/.cabal/bin ~/.cargo/bin
     $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
     /usr/local/bin /usr/local/sbin
-    /bin /sbin /usr/bin)
+    /bin /sbin /usr/bin
+)
 pythonpath=(~/lib/python)
 
 function _trydot {
