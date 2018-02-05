@@ -22,7 +22,7 @@ vm <buffer> ,c :!cmt //<cr>
 " 	endif
 " endfunction
 
-nm <silent> ,h :exec ToggleHeader()<cr>
+nnoremap <buffer> <silent> ,h :exec ToggleHeader()<cr>
 
 if !exists("*ToggleHeader")
     function ToggleHeader()

@@ -26,8 +26,6 @@ au BufRead,BufNewFile *.clj     so ~/.vim/lisp.vim
 
 " haskell
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
-" Hack to fix iskeyword after <c-]> changed it.
-au BufEnter           *.hs      set iskeyword&
 au BufRead,BufNewFile *.x       so ~/.vim/hs.vim " alex
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
@@ -56,6 +54,8 @@ au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
 
 au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
 au BufRead,BufNewFile *.ily     so ~/.vim/ly.vim
+
+au BufRead,BufNewFile *.dsp     so ~/.vim/faust.vim
 
 augroup END
 
@@ -123,25 +123,26 @@ mapclear!
 " nm <silent> n /<cr>
 " nm <silent> N ?<cr>
 
-nm ,e	:edit 
-nm ;e   :edit <C-R>=expand("%:h") . "/" <CR>
-nm ,o	:buffer 
-nm ;o   :buffer <C-R>=expand("%:h") . "/" <CR>
-nm ,l	:ls<cr>
-nm ,u	:bdelete<cr>
+nmap ,e   :edit 
+nmap ;e   :edit <C-R>=expand("%:h") . "/" <CR>
+nmap ,o   :buffer 
+nmap ;o   :buffer <C-R>=expand("%:h") . "/" <CR>
+nmap ,l   :ls<cr>
+nmap ,u   :bdelete<cr>
 
 " I never actually want to look up a man page.
 nm K k
 vm K k
 
 " fix traditional vi annoyances
-nm Y	y$
-nm ''	``
+nmap Y  y$
+nmap '' ``
 " Get rid of useless control-space behaviour.
 imap <Nul> <Space>
 
 nmap <down> <c-e>
 nmap <up> <c-y>
+nmap <c-@> @@
 
 " complete filenames
 inoremap <c-f>   <c-x><c-f>
@@ -163,12 +164,12 @@ nm <silent> ,n :let @/='<C-R><C-W>'<CR>:set hls<CR>
 nm ,c V,c
 
 " # is default comment
-vm ,c :!cmt '\\#'<cr>
+vm ,c :!cmt '\#'<cr>
 
 
 " ,d insert current date
 nm <silent> ,d   :r !date<cr>
-nm <silent> ,D	:r !date +\\%Y-\\%m-\\%d<cr>
+nm <silent> ,D  :r !date +\\%Y-\\%m-\\%d<cr>
 nm <silent> ,t   :r !date +\\%H:\\%M:\\%S<cr>
 
 " clear out trailing whitespace and lines ending in whitespace
@@ -179,7 +180,7 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 
 nm <c-j> :next<cr>
 
-so ~/.vim/global.vim
+source ~/.vim/global.vim
 
 if has('python')
     py import sys, os, vim
@@ -193,3 +194,15 @@ endif
 if $domain =~ '.*\.corp\.google\.com'
     so ~/.vim/google.vim
 endif
+
+source ~/.vim/bundle/vim-surround/plugin/surround.vim
+" set runtimepath^=~/.vim/bundle/vim-surround
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" Disable for now.
+" let g:loaded_ctrlp = 1
+
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_switch_buffer = 'Et'
+" let g:ctrlp_custom_ignore = '\v(_darcs|\.git)$'
+" runtime plugin/ctrlp.vim
