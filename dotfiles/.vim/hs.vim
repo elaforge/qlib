@@ -14,29 +14,26 @@ setl smarttab
 " haskell has lots of \(...) so don't do the special \ treatment
 setl cpoptions+=M
 
-vm <buffer> ,c :!cmt --<cr>
+vnoremap <buffer> ,c :!cmt --<cr>
 
 " intentional trailing space
-ino <buffer> ;i import qualified 
+inoremap <buffer> ;i import qualified 
 
 " Make gf work on module import lines.
 setl includeexpr=substitute(v:fname,'\\.','/','g')
 setl suffixesadd=.hsc,.hs
 
-nmap <silent> ,t :exec ToggleTest()<cr>
-nmap <silent> ,a :call FixImports()<cr>
-
-" I rely on :auto BufEnter *.hs to reset it.
-" Technically, ' (39) is in haskell keywords, but that makes tags on
-" haddock references like 'A.B' not work.
-nnoremap <silent> <c-]> :set iskeyword=@,_,.,48-57<cr><c-]>
-    \:set iskeyword=@,48-57,_,192-255<cr>
-" trailing :set fixes it for local jumps, autocmd fixes it for jumps to
-" different files.
+nnoremap <buffer> <silent> ,t :exec ToggleTest()<cr>
+nnoremap <buffer> <silent> ,a :call FixImports()<cr>
 
 iabbr <buffer> und undefined
 
 source ~/.vim/hs-syntax.vim
+
+if has('python')
+    py import qualified_tag
+    nnoremap <buffer> <silent> <c-]> :py qualified_tag.tag_word(vim)<cr>
+endif
 
 if exists("b:did_hs_functions") || exists("*ToggleTest")
     finish
