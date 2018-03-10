@@ -29,6 +29,7 @@ au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
 au BufRead,BufNewFile *.x       so ~/.vim/hs.vim " alex
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
+au BufRead,BufNewFile *.chs     so ~/.vim/hs.vim
 au BufRead,BufNewFile .ghci     so ~/.vim/hs.vim
 " GHC profile output.
 au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
@@ -168,12 +169,10 @@ vm ,c :!cmt '\#'<cr>
 
 
 " ,d insert current date
-nm <silent> ,d   :r !date<cr>
-nm <silent> ,D  :r !date +\\%Y-\\%m-\\%d<cr>
-nm <silent> ,t   :r !date +\\%H:\\%M:\\%S<cr>
+nm <silent> ,d  :r !date +\%Y-\%m-\%d<cr>
 
 " clear out trailing whitespace and lines ending in whitespace
-nm <silent> ,w   :%s/[\\t ]\\+$//e<cr>
+nm <silent> ,w   :%s/[\t ]\+$//e<cr>
 
 " ,p toggle paste mode
 nm ,p   :se invpaste<cr>:se paste?<cr>
@@ -189,10 +188,6 @@ if has('python')
 
     nm <silent> <c-s> :py swapwords.vim_swap_word(vim)<cr>
     nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
-endif
-
-if $domain =~ '.*\.corp\.google\.com'
-    so ~/.vim/google.vim
 endif
 
 source ~/.vim/bundle/vim-surround/plugin/surround.vim

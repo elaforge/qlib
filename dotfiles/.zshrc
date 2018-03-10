@@ -15,7 +15,7 @@ alias od='od -A x -taxC'
 
 alias d=darcs
 alias g=git
-alias gog='git log | l'
+alias gog='git log --decorate=short | l'
 alias cha='darcs changes | l'
 alias dw='darcs w -l'
 

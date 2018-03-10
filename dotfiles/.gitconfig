@@ -2,6 +2,8 @@
 [core]
 user = Evan Laforge
 email = qdunkan@gmail.com
+# pager = cat
+pager = less --quit-if-one-screen --no-init
 
 [user]
 name = Evan Laforge
@@ -12,10 +14,13 @@ default = simple
 
 [alias]
 amend = commit --amend
+a = add
 s = status --short
 b = branch
 co = checkout
 c = commit
+d = diff
+ds = diff --stat
 wip = commit -am wip
 unrec = reset HEAD^
 pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
