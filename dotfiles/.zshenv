@@ -43,3 +43,6 @@ _trydot $qlib/sys/$domain/zshenv
 export PAGER=less
 export EDITOR=vim
 export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
+    # Try this with git, so I can get colors and no less.  --no-init disables
+    # page flipping, though I sometimes like it.
+    # --quit-if-one-screen --no-init

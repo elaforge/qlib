@@ -1,5 +1,14 @@
 :set stop :list
 
+-- :seti -W
+:set -fwarn-identities
+:set -fwarn-tabs
+:set -fwarn-incomplete-record-updates
+:set -fwarn-missing-fields
+:set -fwarn-unused-matches
+:set -fwarn-wrong-do-bind
+:set -fwarn-redundant-constraints
+
 -- Make the prompt obvious.
 :set prompt "\ESC[46m\STX%s>\ESC[39;49m\STX "
 
