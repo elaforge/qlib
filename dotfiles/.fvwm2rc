@@ -1,4 +1,5 @@
-ModulePath /usr/local/libexec/fvwm/2.6.5
+ModulePath /usr/lib/fvwm/2.6.7
+# ImagePath /home/quinn/gfx
 # ModuleSynchronous Timeout 5 FvwmTheme # but I don't *want* themes!
 # *FvwmTheme: Colorset 0 fg red bg green
 
@@ -19,7 +20,8 @@ ColormapFocus FollowsFocus
 Style "**"           NoTitle, NoHandles, BorderWidth 1, StickyIcon, \
     RandomPlacement, SmartPlacement, SloppyFocus, Lenience, \
     Color white/gray40, \
-    IconBox 852 0 1130 76
+    IconBox screen g 694 0 1290 78 # g=global screen rect, order is l t r b
+    # 694
 # Icon "22.xpm"
 Style "Fvwm*"       NoTitle, NoHandles, Sticky, WindowListSkip, \
     CirculateSkipIcon
@@ -82,7 +84,7 @@ Key q   FSTW  4  Module FvwmIdent
 Key v   A   4   WindowList
   # according to the man page, WindowList can take args, but it really doesn't
 Key x   A   4   Exec xterm
-Key x   A   4S  TwoXTerms
+Key x   A   4S  XTerms
 
 Key h   A   4   CursorMove -10 0
 Key h   A   4S  CursorMove -1 0
@@ -103,7 +105,7 @@ Mouse 1     I   A   Iconify
 Mouse 2     I   A   Move
 Mouse 3     I   A   Move
 
-# Mouse 4     FSTW A  Raise-and-Move
+Mouse 4     FSTW A  Raise-and-Move
 Mouse 1     FSTW 4  Raise
 
 Mouse 1     A   4   Popup Ops Nop
@@ -119,22 +121,20 @@ AddToFunc RestartFunction   "I" Module FvwmPager 0 3
 AddToFunc Raise-and-Move    "I" Raise
 +                           "I" Move
 
-AddToFunc TwoXTerms         "I" Exec xterm -geometry 80x79+0+76
-+                           "I" Exec xterm -geometry 80x79+566+76
-+                           "I" Exec xterm -geometry 80x60+1133+0
-+                           "I" Exec xterm -geometry 80x24+1133+847
-# AddToFunc TwoXTerms         "I" Exec xterm -geometry 80x50+0+0
-# +                           "I" Exec xterm -geometry 80x50+461+0
+AddToFunc XTerms            "I" Exec xterm -geometry 80x66+0+75
++                           "I" Exec xterm -geometry 80x66+647+75
++                           "I" Exec xterm -geometry 78x46+1290+0
++                           "I" Exec xterm -geometry 78x24+1290+788
 
 ############################### Menus ########################################
 AddToMenu   Ops         "ops"      Title
-+           "XTerm"     Exec xterm
++           "chrome"    Exec chromium
 +           "Ident"     Module FvwmIdent
 +           "WinList"   Module FvwmWinList
 +           "Talk"      Module FvwmTalk
 +           "Close"     Close
-+           "Restart std fvwm"  Restart /usr/local/bin/fvwm
-+           "Quit"      Quit
++           "Restart std fvwm"  Restart
++           "Restart local-fvwm"    Restart /home/elaforge/bin/mehitabel/local-fvwm
 
 ########################### Pager #########################################
 *FvwmPagerHilight darkgreen
@@ -158,5 +158,5 @@ AddToMenu   Ops         "ops"      Title
 *FvwmWinListGeometry +0-1
 
 ### buttons
-*FvwmButtons: Geometry +125+0
-*FvwmButtons: (Title "foil evil hackers", Action "Exec /home/elaforge/qlib/sys/corp.google.com/bin/xlock")
+# *FvwmButtons: Geometry +125+0
+# *FvwmButtons: (Title "foil evil hackers", Action "Exec /home/elaforge/qlib/sys/corp.google.com/bin/xlock")
