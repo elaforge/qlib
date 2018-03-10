@@ -27,12 +27,16 @@ xsetroot -solid gray30
 # xsetroot -cursor ~/gfx/x-cursor ~/gfx/x-cursor-mask
 
 case $res in
+  1920x1200)
+    xterms=(
+        80x66+0+75
+        80x66+646+75
+        78x46+1291+0 78x24+1291+788
+    )
+    # xterms=(80x79+0+76 80x43+566+76 80x24+566+684 80x73+1132+0)
+    ;;
   1600x1200)
     xterms=(80x80+0+75 80x80+566+75 80x85+1034+0)
-    ;;
-  1920x1200)
-    xterms=(80x80+0+75 80x70+647+75 78x74+1290+0)
-    # xterms=(80x79+0+76 80x43+566+76 80x24+566+684 80x73+1132+0)
     ;;
   *)
     xterms=(80x74+0+74 80x40+566+74 80x23+566+678 80x79+1033+0)
@@ -45,7 +49,7 @@ for geo in $xterms; do
 done
 
 xload -nolabel -update 3 -hl red -geometry 255x74+0+0 &
-xsysinfo -update 500 -geometry 212x74+255+0 &
+# xsysinfo -update 500 -geometry 212x74+255+0 &
 xclock -padding 4 -d -strftime '%I:%M %a %d' -geometry +0+0 &
 
 # nvidia-settings --load-config-only &
