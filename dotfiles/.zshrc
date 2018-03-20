@@ -51,10 +51,10 @@ bindkey -a	'' push-line
 bindkey		'' history-incremental-search-backward
 bindkey -a	'' history-incremental-search-backward
 
-# bindkey	 '[A' up-line-or-history
-# bindkey	 '[B' down-line-or-history
-# bindkey	 '[D' backward-char
-# bindkey	 '[C' forward-char
+# bindkey         '[A' up-line-or-history
+# bindkey         '[B' down-line-or-history
+# bindkey         '[D' backward-char
+# bindkey         '[C' forward-char
 
 setopt extendedglob nobgnice noflowcontrol histignoredups nohup
 setopt interactivecomments listtypes longlistjobs
@@ -64,18 +64,22 @@ HISTSIZE=300
 
 host_complete=($(<$qlib/dotfiles/hosts))
 if [[ -r $qlib/sys/$host/hosts ]]; then
-	host_complete=($(<$qlib/sys/$host/hosts) $host_complete)
+    host_complete=($(<$qlib/sys/$host/hosts) $host_complete)
 fi
 scpary=(${^host_complete}:)
 compctl -k host_complete telnet ssh
 compctl -f + -k host_complete -S : scp darcs d
 
+# If preceeded by co or checkout, complete on branches, or filename.
+# Otherwise, complete filenames.
+compctl -x 'c[-1,co],c[-1,checkout]' -W .git/refs/heads/ -f + -f -- + -f git g
+
 if [[ $TERM == xterm ]]; then
-	function chpwd {
-		print -nP "\033]2;tty%l: %~\007\033]1;tty%l: %~\007"
-	}
-	chpwd
-	# func 'preexec' executed before each command
+    function chpwd {
+        print -nP "\033]2;tty%l: %~\007\033]1;tty%l: %~\007"
+    }
+    chpwd
+    # func 'preexec' executed before each command
 fi
 
 _trydot $qlib/sys/$host/zshrc
