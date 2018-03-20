@@ -26,6 +26,7 @@ au BufRead,BufNewFile *.clj     so ~/.vim/lisp.vim
 
 " haskell
 au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
+au BufRead,BufNewFile *.cabal   so ~/.vim/hs.vim
 au BufRead,BufNewFile *.x       so ~/.vim/hs.vim " alex
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
 au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
@@ -57,6 +58,8 @@ au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
 au BufRead,BufNewFile *.ily     so ~/.vim/ly.vim
 
 au BufRead,BufNewFile *.dsp     so ~/.vim/faust.vim
+
+au BufRead,BufNewFile *.yml     so ~/.vim/yaml.vim
 
 augroup END
 
