@@ -11,15 +11,15 @@ vm <buffer> ,c :!cmt //<cr>
 
 " setl foldmethod=marker
 " setl foldmarker={,}
-" 
+"
 " function C_fold_level(lnum)
-" 	if getLine(v:lnum)[0] == '{'
-" 		return ">1"
-" 	elseif getLine(v:lnum)[0] == '}'
-" 		return "<1"
-" 	else
-" 		return "="
-" 	endif
+"       if getLine(v:lnum)[0] == '{'
+"               return ">1"
+"       elseif getLine(v:lnum)[0] == '}'
+"               return "<1"
+"       else
+"               return "="
+"       endif
 " endfunction
 
 nnoremap <buffer> <silent> ,h :exec ToggleHeader()<cr>
@@ -34,8 +34,8 @@ if !exists("*ToggleHeader")
         else
             return
         endif
-        " Look for .cc
-        if filereadable(filename . 'c')
+        " Look for .c
+        if !filereadable(filename)
             let filename = filename . 'c'
         endif
         return ":edit " . filename
