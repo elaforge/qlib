@@ -12,6 +12,8 @@ src=/usr/local/src
 dl=$HOME/Downloads
 doc=/usr/local/share/doc # haskell docs
 
+export LEDGER_FILE=$HOME/src/money/journal/2018/main.j
+
 # Look in $CWD for a bin directory.
 path=(bin $path)
 

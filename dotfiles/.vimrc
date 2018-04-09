@@ -60,6 +60,10 @@ au BufRead,BufNewFile *.ily     so ~/.vim/ly.vim
 au BufRead,BufNewFile *.dsp     so ~/.vim/faust.vim
 
 au BufRead,BufNewFile *.yml     so ~/.vim/yaml.vim
+au BufRead,BufNewFile *.yaml    so ~/.vim/yaml.vim
+" hledger journals
+au BufRead,BufNewFile *.journal so ~/.vim/journal.vim
+au BufRead,BufNewFile *.j       so ~/.vim/journal.vim
 
 augroup END
 

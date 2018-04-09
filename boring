@@ -1,5 +1,7 @@
 /__pycache__
 dotfiles/.vim/current_hs
+dotfiles/.vim/autoload
+dotfiles/.vim/bundle
 \.pyc$
 \.pyo
 \.swp$
