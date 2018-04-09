@@ -14,7 +14,11 @@ setl smarttab
 " haskell has lots of \(...) so don't do the special \ treatment
 setl cpoptions+=M
 
+setl equalprg=fmt-signature\ 78
+
 vnoremap <buffer> ,c :!cmt --<cr>
+vnoremap <buffer> ,t :!string-literal --wrapped --toggle-backslash<cr>
+vnoremap <buffer> ,T :!string-literal --toggle-lines<cr>
 
 " intentional trailing space
 inoremap <buffer> ;i import qualified 

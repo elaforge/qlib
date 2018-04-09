@@ -19,20 +19,19 @@ email = qdunkan@gmail.com
 default = simple
 
 [alias]
-amend = commit --amend
 a = add
-s = status --short
+amend = commit --amend
 b = branch -v
-co = checkout
 c = commit
+co = checkout
 d = diff
 ds = diff --stat
-wip = commit -am wip
-unrec = reset HEAD^
+lp = log -p -1 # Show either a a single patch, or last patch to a file.
+m = merge --ff-only
 oblit = reset --keep HEAD^
-
-# Show either a a single patch, or last patch to a file.
-lp = log -p -1
+s = status --short
+unrec = reset HEAD^
+wip = commit -am wip
 
 # For ghc.
 pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"

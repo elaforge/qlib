@@ -5,7 +5,7 @@ nm gs :wa<cr>:!relily %<cr>
 setl cpoptions+=M
 
 setl comments=:%
-vm <buffer> ,c :!cmt \\%<cr>
+vm <buffer> ,c :!cmt %<cr>
 
 syn keyword   Todo     contained TODO XXX
 syn match   lyComment   contains=Todo "%.*"

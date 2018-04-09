@@ -12,16 +12,6 @@
 -- Make the prompt obvious.
 :set prompt "\ESC[46m\STX%s>\ESC[39;49m\STX "
 
--- Doesn't seem to work... because loading a module overrides it?
-:seti -XNoMonomorphismRestriction
-
--- Theoretically convenient, but makes many simple expressions become
--- ambiguous.
-:seti -XOverloadedStrings
-
--- use (?foo x y z) in a sub-expression to get the type of the expr
--- :set -XImplicitParams
-
 -- :R is the same as :r
 :def R (\args -> return (":r " ++ args))
 
