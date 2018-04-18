@@ -1,6 +1,8 @@
 # nice to have these for interactive sessions
 import sys, os
 
+sys.path.insert(1, os.path.join(os.environ['HOME'], 'qlib/lib/python'))
+
 sys.ps1 = sys.ps2 = ''
 def _eh(typ, val, tb):
     import local.qtraceback
