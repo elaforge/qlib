@@ -68,13 +68,16 @@ host_complete=($(<$qlib/dotfiles/hosts))
 if [[ -r $qlib/sys/$host/hosts ]]; then
     host_complete=($(<$qlib/sys/$host/hosts) $host_complete)
 fi
-scpary=(${^host_complete}:)
 compctl -k host_complete telnet ssh
-compctl -f + -k host_complete -S : scp darcs d
+compctl -f + -k host_complete -S : scp rsync darcs d
 
-# If preceeded by co or checkout, complete on branches, or filename.
+function git_refs() {
+    reply=($(git for-each-ref --format='%(refname:short)' "refs/heads/$1*"))
+}
+# checkout and branch complete on branches, or filename.
 # Otherwise, complete filenames.
-compctl -x 'c[-1,co],c[-1,checkout]' -W .git/refs/heads/ -f + -f -- + -f git g
+compctl -x 'w[1,co][1,checkout][1,b][1,branch]' \
+    -K git_refs -f + -f -- + -f git g
 
 if [[ $TERM == xterm ]]; then
     function chpwd {
