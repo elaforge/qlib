@@ -65,6 +65,8 @@ au BufRead,BufNewFile *.yaml    so ~/.vim/yaml.vim
 au BufRead,BufNewFile *.journal so ~/.vim/journal.vim
 au BufRead,BufNewFile *.j       so ~/.vim/journal.vim
 
+au BufRead,BufNewFile *.nix     so ~/.vim/nix.vim
+
 augroup END
 
 " reset everything to defaults
@@ -173,7 +175,6 @@ nm ,c V,c
 
 " # is default comment
 vm ,c :!cmt '\#'<cr>
-
 
 " ,d insert current date
 nm <silent> ,d  :r !date +\%Y-\%m-\%d<cr>
