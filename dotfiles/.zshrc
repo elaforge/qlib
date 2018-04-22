@@ -78,7 +78,7 @@ function git_refs() {
 }
 # checkout and branch complete on branches, or filename.
 # Otherwise, complete filenames.
-compctl -x 'w[1,co][1,checkout][1,b][1,branch]' \
+compctl -x 'w[1,co][1,checkout][1,b][1,branch][1,m][1,d]' \
     -K git_refs -f + -f -- + -f git g
 
 if [[ $TERM == xterm ]]; then
