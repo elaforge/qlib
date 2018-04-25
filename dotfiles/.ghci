@@ -9,6 +9,8 @@
 :set -fwarn-wrong-do-bind
 :set -fwarn-redundant-constraints
 
+:seti -XOverloadedStrings
+
 -- Make the prompt obvious.
 :set prompt "\ESC[46m\STX%s>\ESC[39;49m\STX "
 
