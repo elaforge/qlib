@@ -22,6 +22,8 @@ alias dw='darcs w -l'
 export DARCS_DONT_ESCAPE_8BIT=1
 # Change obnoxious warnings magenta 35 to blue 34.
 export GHC_COLOURS='header=:message=1:warning=1;34:error=1;31:fatal=1;31:margin=1;34'
+# Otherwise it's ^^, which is used by vi.
+export MOSH_ESCAPE_KEY=
 
 # cd to copy and pasted prompt
 function ccd {
@@ -68,7 +70,7 @@ host_complete=($(<$qlib/dotfiles/hosts))
 if [[ -r $qlib/sys/$host/hosts ]]; then
     host_complete=($(<$qlib/sys/$host/hosts) $host_complete)
 fi
-compctl -k host_complete telnet ssh
+compctl -k host_complete telnet ssh mosh
 compctl -f + -k host_complete -S : scp rsync darcs d
 
 function git_refs() {
