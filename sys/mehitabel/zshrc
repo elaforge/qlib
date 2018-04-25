@@ -1,0 +1,6 @@
+alias vi=vim
+
+src=/usr/local/src
+dl=/usr/local/dl
+
+eval $(dircolors ~/.dircolors)
