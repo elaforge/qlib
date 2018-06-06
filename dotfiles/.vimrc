@@ -7,7 +7,6 @@ autocmd!
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
-au BufRead,BufNewFile wscript   so ~/.vim/py.vim
 au BufRead,BufNewFile *.e       so ~/.vim/e.vim
 au BufRead,BufNewFile *.c       so ~/.vim/c.vim
 au BufRead,BufNewFile *.h       so ~/.vim/c.vim
@@ -129,7 +128,6 @@ set nofileignorecase
 mapclear
 mapclear!
 
-" vim is buggy and doesn't open folds even though its set to
 " nm <silent> n /<cr>
 " nm <silent> N ?<cr>
 
@@ -159,7 +157,6 @@ inoremap <c-f>   <c-x><c-f>
 " complete tags
 inoremap <c-]> <c-x><c-]>
 
-
 nm gqp  gqap
 nm gz   :wa<cr>
 nm Q gq
@@ -169,7 +166,6 @@ nm <silent> ,s :nohlsearch<cr>
 " nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
 nm <silent> ,n :let @/='<C-R><C-W>'<CR>:set hls<CR>
 " nm <Leader>* :let @/='\<'.expand('<cword>').'\>'<CR>
-
 
 nm ,c V,c
 
@@ -198,7 +194,7 @@ if has('python')
     nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
 endif
 
-source ~/.vim/bundle/vim-surround/plugin/surround.vim
+" source ~/.vim/bundle/vim-surround/plugin/surround.vim
 " set runtimepath^=~/.vim/bundle/vim-surround
 " set runtimepath^=~/.vim/bundle/ctrlp.vim
 
