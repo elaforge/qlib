@@ -1,8 +1,6 @@
 " options for haskell
 setl foldmethod=indent
 setl ts=4 sw=4 sts=4
-" this makes tags work on qualified names
-" setl iskeyword=@,_,.,48-57,39 " digits, '
 
 setl comments=:--
 " replace c with t since vi's idea of comments will be backwards
