@@ -15,11 +15,16 @@ alias od='od -A x -taxC'
 
 alias d=darcs
 alias g=git
-function gog {
-    git log --decorate=short "$@" | l
-}
+alias gog='git log --decorate=short | l'
 alias cha='darcs changes | l'
 alias dw='darcs w -l'
+
+# history
+setopt inc_append_history # session histories will be interleaved
+setopt hist_save_no_dups
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=10000
 
 export DARCS_DONT_ESCAPE_8BIT=1
 # Change obnoxious warnings magenta 35 to blue 34.
@@ -80,8 +85,9 @@ function git_refs() {
 }
 # checkout and branch complete on branches, or filename.
 # Otherwise, complete filenames.
-compctl -x 'w[1,co][1,checkout][1,b][1,branch][1,m][1,d]' \
+compctl -x 'w[1,co][1,checkout][1,b][1,branch][1,m][1,d][1,rebase]' \
     -K git_refs -f + -f -- + -f git g
+# compctl -K git_refs -f + -f -- + -f git g
 
 if [[ $TERM == xterm ]]; then
     function chpwd {
