@@ -5,6 +5,7 @@ unhash -fm '*'
 bindkey -d
 # not sure where or how this gets set, but it messes up automatic path stuff
 unset MANPATH
+skip_global_compinit=1
 
 host=$(/bin/hostname -s)
 if which dnsdomainname >/dev/null; then
@@ -12,6 +13,10 @@ if which dnsdomainname >/dev/null; then
 else
     domain=none
 fi
+if [[ $domain = c.groq*.internal ]]; then
+    domain=groq
+fi
+
 export host domain
 oname=$(~/bin/oname)
 qlib=~/qlib

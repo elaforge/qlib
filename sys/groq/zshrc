@@ -1,0 +1,2 @@
+# Access to git root.
+function g3() { git rev-parse --show-toplevel }
