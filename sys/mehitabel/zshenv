@@ -1,4 +1,4 @@
 # make chinese display correctly in iterm
 export LANG=en_US.UTF-8
 
-. /home/elaforge/.nix-profile/etc/profile.d/nix.sh
+. /etc/profile.d/nix.sh
