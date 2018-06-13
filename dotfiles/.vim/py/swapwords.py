@@ -22,10 +22,12 @@ symbols is also a token, with some exceptions like )}] (so that '))' won't be
 considered a single token).
 """
 
+from __future__ import print_function
 import re, string
 
 # This may need to be adjusted for languages with other rules for identifiers.
-word_chars = string.letters + string.digits + '_.'
+letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+word_chars = letters + string.digits + '_.'
 
 # vim_* functions take the 'vim' module and try to adapt this to vim's awkward
 # list of lines API.  The tokenizer could probably be adapted to (row, col)
@@ -111,8 +113,10 @@ def index_to_cursor(text, i):
         row += 1
     return (row, i)
 
-def swap(text, (s1, e1), (s2, e2)):
+def swap(text, se1, se2):
     """Swap the two ranges given."""
+    (s1, e1) = se1
+    (s2, e2) = se2
     return text[:s1] + text[s2:e2] + text[e1:s2] + text[s1:e1] + text[e2:]
 
 
@@ -164,7 +168,7 @@ def token_end(text, start):
         return i
 
 closing = { '(': ')', '{': '}', '[': ']'}
-special = set(closing.keys() + closing.values() + list('"\''))
+special = set(list(closing.keys()) + list(closing.values()) + list('"\''))
 
 def tokens(text, start, end):
     """token_end just gives the index of the end of the token.  Figure out
@@ -198,10 +202,10 @@ class ParseError(Exception): pass
 # testing
 
 def t0():
-    print tokenize(s0)
-    print tokens(s0, 13, 17)
+    print(tokenize(s0))
+    print(tokens(s0, 13, 17))
     # import pdb; pdb.set_trace()
-    print swap_delim(s0, 7, '->', [DEDENT])
+    print(swap_delim(s0, 7, '->', [DEDENT]))
 
 s0 = '''foo :: (b -> c) -> d
     -> a -> e
@@ -217,7 +221,7 @@ def tokenize(text):
     ts = []
     while True:
         e = token_end(text, s)
-        print (s, e)
+        print((s, e))
         if e is not None and text[s:e]:
             ts.extend(tokens(text, s, e))
             s = e
