@@ -1,4 +1,5 @@
 let maplocalleader = ","
+syntax off
 
 " clear all filetypes autocmds
 augroup filetypes
@@ -128,6 +129,7 @@ set nofileignorecase
 mapclear
 mapclear!
 
+" vim is buggy and doesn't open folds even though its set to
 " nm <silent> n /<cr>
 " nm <silent> N ?<cr>
 
@@ -189,6 +191,13 @@ if has('python')
     py import sys, os, vim
     py sys.path.insert(0, os.environ['HOME'] + '/.vim/py')
     py import swapwords
+
+    nm <silent> <c-s> :py swapwords.vim_swap_word(vim)<cr>
+    nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
+elseif has('python3')
+    py3 import sys, os, vim
+    py3 sys.path.insert(0, os.environ['HOME'] + '/.vim/py')
+    py3 import swapwords
 
     nm <silent> <c-s> :py swapwords.vim_swap_word(vim)<cr>
     nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
