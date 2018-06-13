@@ -35,6 +35,9 @@ source ~/.vim/hs-syntax.vim
 if has('python')
     py import qualified_tag
     nnoremap <buffer> <silent> <c-]> :py qualified_tag.tag_word(vim)<cr>
+elseif has('python3')
+    py3 import qualified_tag
+    nnoremap <buffer> <silent> <c-]> :py3 qualified_tag.tag_word(vim)<cr>
 endif
 
 if exists("b:did_hs_functions") || exists("*ToggleTest")
