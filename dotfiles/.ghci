@@ -5,6 +5,8 @@
 :set -Wno-name-shadowing
 :set -Wno-unused-top-binds -Wno-missing-signatures
 :set -Wno-unused-imports
+:set -Wno-duplicate-exports -Wno-unused-do-bind -Wno-orphans
+:set -Wno-type-defaults
 
 -- :set -fwarn-identities
 -- :set -fwarn-tabs
@@ -23,20 +25,20 @@
 -- :R is the same as :r
 :def R (\args -> return (":r " ++ args))
 
--- :L loads the file currently edited in vim
-
 -- Foo/Bar.hs -> Foo.Bar
-:set +m
+:{
 let mangle_file =
         map (\c -> if c == '/' then '.' else c)
         . System.FilePath.dropExtension
+:}
 
 -- This uses :l instead of :load so it will invoke a possible local :l.
+:{
 let load_vim = do
         home <- System.Environment.getEnv "HOME"
         file <- readFile (home ++ "/.vim/current_hs")
         return (":l *" ++ mangle_file file)
+:}
 
+-- :L loads the file currently edited in vim
 :def L (\_ -> load_vim)
-
-:set -m
