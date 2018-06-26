@@ -14,10 +14,13 @@ alias pwd='command pwd'
 alias od='od -A x -taxC'
 
 alias d=darcs
-alias g=git
-function gog() { git log --decorate=short "$@" | l }
 alias cha='darcs changes | l'
 alias dw='darcs w -l'
+
+# git
+alias g=git
+function gog() { git log --decorate=short "$@" | l }
+
 
 # history
 setopt inc_append_history # session histories will be interleaved
