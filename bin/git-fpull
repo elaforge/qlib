@@ -1,0 +1,17 @@
+#!/bin/zsh
+# Force pull, for symmetry with force push.
+
+tmp=tmp-fpull
+
+if [[ -n $1 ]]; then
+    echo expected no args
+    return 1
+fi
+branch=$(git rev-parse --abbrev-ref HEAD)
+git fetch
+git branch -f $tmp
+git checkout --quiet origin/$branch
+git checkout -B $branch
+if ! git branch -d $tmp 2>/dev/null; then
+    echo local changes in $tmp
+fi
