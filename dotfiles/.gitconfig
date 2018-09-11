@@ -10,6 +10,16 @@ whitespace = trailing-space,tab-in-indent
 name = Evan Laforge
 email = qdunkan@gmail.com
 
+[diff]
+colorMoved = zebra
+colorMovedWS = allow-indentation-change
+
+[color.diff]
+oldMoved = white
+newMoved = white bold
+oldMovedAlternative = white reverse
+newMovedAlternative = white bold reverse
+
 [branch]
 # I think this means when creating a local branch from a remote one,
 # automatically add the upstream info
