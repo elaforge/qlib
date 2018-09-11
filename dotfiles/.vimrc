@@ -7,22 +7,16 @@ autocmd!
 
 au BufRead,BufNewFile *         so ~/.vim/global.vim
 
+au BufRead,BufNewFile *.vim,.vimrc so ~/.vim/vim.vim
+
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
 au BufRead,BufNewFile *.e       so ~/.vim/e.vim
-au BufRead,BufNewFile *.c       so ~/.vim/c.vim
-au BufRead,BufNewFile *.h       so ~/.vim/c.vim
-au BufRead,BufNewFile *.m       so ~/.vim/c.vim
-au BufRead,BufNewFile *.cc      so ~/.vim/c.vim
-au BufRead,BufNewFile *.mm      so ~/.vim/c.vim
-au BufRead,BufNewFile *.m       so ~/.vim/c.vim
-au BufRead,BufNewFile *.cpp     so ~/.vim/c.vim
-au BufRead,BufNewFile *.cxx     so ~/.vim/c.vim
-au BufRead,BufNewFile *.hh      so ~/.vim/c.vim
+au BufRead,BufNewFile *.c,*.h   so ~/.vim/c.vim
+au BufRead,BufNewFile *.m,*.mm  so ~/.vim/c.vim
+au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H so ~/.vim/c.vim
 au BufRead,BufNewFile *.rs      so ~/.vim/rs.vim
 
-au BufRead,BufNewFile *.scm     so ~/.vim/lisp.vim
-au BufRead,BufNewFile *.lsp     so ~/.vim/lisp.vim
-au BufRead,BufNewFile *.lisp    so ~/.vim/lisp.vim
+au BufRead,BufNewFile *.scm,*.lsp,*.lisp so ~/.vim/lisp.vim
 au BufRead,BufNewFile *.clj     so ~/.vim/lisp.vim
 
 " haskell
@@ -30,8 +24,7 @@ au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
 au BufRead,BufNewFile *.cabal   so ~/.vim/hs.vim
 au BufRead,BufNewFile *.x       so ~/.vim/hs.vim " alex
 au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
-au BufRead,BufNewFile *.hsc     so ~/.vim/hs.vim
-au BufRead,BufNewFile *.chs     so ~/.vim/hs.vim
+au BufRead,BufNewFile *.hsc,*.chs     so ~/.vim/hs.vim
 au BufRead,BufNewFile .ghci     so ~/.vim/hs.vim
 " GHC profile output.
 au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
@@ -68,12 +61,15 @@ au BufRead,BufNewFile *.j       so ~/.vim/journal.vim
 
 au BufRead,BufNewFile *.nix     so ~/.vim/nix.vim
 
+au BufRead,BufNewFile */p/*.hs  so ~/.vim/groq.vim
+
 augroup END
 
 " reset everything to defaults
 set all&
 syntax clear
 
+set encoding=utf8
 set noloadplugins " don't read crap from $VIM/plugins
 set nocompatible " no vi compatibility, matchparen requires this
 runtime plugin/matchparen.vim " wait, except I like this one
@@ -177,6 +173,7 @@ vm ,c :!cmt '\#'<cr>
 
 " ,d insert current date
 nm <silent> ,d  :r !date +\%Y-\%m-\%d<cr>
+nm <silent> ,D  :r !date +\%Y-\%m-\%d:\%H:\%M:\%S<cr>
 
 " clear out trailing whitespace and lines ending in whitespace
 nm <silent> ,w   :%s/[\t ]\+$//e<cr>

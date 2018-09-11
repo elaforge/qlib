@@ -1,2 +1,12 @@
 # Access to git root.
 function g3() { git rev-parse --show-toplevel }
+
+function baked() { bake "$@" --bake-path=$(g3)/bake }
+function bake-ghci() { $(g3)/Groq/Infra/Bake/bake-ghci.sh "$@" }
+
+function vm-of() { grep $1 ~/p/saltstack-config/salt/nodegroups.conf }
+
+function hgrep() { grep -n "$@" $(g3)/Groq/**/*.hs }
+
+# configure gcloud cmd
+export CLOUDSDK_COMPUTE_ZONE=us-west1-b
