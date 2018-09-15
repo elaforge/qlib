@@ -28,6 +28,9 @@ newMovedAlternative = white bold reverse
 [push]
 default = simple
 
+[pull]
+ff = only
+
 [alias]
 a = add
 amend = commit --amend
@@ -42,7 +45,7 @@ oblit = reset --keep HEAD^
 s = status --short
 sync = pull -r origin head
 unrec = reset HEAD^
-wip = commit -am wip
+wip = "!f(){ long_lines_ok=t git commit -am wip; }; f"
 
 # For ghc.
 pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
