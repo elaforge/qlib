@@ -1,7 +1,7 @@
 #!/bin/zsh -e
 cd
 dotfiles=(
-    .fvwm2rc .inputrc .vim .vimrc .zlogin .zshenv .zshrc .haskeline .ghci
+    .fvwm2rc .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci
     .editrc .gitconfig .darcs
 )
 for fn in $dotfiles; do
