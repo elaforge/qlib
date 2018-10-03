@@ -10,7 +10,6 @@ au BufRead,BufNewFile *         so ~/.vim/global.vim
 au BufRead,BufNewFile *.vim,.vimrc so ~/.vim/vim.vim
 
 au BufRead,BufNewFile *.py      so ~/.vim/py.vim
-au BufRead,BufNewFile *.e       so ~/.vim/e.vim
 au BufRead,BufNewFile *.c,*.h   so ~/.vim/c.vim
 au BufRead,BufNewFile *.m,*.mm  so ~/.vim/c.vim
 au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H so ~/.vim/c.vim
@@ -39,7 +38,6 @@ au BufRead,BufNewFile *.ksp     so ~/.vim/ksp.vim
 au BufRead,BufNewFile *.java    so ~/.vim/java.vim
 " close enough...
 au BufRead,BufNewFile *.js      so ~/.vim/java.vim
-au BufRead,BufNewFile *.xml     so ~/.vim/xml.vim
 au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
 
 au BufEnter TODO*               so ~/.vim/todo.vim
