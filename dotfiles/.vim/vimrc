@@ -10,7 +10,7 @@ filetype plugin on
 au BufNewFile *.hs,*.hsc        so ~/.vim/hs-new.vim
 " " GHC profile output.
 " au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
-" au BufRead,BufNewFile */p/*.hs  so ~/.vim/groq.vim
+au BufRead,BufNewFile */p/*.hs  so ~/.vim/groq.vim
 
 " reset everything to defaults
 set all&
