@@ -1,3 +1,5 @@
+let b:did_ftplugin = 1
+
 " options for haskell
 setl foldmethod=indent
 setl ts=4 sw=4 sts=4
@@ -29,8 +31,6 @@ nnoremap <buffer> <silent> ,t :exec ToggleTest()<cr>
 nnoremap <buffer> <silent> ,a :call FixImports()<cr>
 
 iabbr <buffer> und undefined
-
-source ~/.vim/hs-syntax.vim
 
 if has('python')
     py import qualified_tag

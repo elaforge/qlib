@@ -1,71 +1,19 @@
 let maplocalleader = ","
-syntax off
 
-" clear all filetypes autocmds
-augroup filetypes
-autocmd!
+" stop syntax/syncolor.vim from doing anything
+let syntax_cmd = "mine"
+" :syntax enable will reset syntax_cmd
+runtime syntax/syntax.vim
 
-au BufRead,BufNewFile *         so ~/.vim/global.vim
+filetype plugin on
 
-au BufRead,BufNewFile *.vim,.vimrc so ~/.vim/vim.vim
-
-au BufRead,BufNewFile *.py      so ~/.vim/py.vim
-au BufRead,BufNewFile *.c,*.h   so ~/.vim/c.vim
-au BufRead,BufNewFile *.m,*.mm  so ~/.vim/c.vim
-au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H so ~/.vim/c.vim
-au BufRead,BufNewFile *.rs      so ~/.vim/rs.vim
-
-au BufRead,BufNewFile *.scm,*.lsp,*.lisp so ~/.vim/lisp.vim
-au BufRead,BufNewFile *.clj     so ~/.vim/lisp.vim
-
-" haskell
-au BufRead,BufNewFile *.hs      so ~/.vim/hs.vim
-au BufRead,BufNewFile *.cabal   so ~/.vim/hs.vim
-au BufRead,BufNewFile *.x       so ~/.vim/hs.vim " alex
-au BufRead,BufNewFile *.lhs     so ~/.vim/hs.vim
-au BufRead,BufNewFile *.hsc,*.chs     so ~/.vim/hs.vim
-au BufRead,BufNewFile .ghci     so ~/.vim/hs.vim
-" GHC profile output.
-au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
-au BufNewFile *.hs              so ~/.vim/hs-new.vim
-au BufNewFile *.hsc             so ~/.vim/hs-new.vim
-" close enough
-au BufRead,BufNewFile *.idr     so ~/.vim/idr.vim
-
-au BufRead,BufNewFile *.ky      so ~/.vim/ky.vim
-au BufRead,BufNewFile *.ksp     so ~/.vim/ksp.vim
-
-au BufRead,BufNewFile *.java    so ~/.vim/java.vim
-" close enough...
-au BufRead,BufNewFile *.js      so ~/.vim/java.vim
-au BufRead,BufNewFile *.php     setl ts=2 sw=2 et softtabstop=2 ai
-
-au BufEnter TODO*               so ~/.vim/todo.vim
-au BufEnter todo-*              so ~/.vim/todo.vim
-au BufEnter */todo/*            so ~/.vim/todo.vim
-
-au BufRead,BufNewFile Makefile  so ~/.vim/makefile.vim
-
-au BufRead,BufNewFile *.ly      so ~/.vim/ly.vim
-au BufRead,BufNewFile *.ily     so ~/.vim/ly.vim
-
-au BufRead,BufNewFile *.dsp     so ~/.vim/faust.vim
-
-au BufRead,BufNewFile *.yml     so ~/.vim/yaml.vim
-au BufRead,BufNewFile *.yaml    so ~/.vim/yaml.vim
-" hledger journals
-au BufRead,BufNewFile *.journal so ~/.vim/journal.vim
-au BufRead,BufNewFile *.j       so ~/.vim/journal.vim
-
-au BufRead,BufNewFile *.nix     so ~/.vim/nix.vim
-
-au BufRead,BufNewFile */p/*.hs  so ~/.vim/groq.vim
-
-augroup END
+au BufNewFile *.hs,*.hsc        so ~/.vim/hs-new.vim
+" " GHC profile output.
+" au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
+" au BufRead,BufNewFile */p/*.hs  so ~/.vim/groq.vim
 
 " reset everything to defaults
 set all&
-syntax clear
 
 set encoding=utf8
 set noloadplugins " don't read crap from $VIM/plugins
@@ -181,7 +129,21 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 
 nm <c-j> :next<cr>
 
-source ~/.vim/global.vim
+
+" trailing spaces are always bad
+syntax match ErrorMsg   display "\s\+$"
+" mixed tabs and spaces
+syntax match ErrorMsg   display " \+\t"
+syntax match ErrorMsg   display "\t\+ "
+
+" mark columns 80 and 81 in red for long lines...
+match ErrorMsg /\%80v.\%81v./
+
+set cpoptions= " turn off more vi compatibility
+
+if v:progname == 'nvim'
+    set cpoptions=_ " restore normal cw, neovim breaks this
+endif
 
 if has('python')
     py import sys, os, vim
@@ -195,8 +157,8 @@ elseif has('python3')
     py3 sys.path.insert(0, os.environ['HOME'] + '/.vim/py')
     py3 import swapwords
 
-    nm <silent> <c-s> :py swapwords.vim_swap_word(vim)<cr>
-    nm <silent> <c-n> :py swapwords.vim_swap_delim(vim)<cr>
+    nm <silent> <c-s> :py3 swapwords.vim_swap_word(vim)<cr>
+    nm <silent> <c-n> :py3 swapwords.vim_swap_delim(vim)<cr>
 endif
 
 " source ~/.vim/bundle/vim-surround/plugin/surround.vim

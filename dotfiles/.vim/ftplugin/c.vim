@@ -1,3 +1,5 @@
+let b:did_ftplugin = 1
+
 setl cindent
 iabbr <buffer> #i #include
 iabbr <buffer> #d #define
@@ -7,7 +9,7 @@ setl foldnestmax=3
 setl foldignore=# " ignore preprocessor
 
 setl comments=s1:/*,mb:*,ex:*/,://
-vm <buffer> ,c :!cmt //<cr>
+vm <buffer> <LocalLeader>c :!cmt //<cr>
 
 " setl foldmethod=marker
 " setl foldmarker={,}

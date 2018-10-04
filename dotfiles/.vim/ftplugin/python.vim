@@ -1,3 +1,5 @@
+let b:did_ftplugin = 1
+
 setl foldmethod=indent
 setl foldnestmax=3 " class, method, if
 " setl foldignore=# " ignore comments
