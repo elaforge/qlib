@@ -1,6 +1,6 @@
 :set stop :list
 
-:set -fdefer-type-errors
+-- :set -fdefer-type-errors
 :set -Wall
 :set -Wno-name-shadowing
 :set -Wno-unused-top-binds -Wno-missing-signatures

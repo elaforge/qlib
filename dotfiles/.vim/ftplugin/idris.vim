@@ -1,8 +1,10 @@
+let b:did_ftplugin = 1
+
 source ~/.vim/bundle/idris-vim/ftplugin/idris.vim
 
 " hs functions don't apply to idris
 let b:did_hs_functions = 1
-source ~/.vim/hs.vim
+source ~/.vim/ftplugin/haskell.vim
 
 setl comments=:\|\|\|,:--
 
@@ -27,7 +29,7 @@ syn match idrisMetaVar "?[A-Za-z][A-Za-z0-9_']*"
 
 syn match idrisDirective "%\(access\|assert_total\|default\|elim\|error_reverse\|hide\|name\|reflection\|error_handlers\|language\|flag\|dynamic\|provide\|inline\|used\|no_implicit\|hint\|extern\|unqualified\|error_handler\)"
 
-hi link idrisKeyword hsKeyword
-hi link idrisDirective hsPragma
+hi link idrisKeyword Keyword
+hi link idrisDirective Pragma
 
 hi idrisMetaVar cterm=bold ctermfg=DarkRed

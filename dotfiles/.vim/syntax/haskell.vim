@@ -1,4 +1,9 @@
-syn clear
+" TODO breaks it?
+" if exists("b:current_syntax")
+"     finish
+" endif
+
+" syn clear
 syntax sync fromstart " slow but accurate
 
 " why no need he=s+6 to restrict highlight to import string?
@@ -14,7 +19,7 @@ syn keyword hsKeyword   if then else
 
 syn keyword hsDebug     undefined error
 
-syn keyword   todo     contained TODO XXX
+syn keyword   TODO     contained TODO XXX
 
 " trailing spaces are always bad
 syntax match warning   display "\s\+$"
@@ -41,28 +46,21 @@ syn match   hsChar      "[^a-zA-Z0-9_']'\([^\\]\|\\[^']\+\|\\'\)'"lc=1
     \ contains=hsSpecialChar
 syn match   hsChar      "^'\([^\\]\|\\[^']\+\|\\'\)'" contains=hsSpecialChar
 
-hi clear
-hi link warning ErrorMsg
+" hi clear
 
-hi hsKeyword cterm=underline
-hi link hsImportKeyword hsKeyword
+hi link hsKeyword Keyword
+hi link hsImportKeyword Keyword
+hi link hsLineComment Comment
+hi link hsBlockComment Comment
 
-hi link hsLineComment hsComment
-hi link hsBlockComment hsComment
-
-hi hsComment cterm=bold
 hi hsPragma cterm=bold ctermfg=DarkRed
 
-hi hsString ctermfg=DarkBlue
-hi hsSpecialChar ctermfg=DarkRed
+hi link hsString String
+hi link hsSpecialChar SpecialChar
+
 hi strContinuation ctermfg=DarkRed
-hi link hsChar hsString
+hi link hsChar String
 
-hi todo ctermbg=Cyan
-hi hsDebug ctermbg=Cyan
-
-" ctermbg=LightGray also looks good
-
-finish
+hi link hsDebug TODO
 
 let b:current_syntax = "haskell"

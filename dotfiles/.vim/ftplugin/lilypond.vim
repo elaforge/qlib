@@ -1,3 +1,5 @@
+let b:did_ftplugin = 1
+
 se ai
 nm gs :wa<cr>:!relily %<cr>
 
