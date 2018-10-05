@@ -17,7 +17,8 @@ setl cpoptions+=M
 setl equalprg=fmt-signature\ 78
 
 vnoremap <buffer> ,c :!cmt --<cr>
-vnoremap <buffer> ,t :!string-literal --wrapped --toggle-backslash<cr>
+vnoremap <buffer> ,t :!string-literal --toggle-backslash<cr>
+vnoremap <buffer> ,W :!string-literal --wrapped --toggle-backslash<cr>
 vnoremap <buffer> ,T :!string-literal --toggle-lines<cr>
 
 " intentional trailing space

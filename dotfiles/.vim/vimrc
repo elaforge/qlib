@@ -129,7 +129,6 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 
 nm <c-j> :next<cr>
 
-
 " trailing spaces are always bad
 syntax match ErrorMsg   display "\s\+$"
 " mixed tabs and spaces
