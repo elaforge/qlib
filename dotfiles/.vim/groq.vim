@@ -14,6 +14,8 @@
 "     endif
 " endfunction
 
+setl ts=2 sw=2 sts=2
+
 function! GetPathPrefix()
     let module = expand('%') " Groq/Infra/Bake/Hook/Metrics.hs
     let prefix = substitute(module, '/[^/]\+\.hs$', '', '')
