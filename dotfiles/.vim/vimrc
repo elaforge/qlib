@@ -130,10 +130,10 @@ nm ,p   :se invpaste<cr>:se paste?<cr>
 nm <c-j> :next<cr>
 
 " trailing spaces are always bad
-syntax match ErrorMsg   display "\s\+$"
+syntax match Warning   display "\s\+$"
 " mixed tabs and spaces
-syntax match ErrorMsg   display " \+\t"
-syntax match ErrorMsg   display "\t\+ "
+syntax match Warning   display " \+\t"
+syntax match Warning   display "\t\+ "
 
 " mark columns 80 and 81 in red for long lines...
 match ErrorMsg /\%80v.\%81v./
