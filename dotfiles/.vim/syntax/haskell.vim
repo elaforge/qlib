@@ -28,13 +28,16 @@ syntax match warning   display "\t\+"
 
 " Backslash continues the previous line.  Vim is so bizarre.
 
-syn match hsLineComment contains=todo,warning
+syn match hsLineComment contains=todo,warning,hsHaddock
     \ "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
-syn region  hsBlockComment contains=todo,warning,hsBlockComment
+" Highlight haddock specially, because commenting out a guard creates a haddock
+" time-bomb.
+syn match hsHaddock contained " *-- |"
+syn region hsBlockComment contains=todo,warning,hsBlockComment,hsHaddock
     \ start="{-"  end="-}"
-syn region  hsPragma    start="{-#" end="#-}"
+syn region hsPragma    start="{-#" end="#-}"
 
-syn match   hsSpecialChar contained
+syn match hsSpecialChar contained
     \ "\\\([0-9]\+\|o[0-7]\+\|x[0-9a-fA-F]\+\|[\"\\'&\\abfnrtv]\|^[A-Z^_\[\\\]]\)"
 syn region  hsString      start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
     \ contains=hsSpecialChar,strContinuation
@@ -53,7 +56,8 @@ hi link hsImportKeyword Keyword
 hi link hsLineComment Comment
 hi link hsBlockComment Comment
 
-hi hsPragma cterm=bold ctermfg=DarkRed
+hi link hsPragma SpecialComment
+hi hsHaddock cterm=bold ctermbg=LightRed
 
 hi link hsString String
 hi link hsSpecialChar SpecialChar

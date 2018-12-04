@@ -10,6 +10,7 @@ hi link Warning ErrorMsg
 
 hi Keyword cterm=underline
 hi Comment cterm=bold
+hi SpecialComment cterm=bold ctermfg=DarkRed
 hi String ctermfg=DarkBlue
 hi SpecialChar ctermfg=DarkRed
 hi TODO ctermbg=Cyan
