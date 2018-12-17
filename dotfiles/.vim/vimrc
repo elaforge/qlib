@@ -108,8 +108,8 @@ nm Q gq
 
 " nm <silent> ,s :nohlsearch<cr>:match<cr>
 nm <silent> ,s :nohlsearch<cr>
-" nm <silent> ,n :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
-nm <silent> ,n :let @/='<C-R><C-W>'<CR>:set hls<CR>
+" nm <silent> ,h :exe 'match IncSearch "\<' . expand("<cword>") . '\>"'<cr>
+nm <silent> ,h :let @/='<C-R><C-W>'<CR>:set hls<CR>
 " nm <Leader>* :let @/='\<'.expand('<cword>').'\>'<CR>
 
 nm ,c V,c
