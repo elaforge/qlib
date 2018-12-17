@@ -42,6 +42,7 @@ ds = diff --stat
 lp = log -p -1 # Show either a a single patch, or last patch to a file.
 m = merge --ff-only
 oblit = reset --keep HEAD^
+rc = rebase --continue
 s = status --short
 sync = pull -r origin head
 unrec = reset HEAD^

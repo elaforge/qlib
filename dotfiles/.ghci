@@ -1,5 +1,6 @@
 :set stop :list
 
+-- Broken in ghc >=8.4
 -- :set -fdefer-type-errors
 :set -Wall
 :set -Wno-name-shadowing
