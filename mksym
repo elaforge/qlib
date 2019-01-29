@@ -5,7 +5,13 @@ dotfiles=(
     .editrc .gitconfig .darcs
 )
 for fn in $dotfiles; do
-    ln -fs qlib/dotfiles/$fn
+    ln -Ffs qlib/dotfiles/$fn
+done
+mkdir -p .config
+
+# Don't mess up any local configs that may exist.
+for fn in qlib/dotfiles/.config/*; do
+    ln -Ffs $fn .config
 done
 
 rm -rf bin
