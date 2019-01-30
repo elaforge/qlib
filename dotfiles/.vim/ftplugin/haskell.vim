@@ -14,7 +14,7 @@ setl smarttab
 " haskell has lots of \(...) so don't do the special \ treatment
 setl cpoptions+=M
 
-setl equalprg=fmt-signature\ 78
+setl equalprg=fmt-signature\ 4\ 78
 
 vnoremap <buffer> ,c :!cmt --<cr>
 vnoremap <buffer> ,t :!string-literal --toggle-backslash<cr>
