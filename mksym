@@ -11,7 +11,7 @@ mkdir -p .config
 
 # Don't mess up any local configs that may exist.
 for fn in qlib/dotfiles/.config/*; do
-    ln -Ffs $fn .config
+    ln -Ffs ../$fn .config
 done
 
 rm -rf bin
