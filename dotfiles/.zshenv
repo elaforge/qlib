@@ -51,3 +51,8 @@ export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
     # Try this with git, so I can get colors and no less.  --no-init disables
     # page flipping, though I sometimes like it.
     # --quit-if-one-screen --no-init
+
+export LANG=en_US.UTF-8
+# Otherwise sort sorts in a surprising order.  I can't use LC_ALL because that
+# will change text input, and then haskell gets upset at non-ASCII.
+export LC_COLLATE=C
