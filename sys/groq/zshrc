@@ -2,11 +2,48 @@
 function g3() { git rev-parse --show-toplevel }
 
 function baked() { bake "$@" --bake-path=$(g3)/bake }
-function bake-ghci() { $(g3)/Groq/Infra/Bake/bake-ghci.sh "$@" }
 
 function vm-of() { grep $1 ~/p/saltstack-config/salt/nodegroups.conf }
 
-function hgrep() { grep -n "$@" $(g3)/Groq/**/*.hs }
+function showd() {
+    local drv=$1
+    if [[ -h $drv ]]; then
+        drv=$(readlink $drv)
+    fi
+    nix show-derivation $drv | jq 'del(.[].env.__json)'
+    nix show-derivation $drv | jq '.[].env.__json | fromjson'
+}
+
+function hgrep() {
+    if [[ -d $1 ]]; then
+        local dir=$1
+        shift
+    else
+        dir=.
+    fi
+    rg --type haskell "$@" $dir
+}
+
+function ngrep() {
+    if [[ -d $1 ]]; then
+        local dir=$1
+        shift
+    else
+        dir=.
+    fi
+    rg --type nix "$@" $dir
+}
+
+function ghcib() { no_update=t bake ghci "$@" }
+
+function lbake() {
+    _result_local/Groq/Infra/Bake/bake "$@" --bake-path=$(g3)/bake
+}
+
+function vlbake() {
+    GROQ_LOG_CONFIG=severity=debug,stderr-also \
+        _result_local/Groq/Infra/Bake/bake "$@" --bake-path=$(g3)/bake
+}
 
 # configure gcloud cmd
 export CLOUDSDK_COMPUTE_ZONE=us-west1-b
