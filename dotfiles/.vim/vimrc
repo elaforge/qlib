@@ -50,6 +50,8 @@ set comments=
 
 " wrap text, comments, format comments
 set formatoptions=tcroq
+" delete commments on J
+set formatoptions+=j
 " don't break lines already past tw, break and join chinese sensibly
 set formatoptions+=lmM
 
@@ -84,9 +86,15 @@ nmap ,l   :ls<cr>
 nmap ,u   :bdelete<cr>
 
 " grep
-set grepprg=rg\ --type=haskell\ --vimgrep
-nnoremap ,g :call RgSearch('\\b' . expand('<cword>') . '\\b')<cr>
-fun! RgSearch(txt)
+nnoremap ,g :call Rg('\\b' . expand('<cword>') . '\\b')<cr>
+fun! Rg(txt)
+    if &filetype == ''
+        let &grepprg = 'rg --vimgrep'
+    elseif &filetype == 'c'
+        let &grepprg = 'rg --vimgrep --type=c --type=cpp'
+    else
+        let &grepprg = 'rg --vimgrep --type=' . &filetype
+    endif
     silent! exe 'grep! ' . a:txt
     if len(getqflist()) > 0
         copen
@@ -97,6 +105,7 @@ fun! RgSearch(txt)
         echo 'no match: ' . a:txt
     endif
 endfun
+command! -nargs=* -complete=tag Rg :call Rg(<q-args>)
 
 " I never actually want to look up a man page.
 nmap K k
