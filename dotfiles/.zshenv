@@ -1,58 +1,18 @@
-# kill annoying default aliases and functions
-# *why* must people fiddle with the default setup!?
-unhash -am '*'
-unhash -fm '*'
-bindkey -d
-# not sure where or how this gets set, but it messes up automatic path stuff
-unset MANPATH
-skip_global_compinit=1
-
-host=$(/bin/hostname -s)
-if which dnsdomainname >/dev/null; then
-    domain=$(dnsdomainname)
+if [[ -d ~/qlib ]]; then
+    qlib=~/qlib
+elif [[ -d /groq/elaforge/qlib ]]; then
+    qlib=/groq/elaforge/qlib
 else
-    domain=none
-fi
-if [[ $domain = c.groq*.internal ]]; then
-    domain=groq
+    echo no qlib
 fi
 
-export host domain
-oname=$(~/bin/oname)
-qlib=~/qlib
-
-# typeset -T PATH path # automatic
-# establish a:b:c <-> (a b c) link
-typeset -T PYTHONPATH pythonpath
-export PYTHONPATH
-typeset -U path pythonpath
-export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
-
-path=(
-    ~/bin ~/.cabal/bin ~/.cargo/bin
-    $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
-    /usr/local/bin /usr/local/sbin
-    /bin /sbin /usr/bin
-)
-pythonpath=(~/lib/python)
-
-function _trydot {
-    if [[ -r $1 ]]; then
-        . $1
+if [[ -n $qlib ]]; then
+    if [[ ! -e ~/.zshrc && -e $qlib/dotfiles/.zshrc ]]; then
+        ln -s $qlib/dotfiles/.zshrc ~
     fi
-}
+    if [[ ! -e ~/.zlogin && -e $qlib/dotfiles/.zlogin ]]; then
+        ln -s $qlib/dotfiles/.zlogin ~
+    fi
 
-_trydot $qlib/sys/$host/zshenv
-_trydot $qlib/sys/$domain/zshenv
-
-export PAGER=less
-export EDITOR=vim
-export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
-    # Try this with git, so I can get colors and no less.  --no-init disables
-    # page flipping, though I sometimes like it.
-    # --quit-if-one-screen --no-init
-
-export LANG=en_US.UTF-8
-# Otherwise sort sorts in a surprising order.  I can't use LC_ALL because that
-# will change text input, and then haskell gets upset at non-ASCII.
-export LC_COLLATE=C
+    . $qlib/dotfiles/zshenv
+fi
