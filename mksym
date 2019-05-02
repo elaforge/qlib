@@ -1,21 +1,23 @@
 #!/bin/zsh -e
+qlib=$0:h
+
 cd
 dotfiles=(
     .fvwm2rc .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci
     .editrc .gitconfig .darcs
 )
 for fn in $dotfiles; do
-    ln -Ffs qlib/dotfiles/$fn
+    ln -Ffs $qlib/dotfiles/$fn
 done
 mkdir -p .config
 
 # Don't mess up any local configs that may exist.
-for fn in qlib/dotfiles/.config/*; do
+for fn in $qlib/dotfiles/.config/*; do
     ln -Ffs ../$fn .config
 done
 
 rm -rf bin
-ln -s qlib/bin
+ln -s $qlib/bin
 
-ln -sf qlib/sys/$host/xsession .xsession
+ln -sf $qlib/sys/$host/xsession .xsession
 ln -sf .xsession .xinitrc
