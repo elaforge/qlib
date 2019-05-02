@@ -1,16 +1,6 @@
 function set_ls_colors {
-	case $1 in
-	xterm)
-        local exec='40;32;1'
-        local archive='01;31'
-        local gfx='40;33'
-        local snd='32;40'
-        local src='37;1;40'
-        local doc='35'
-        local obj='31'
-        local special='30;41'
-		;;
-	linux)
+    case $1 in
+    linux)
         local exec='01;32'
         local archive='01;31'
         local gfx='00;33'
@@ -19,12 +9,18 @@ function set_ls_colors {
         local doc='35'
         local obj='31'
         local special='30;41'
-		;;
-	*)
-        # echo "set_ls_colors: don't know about $1"
-        return 0
-		;;
-	esac
+        ;;
+    *)
+        local exec='40;32;1'
+        local archive='01;31'
+        local gfx='40;33'
+        local snd='32;40'
+        local src='37;1;40'
+        local doc='35'
+        local obj='31'
+        local special='30;41'
+        ;;
+    esac
 
     export LS_COLORS=\
 "no=00:fi=00:di=01;34:ln=40;01;36:or=40;36:pi=40;33:so=01;35:bd=40;33;01:\
