@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+
+import sys, socket
+print(socket.gethostbyname(sys.argv[1]))
