@@ -1,5 +1,5 @@
 #!/bin/zsh -e
-qlib=$0:h
+qlib=$(realpath $(dirname $(pwd)/$0))
 
 cd
 dotfiles=(
@@ -12,7 +12,7 @@ done
 mkdir -p .config
 
 # Don't mess up any local configs that may exist.
-for fn in $qlib/dotfiles/.config/*; do
+for fn in $qlib/dotfiles/.config/*(N); do
     ln -Ffs ../$fn .config
 done
 
