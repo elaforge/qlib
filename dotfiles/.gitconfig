@@ -51,7 +51,7 @@ wip = "!f(){ long_lines_ok=t git commit -am wip; }; f"
 # TODO these depend on the head branch name
 sync = pull -r origin head
 # rebase unpushed commits
-ri = "!f() { git rebase -i $(git merge-base head HEAD) }; f"
+ri = "!f() { git rebase -i $(git merge-base head HEAD); }; f"
 
 
 
