@@ -21,7 +21,6 @@ au BufRead,BufNewFile *.cabal   setf haskell
 au BufRead,BufNewFile *.lhs,*.x,*.hsc,*.chs     setf haskell
 au BufRead,BufNewFile .ghci     setf haskell
 au BufRead,BufNewFile *.idr     setf idris
-au BufRead,BufNewFile *.ky      setf ky
 au BufRead,BufNewFile *.ksp     setf ksp
 au BufRead,BufNewFile *.java    setf java
 au BufRead,BufNewFile *.js      setf javascript
@@ -33,5 +32,7 @@ au BufRead,BufNewFile *.journal,*.j     setf hledger
 au BufRead,BufNewFile *.nix     setf nix
 
 au BufRead,BufNewFile TODO*,todo-*,*/todo/* setf todo
+au BufRead,BufNewFile *.ky      setf ky
+au BufRead,BufNewFile *.tscore  setf tscore
 
 augroup END
