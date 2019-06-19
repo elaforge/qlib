@@ -44,11 +44,16 @@ m = merge --ff-only
 oblit = reset --keep HEAD^
 r = rebase -i
 rc = rebase --continue
-ri = rebase -i @{u} # rebase unpushed commits
 s = status --short
-sync = pull -r origin head
 unrec = reset HEAD^
 wip = "!f(){ long_lines_ok=t git commit -am wip; }; f"
+
+# TODO these depend on the head branch name
+sync = pull -r origin head
+# rebase unpushed commits
+ri = "!f() { git rebase -i $(git merge-base head HEAD) }; f"
+
+
 
 # For ghc.
 pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
