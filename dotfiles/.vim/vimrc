@@ -71,6 +71,10 @@ set notagrelative " don't look for tags relative to the edited file
 " files and tab completion are case sensitive, even on OS X
 set nofileignorecase
 
+" Read changed files without prompting.  This happens a lot due to git
+" checkout, and vim only uses mtime so it's wrong a much of the time.
+set autoread
+
 mapclear
 mapclear!
 
