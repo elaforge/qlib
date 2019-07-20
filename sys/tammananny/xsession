@@ -1,13 +1,9 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 errors=$HOME/.xsession-errors
 exec >>$errors 2>&1
 
-qlib=$HOME/qlib
-case $host in
-    tammananny) res=1920x1200;;
-    *) res=1600x1200;;
-esac
+# qlib=$HOME/qlib
 
 setxkbmap -option ctrl:nocaps -option terminate:ctrl_alt_bksp
 xmodmap $qlib/kbd/dvorak.xmodmap
@@ -26,29 +22,11 @@ xset b off
 xsetroot -solid gray30
 # xsetroot -cursor ~/gfx/x-cursor ~/gfx/x-cursor-mask
 
-case $res in
-  1920x1200)
-    xterms=(
-        80x66+0+75
-        80x66+646+75
-        78x46+1291+0 78x24+1291+788
-    )
-    # xterms=(80x79+0+76 80x43+566+76 80x24+566+684 80x73+1132+0)
-    ;;
-  1600x1200)
-    xterms=(80x80+0+75 80x80+566+75 80x85+1034+0)
-    ;;
-  *)
-    xterms=(80x74+0+74 80x40+566+74 80x23+566+678 80x79+1033+0)
-    ;;
-esac
+all-xterms
 
-# setting main xterm as login shell doesn't seem to do anything
-for geo in $xterms; do
-    xterm -geometry $geo &
-done
+# xload -nolabel -update 3 -hl red -geometry 255x74+0+0 &
+xload -nolabel -update 3 -hl red -geometry 640x88+0+0 &
 
-xload -nolabel -update 3 -hl red -geometry 255x74+0+0 &
 # xsysinfo -update 500 -geometry 212x74+255+0 &
 xclock -padding 4 -d -strftime '%I:%M %a %d' -geometry +0+0 &
 
