@@ -1,5 +1,5 @@
 XTerm.vt100.faceName:           Inconsolata
-XTerm.vt100.faceSize:           12
+XTerm.vt100.faceSize:           11
 ! XTerm.vt100.faceName:           monospace:minspace=true
 XTerm.vt100.font:               10x20
 XTerm.vt100.loginShell:         false
@@ -14,6 +14,12 @@ XTerm.vt100.foreground:         Black
 XTerm.ttyModes:                 intr ^c susp ^z erase ^h
 XTerm.vt100.scrollBar:          false
 XTerm*utf8:                     1
+
+! XTerm.vt100.on2Clicks: regex [a-zA-Z0-9:._/-]+
+XTerm.vt100.on2Clicks: word
+! 48 is the alphanumeric group
+! ','.join('%d:48' % ord(c) for c in ':._/-')
+XTerm.vt100.charClass: 58:48,46:48,95:48,47:48,45:48
 
 ! make xterm copy to the PRIMARY buffer
 XTerm*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
@@ -31,9 +37,5 @@ XSysinfo*swap*bar.forground1:   white
 XSysinfo*swap*bar.forground2:   white
 
 GV.antialias:           true
-
-Wily*p9font:            /usr/local/lib/prop.9.font
-Wily*p9fixed:           /usr/local/lib/fixed.9.font
-Wily*geometry:          1600x1200+0+0
 
 *dndTextOps: false // see if this turns of annoying text dnd

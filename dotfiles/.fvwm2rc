@@ -121,10 +121,7 @@ AddToFunc RestartFunction   "I" Module FvwmPager 0 3
 AddToFunc Raise-and-Move    "I" Raise
 +                           "I" Move
 
-AddToFunc XTerms            "I" Exec xterm -geometry 80x66+0+75
-+                           "I" Exec xterm -geometry 80x66+647+75
-+                           "I" Exec xterm -geometry 78x46+1290+0
-+                           "I" Exec xterm -geometry 78x24+1290+788
+AddToFunc XTerms            "I" Exec all-xterms
 
 ############################### Menus ########################################
 AddToMenu   Ops         "ops"      Title
