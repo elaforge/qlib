@@ -4,7 +4,7 @@ qlib=$(realpath $(dirname $(pwd)/$0))
 cd
 dotfiles=(
     .fvwm2rc .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci
-    .editrc .gitconfig .darcs
+    .editrc .gitconfig .darcs .tmux.conf
 )
 for fn in $dotfiles; do
     ln -Ffs $qlib/dotfiles/$fn
