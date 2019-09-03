@@ -1,7 +1,7 @@
 if [[ -d ~/qlib ]]; then
     qlib=~/qlib
-elif [[ -d /groq/elaforge/qlib ]]; then
-    qlib=/groq/elaforge/qlib
+elif [[ -d /net/home/elaforge/qlib ]]; then
+    qlib=/net/home/elaforge/qlib
 else
     echo no qlib
 fi
