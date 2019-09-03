@@ -26,7 +26,7 @@ au BufRead,BufNewFile *.java    setf java
 au BufRead,BufNewFile *.js      setf javascript
 au BufRead,BufNewFile Makefile  setf makefile
 au BufRead,BufNewFile *.ly,*.ily setf lilypond
-au BufRead,BufNewFile *.dsp     setf faust
+au BufRead,BufNewFile *.dsp,*.dsph setf faust
 au BufRead,BufNewFile *.yml,*.yaml      setf yaml
 au BufRead,BufNewFile *.journal,*.j     setf hledger
 au BufRead,BufNewFile *.nix     setf nix

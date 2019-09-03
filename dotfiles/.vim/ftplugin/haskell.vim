@@ -21,7 +21,7 @@ vnoremap <buffer> ,T :!string-literal --toggle-lines<cr>
 
 " intentional trailing space
 inoremap <buffer> ;i import qualified 
-inoremap <buffer> ;l {-# LANGUAGE #-}<esc>hhhi
+inoremap <buffer> ;l {-# LANGUAGE  #-}<esc>hhhi
 
 " Make gf work on module import lines.
 setl includeexpr=substitute(v:fname,'\\.','/','g')
