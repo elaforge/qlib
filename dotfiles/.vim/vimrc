@@ -1,4 +1,5 @@
 let maplocalleader = ","
+let mapleader = ","
 
 " stop syntax/syncolor.vim from doing anything
 let syntax_cmd = "mine"
