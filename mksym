@@ -1,23 +1,29 @@
 #!/bin/zsh -e
-qlib=$(realpath $(dirname $0))
 
-cd
-dotfiles=(
-    .fvwm2rc .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci
-    .editrc .gitconfig .darcs .tmux.conf
-)
-for fn in $dotfiles; do
-    ln -Ffs $qlib/dotfiles/$fn
-done
-mkdir -p .config
+if [[ -z $qlib ]]; then
+    echo $0: qlib not set
+else
+    # TODO: This is broken, but rely on it already being set.
+    # qlib=$(realpath $(dirname $(pwd)/$0))
 
-# Don't mess up any local configs that may exist.
-for fn in $qlib/dotfiles/.config/*(N); do
-    ln -Ffs ../$fn .config
-done
+    cd
+    dotfiles=(
+        .fvwm2rc .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci
+        .editrc .gitconfig .darcs
+    )
+    for fn in $dotfiles; do
+        ln -Ffs $qlib/dotfiles/$fn
+    done
+    mkdir -p .config
 
-rm -rf bin
-ln -s $qlib/bin
+    # Don't mess up any local configs that may exist.
+    for fn in $qlib/dotfiles/.config/*(N); do
+        ln -Ffs ../$fn .config
+    done
 
-ln -sf $qlib/sys/$host/xsession .xsession
-ln -sf .xsession .xinitrc
+    rm -rf bin
+    ln -s $qlib/bin
+
+    ln -sf $qlib/sys/$host/xsession .xsession
+    ln -sf .xsession .xinitrc
+fi
