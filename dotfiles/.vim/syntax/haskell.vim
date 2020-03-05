@@ -3,8 +3,12 @@
 "     finish
 " endif
 
+" prevent stdlib haskell.vim from running
+let b:current_syntax = "haskell"
+
 " syn clear
 syntax sync fromstart " slow but accurate
+
 
 " why no need he=s+6 to restrict highlight to import string?
 syn keyword hsKeyword   module
@@ -20,11 +24,6 @@ syn keyword hsKeyword   if then else
 syn keyword hsDebug     undefined error
 
 syn keyword   TODO     contained TODO XXX
-
-" trailing spaces are always bad
-syntax match warning   display "\s\+$"
-" no tabs
-syntax match warning   display "\t\+"
 
 " Backslash continues the previous line.  Vim is so bizarre.
 
@@ -66,5 +65,3 @@ hi strContinuation ctermfg=DarkRed
 hi link hsChar String
 
 hi link hsDebug TODO
-
-let b:current_syntax = "haskell"

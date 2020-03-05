@@ -6,12 +6,6 @@ syn keyword Keyword  call function on
 
 syn keyword todo     contained TODO XXX
 
-" " trailing spaces are always bad
-" syntax match warning   display "\s\+$"
-" " mixed tabs and spaces
-" syntax match warning   display " \+\t"
-" syntax match warning   display "\t\+ "
-
 " Backslash continues the previous line.  Vim is so bizarre.
 syn region  kspBlockComment contains=todo,warning,kspBlockComment
     \ start="{"  end="}"

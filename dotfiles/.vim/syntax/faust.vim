@@ -1,3 +1,5 @@
+let b:current_syntax = "faust"
+
 syn keyword faustKeyword case declare letrec with
 syn keyword faustKeyword soundfile waveform
 syn keyword faustKeyword ffunction fvariable fconstant
@@ -13,5 +15,3 @@ hi link faustKeyword Keyword
 hi link faustLineComment Comment
 hi link faustBlockComment Comment
 hi link faustString String
-
-let b:current_syntax = "faust"

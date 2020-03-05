@@ -3,6 +3,8 @@ let mapleader = ","
 
 " stop syntax/syncolor.vim from doing anything
 let syntax_cmd = "mine"
+" let syntax_manual = "true"
+
 " :syntax enable will reset syntax_cmd
 runtime syntax/syntax.vim
 
@@ -157,12 +159,6 @@ nmap <silent> ,w   :%s/[\t ]\+$//e<cr>
 nmap ,p   :se invpaste<cr>:se paste?<cr>
 
 nmap <c-j> :next<cr>
-
-" trailing spaces are always bad
-syntax match Warning   display "\s\+$"
-" mixed tabs and spaces
-syntax match Warning   display " \+\t"
-syntax match Warning   display "\t\+ "
 
 " mark columns 80 and 81 in red for long lines...
 match ErrorMsg /\%80v.\%81v./
