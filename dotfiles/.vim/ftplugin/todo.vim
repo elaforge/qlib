@@ -1,7 +1,7 @@
 let b:did_ftplugin = 1
 
 setl foldmethod=indent
-setl foldnestmax=5
+setl foldnestmax=7
 
 setl ai smarttab
 setl ts=2 sw=2 et softtabstop=4

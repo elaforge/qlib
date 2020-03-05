@@ -61,9 +61,11 @@ endfunction
 " A ghci command can use this to load the currently edited file.
 function SaveFile()
     " :load on a lowercase directory name won't work anyway.
-    if match(expand('%'), '^[^/]\+\.hs$') != -1
-            \ || match(expand('%'), '[A-Z]') == 0
-        call writefile([substitute(expand('%'), "//", "/", "g")],
+    let filename = substitute(expand('%'), '^\.\/', '', '')
+    " Either abc.hs right here, or A/B/C.hs in a subdir.
+    if match(filename, '^[^/]\+\.hs$') != -1
+            \ || match(filename, '[A-Z]') == 0
+        call writefile([substitute(filename, "//", "/", "g")],
             \ $HOME . "/.vim/current_hs")
     endif
 endfunction
