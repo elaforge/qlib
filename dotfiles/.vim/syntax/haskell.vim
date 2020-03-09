@@ -5,6 +5,7 @@
 
 " prevent stdlib haskell.vim from running
 let b:current_syntax = "haskell"
+source ~/.vim/global-syntax.vim
 
 " syn clear
 syntax sync fromstart " slow but accurate

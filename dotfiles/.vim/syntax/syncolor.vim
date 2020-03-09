@@ -8,11 +8,12 @@
 
 " Stuff all syntax files should do.
 
-" trailing spaces are always bad
-syntax match Warning   display "\s\+$"
-" mixed tabs and spaces
-syntax match Warning   display " \+\t"
-syntax match Warning   display "\t\+ "
+" doesn't work, I guess syntax is cleared by someone?
+" " trailing spaces are always bad
+" syntax match Warning   display "\s\+$"
+" " mixed tabs and spaces
+" syntax match Warning   display " \+\t"
+" syntax match Warning   display "\t\+ "
 
 hi link Warning ErrorMsg
 

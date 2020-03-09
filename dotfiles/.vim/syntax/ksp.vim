@@ -1,4 +1,5 @@
 syntax sync fromstart " slow but accurate
+source ~/.vim/global-syntax.vim
 
 " why no need he=s+6 to restrict highlight to import string?
 syn keyword Keyword  declare const polyphonic if else end while select case

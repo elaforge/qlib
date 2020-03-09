@@ -1,4 +1,5 @@
 let b:current_syntax = "faust"
+source ~/.vim/global-syntax.vim
 
 syn keyword faustKeyword case declare letrec with
 syn keyword faustKeyword soundfile waveform
