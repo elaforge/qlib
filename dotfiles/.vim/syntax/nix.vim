@@ -1,4 +1,5 @@
 let b:current_syntax = "nix"
+source ~/.vim/global-syntax.vim
 
 " syn clear
 syn region  nixString    start=+"+  skip=+\\\\\|\\"+  end=+"\|$+

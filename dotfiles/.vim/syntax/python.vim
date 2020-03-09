@@ -3,6 +3,7 @@
 " endif
 
 let b:current_syntax = "python"
+" source ~/.vim/global-syntax.vim
 
 syntax sync fromstart " slow but accurate
 
@@ -17,12 +18,15 @@ syn keyword Keyword
 
 syn region  String      start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
 syn region  String      start=+'+  skip=+\\\\\|\\'+  end=+'\|$+
-syn region  String      start=+"""+  end=+"""+
-syn region  String      start=+'''+  end=+'''+
+syn region  String      contains=Warning start=+"""+  end=+"""+
+syn region  String      contains=Warning start=+'''+  end=+'''+
+
+hi link multilineString String
 
 syn match Comment contains=todo,warning "#.*$"
 
 syn keyword   TODO     contained TODO XXX
 
+" No tabs at all.
 syntax match Warning   display "\s\+$"
 syntax match Warning   display "\t"

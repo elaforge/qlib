@@ -3,6 +3,7 @@
 " endif
 
 let b:current_syntax = "rust"
+source ~/.vim/global-syntax.vim
 
 syntax sync fromstart " slow but accurate
 
