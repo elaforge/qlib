@@ -28,18 +28,24 @@
 
 -- Foo/Bar.hs -> Foo.Bar
 :{
-let mangle_file =
+let _ghciMangleFile =
         map (\c -> if c == '/' then '.' else c)
         . System.FilePath.dropExtension
 :}
 
 -- This uses :l instead of :load so it will invoke a possible local :l.
+-- Arguments get added to scope.  :add looks like it should do this,
+-- but it doesn't, because it also changes the imported modules, instead
+-- of just adding one.
 :{
-let load_vim = do
+let _ghciLoadVim arg = do
         home <- System.Environment.getEnv "HOME"
         file <- readFile (home ++ "/.vim/current_hs")
-        return (":l *" ++ mangle_file file)
+        return $ unlines
+            [ ":l *" ++ _ghciMangleFile file ++ " " ++ arg
+            , unwords [":module +" ++ m | m <- words arg]
+            ]
 :}
 
 -- :L loads the file currently edited in vim
-:def L (\_ -> load_vim)
+:def L _ghciLoadVim
