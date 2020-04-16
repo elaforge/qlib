@@ -17,6 +17,7 @@ au BufRead,BufNewFile *.scm,*.lsp,*.lisp so setf lisp
 au BufRead,BufNewFile *.clj     setf lip
 
 au BufRead,BufNewFile *.hs      setf haskell
+au BufRead,BufNewFile *.dhall   setf dhall
 au BufRead,BufNewFile *.cabal   setf haskell
 au BufRead,BufNewFile *.lhs,*.x,*.hsc,*.chs     setf haskell
 au BufRead,BufNewFile .ghci     setf haskell
