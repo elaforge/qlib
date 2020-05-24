@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+store=$(nix store add-path --name qlib .)
+narpile upload $store

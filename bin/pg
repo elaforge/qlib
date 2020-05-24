@@ -1,0 +1,52 @@
+#!/usr/bin/env zsh
+# Script to connect to brake db.
+
+set -eu
+
+host=8657c7c82a88.20xohpv8rtqwe.us-central1.sql.goog.
+host_replica=4e7a64af75a1.20xohpv8rtqwe.us-central1.sql.goog.
+
+db=brake
+is_prod=
+
+if [[ ! -r ~/.pgpass ]]; then
+  echo "You'll need to create a ~/.pgpass with at least:"
+  echo "$host:*:brake:brakero:<password> # main ro"
+  echo "$host:*:brake:brakerw:<password> # main rw"
+  echo "$host:*:test:tester:<password>"
+  echo "$host_replica:*:brake:brakero:<password> # replica"
+  echo
+  echo "Use berglas access sm://nv-hwlpu-20260103060253/<name>"
+  echo "to get the passwords, and chmod 600 the file."
+  exit 1
+fi
+
+case ${1-ro} in
+ro) user=brakero;;
+replica) host=$host_replica; user=brakero;;
+rw) is_prod=t; user=brakerw;;
+test) db=test; user=tester;;
+server_test) db=server_test; user=brakerw;;
+server_test2) db=brake_server_test_bakery; user=brakerw; host=10.69.173.62;;
+root) db=postgres; user=postgres;;
+*) echo unknown db; exit 1;;
+esac
+if [[ -v 1 ]]; then
+    shift
+fi
+
+if [[ -n $is_prod ]]; then
+    color='%033[41m' # red background
+else
+    color='%033[46m' # cyan background
+fi
+args=(
+    # I'd like to use color but it messes up readline.
+    # --set=PROMPT1="%[$color%]%n@%/%R%[%#%033[0m%] "
+    --set=PROMPT1="%n@%/%R "
+)
+
+export PGPASSFILE=~/.pgpass
+set -x
+exec /nix/var/nix/profiles/default/bin/psql $args --no-password \
+  --host=$host --user=$user --dbname=$db "$@"

@@ -14,12 +14,25 @@
 "     endif
 " endfunction
 
-setl ts=2 sw=2 sts=2
+if match(expand('%'), '\.py$') == -1
+    setl ts=2 sw=2 sts=2
+endif
 
 function! GetPathPrefix()
     let module = expand('%') " Groq/Infra/Bake/Hook/Metrics.hs
     let prefix = substitute(module, '/[^/]\+\.hs$', '', '')
     return substitute(prefix, '/', '.', 'g') . '.'
+endfunction
+
+function! GetFullModuleName()
+    let module = expand('%') " Groq/Infra/Bake/Hook/Metrics.hs
+    let prefix = substitute(module, '\.hs$', '', '')
+    return substitute(prefix, '/', '.', 'g')
+endfunction
+
+function! GetModuleName()
+    let module = expand('%') " Groq/Infra/Bake/Hook/Metrics.hs
+    return substitute(split(module, '/')[-1], '\.hs$', '', '')
 endfunction
 
 function! GetRepoRoot()
@@ -32,4 +45,5 @@ endfunction
 " nmap ,h :call append(line('.'), GetPathPrefix())<cr>
 " nmap ,h :exe 'norm i' . GetPathPrefix() . '.'<cr>
 
-imap <c-s> <c-r>=GetPathPrefix()<cr>
+" imap <c-s> <c-r>=GetPathPrefix()<cr>
+imap <c-s> <c-r>=GetFullModuleName()<cr>

@@ -7,6 +7,8 @@ syn region  nixString    start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
 syn keyword nixKeyword   let in inherit rec or if then else with import
 
 syn match nixComment "#.*$"
+" no good, because it picks up /* in '' strings.
+" syn region nixComment contains=todo,warning,nixComment start="/\*"  end="\*/"
 
 " hi clear
 hi link warning ErrorMsg

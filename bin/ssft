@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+eval $(tmux showenv -s)
+exec sft ssh "$@"

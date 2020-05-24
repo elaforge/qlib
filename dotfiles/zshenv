@@ -5,7 +5,8 @@ unhash -fm '*'
 
 # New linux likes to put annoying junk in system profiles.
 # /etc/zshenv will still run though.
-setopt no_global_rcs
+# setopt no_global_rcs
+
 # Disable whatever functions happen to be lurking.
 fpath=()
 
@@ -23,8 +24,9 @@ if which dnsdomainname >/dev/null; then
 else
     domain=nodomain
 fi
-if [[ $domain = '' ]]; then
-    domain=nodomain
+
+if [[ $domain = c.nv-hwlpu-*.internal ]]; then
+  domain=groq
 fi
 
 export host domain
@@ -71,15 +73,13 @@ export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
     # --quit-if-one-screen --no-init
 # For whatever reason, systemctl decides to ignore $LESS in favor of its own
 # annoying defaults.
-export SYSTEMD_LESS=$LESS
+# export SYSTEMD_LESS=$LESS
+export SYSTEMD_PAGER=
 
 export LANG=en_US.utf-8
 # Otherwise sort sorts in a surprising order.  I can't use LC_ALL because that
 # will change text input, and then haskell gets upset at non-ASCII.
 export LC_COLLATE=C
-
-_trydot /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-_trydot ~/.nix-profile/etc/profile.d/nix-daemon.sh
 
 _trydot $qlib/sys/$host/zshenv
 _trydot $qlib/sys/$domain/zshenv

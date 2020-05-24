@@ -2,8 +2,8 @@ qlibs=(
     ~/qlib
     ~/elaforge/qlib
     /net/home/elaforge/qlib
-    /labshare/elaforge/qlib
-    /lab/elaforge/qlib
+    /net/gcp_labshare_hdd/elaforge/qlib
+    $(dirname $(dirname $(readlink ~/.zshenv)))
 )
 for qlib in $qlibs; do
     if [[ -d $qlib ]]; then

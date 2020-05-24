@@ -122,13 +122,13 @@ function fix-drv {
 
 function drv-out {
     for drv in "$@"; do
-        nix derivation show $(fix-drv $drv) | jq -r '.[].outputs[].path'
+        nix derivation show $(fix-drv $drv) | jq -r '.derivations | .[].outputs[].path'
     done
 }
 
 function out-drv {
     for drv in "$@"; do
-        nix derivation show $(fix-drv $drv) | jq -r 'keys[]'
+        nix derivation show $(fix-drv $drv) | jq -r '.derivations | keys[]'
     done
 }
 

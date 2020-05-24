@@ -1,6 +1,13 @@
 #!/usr/bin/env zsh
 
-set -eu
+# set -eu
+
+# Set this by hand to link a different qlib.  However, zshenv will still find
+# the first match.
+if [[ -z $qlib ]]; then
+    echo $0: qlib not set
+    # exit 1
+fi
 
 if [[ -e $qlib/sys/$host/xsession ]]; then
     use_x=t
@@ -8,17 +15,10 @@ else
     use_x=
 fi
 
-if [[ -z $qlib ]]; then
-    echo $0: qlib not set
-    exit 1
-fi
-
-# TODO: This is broken, let's rely on it already being set.
-# qlib=$(realpath $(dirname $(pwd)/$0))
-
 cd
 dotfiles=(
     .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci .editrc
+    .tmux.conf
 )
 if [[ -n $use_x ]]; then
     dotfiles+=(.fvwm2rc)

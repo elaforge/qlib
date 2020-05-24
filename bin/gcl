@@ -1,0 +1,121 @@
+#!/usr/bin/env zsh
+
+function run {
+  echo "$@"
+  "$@"
+}
+
+function instance_zone {
+  local instance=$1
+  local zone_output
+  zone_output=$(gcloud compute instances list \
+    --filter="name=('${instance}')" \
+    --format='value(zone.basename())') || return
+  local -a zones
+  local listed_zone
+  while IFS= read -r listed_zone; do
+    if [[ -n $listed_zone ]]; then
+      zones+=("$listed_zone")
+    fi
+  done <<< "$zone_output"
+  if (( ${#zones} == 0 )); then
+    print -u2 -- "instance not found: $instance"
+    return 1
+  elif (( ${#zones} > 1 )); then
+    print -u2 -- "instance exists in multiple zones: $instance: ${zones[*]}"
+    return 1
+  fi
+  print -r -- "$zones[1]"
+}
+
+function start_instance {
+  local instance=$1
+  if [[ -z $instance || $instance == -* ]]; then
+    print -u2 -- "start requires an instance name"
+    return 2
+  fi
+  local start_zone
+  start_zone=$(instance_zone "$instance") || return
+  run gcloud compute instances start "--zone=$start_zone" "$@"
+}
+
+function tail_serial {
+  local start=""
+  local instance=$1
+  if [[ -z $instance || $instance == -* ]]; then
+    print -u2 -- "tail requires an instance name"
+    return 2
+  fi
+  local tail_zone
+  tail_zone=$(instance_zone "$instance") || return
+
+  local stdout_file stderr_file
+  stdout_file=$(mktemp) || return
+  stderr_file=$(mktemp) || {
+    rm -f "$stdout_file"
+    return
+  }
+  local -a start_arg
+  local exit_status next_start line
+  {
+    while true; do
+      start_arg=()
+      if [[ -n $start ]]; then
+        start_arg=("--start=$start")
+      fi
+
+      : > "$stdout_file"
+      : > "$stderr_file"
+      gcloud compute instances get-serial-port-output \
+        "--zone=$tail_zone" "${start_arg[@]}" "$@" \
+        >"$stdout_file" 2>"$stderr_file"
+      exit_status=$?
+
+      if grep -q '[^[:space:]]' "$stdout_file"; then
+        cat "$stdout_file"
+      fi
+
+      next_start=""
+      while IFS= read -r line || [[ -n $line ]]; do
+        if [[ $line =~ "Specify --start=([0-9]+)" ]]; then
+          next_start=$match[1]
+        else
+          print -r -u2 -- "$line"
+        fi
+      done < "$stderr_file"
+
+      if (( exit_status != 0 )); then
+        return $exit_status
+      elif [[ -z $next_start ]]; then
+        print -u2 -- "gcloud did not report the next serial-port offset"
+        return 1
+      fi
+
+      start=$next_start
+      sleep 1
+    done
+  } always {
+    rm -f "$stdout_file"
+    rm -f "$stderr_file"
+  }
+}
+
+cmd=$1
+shift
+case $cmd in
+  list)
+    name=$1
+    shift
+    run gcloud compute instances list --filter="name~'.*"$name".*'" "$@"
+    ;;
+  start)
+    start_instance "$@"
+    ;;
+  tail)
+    tail_serial "$@"
+    ;;
+  *)
+    echo unknown command "$cmd"
+    exit 1
+    ;;
+esac
