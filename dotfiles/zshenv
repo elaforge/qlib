@@ -15,7 +15,7 @@ host=$(/bin/hostname -s)
 if which dnsdomainname >/dev/null; then
     domain=$(dnsdomainname)
 else
-    domain=none
+    domain=nodomain
 fi
 if [[ $domain = c.groq*.internal ]]; then
     domain=groq
@@ -34,9 +34,11 @@ export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 path=(
     ~/bin ~/.cabal/bin ~/.cargo/bin
     $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
-    /usr/local/bin /usr/local/sbin
-    /bin /sbin /usr/bin
+    $path
 )
+# On OS X, path_helper in /etc/zprofile will rearrange the path, but
+# I shouldn't be overriding system binaries anyway.
+
 pythonpath=(~/lib/python)
 
 function _trydot {
@@ -44,9 +46,6 @@ function _trydot {
         . $1
     fi
 }
-
-_trydot $qlib/sys/$host/zshenv
-_trydot $qlib/sys/$domain/zshenv
 
 export PAGER=less
 export EDITOR=vim
@@ -60,3 +59,7 @@ export LANG=en_US.UTF-8
 # will change text input, and then haskell gets upset at non-ASCII.
 export LC_COLLATE=C
 
+_trydot /Users/elaforge/.nix-profile/etc/profile.d/nix.sh
+
+_trydot $qlib/sys/$host/zshenv
+_trydot $qlib/sys/$domain/zshenv
