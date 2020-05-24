@@ -31,9 +31,9 @@ SAVEHIST=10000
 
 export DARCS_DONT_ESCAPE_8BIT=1
 # Change obnoxious warnings magenta 35 to blue 34.
-export GHC_COLOURS='header=:message=1:warning=1;34:error=1;31:fatal=1;31:margin=1;34'
+export GHC_COLOURS='header=:message=4:warning=1;34:error=1;31:fatal=1;31:margin=1;34'
 # Otherwise it's ^^, which is used by vi.
-export MOSH_ESCAPE_KEY=
+export MOSH_ESCAPE_KEY=
 
 # cd to copy and pasted prompt
 function ccd {
@@ -43,7 +43,11 @@ function ccd {
 }
 
 # PS1='%B%(?..%?)%#%b '
-PS1='%K{cyan}%(?..%?)%# %k'
+if [[ $SHLVL -gt 1 ]]; then
+    PS1='%K{yellow}%(?..%?)%# %k'
+else
+    PS1='%K{cyan}%(?..%?)%# %k'
+fi
 RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
 _trydot $qlib/dotfiles/set-ls-colors $TERM

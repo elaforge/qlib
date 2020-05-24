@@ -4,7 +4,7 @@ user = Evan Laforge
 email = qdunkan@gmail.com
 # pager = cat
 pager = less --quit-if-one-screen --no-init
-whitespace = trailing-space,tab-in-indent
+whitespace = trailing-space,tab-in-indent,-blank-at-eof
 
 [user]
 name = Evan Laforge
