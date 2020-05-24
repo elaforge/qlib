@@ -1,49 +1,103 @@
+if [[ $host != mehitabel ]]; then
+    RPS1='%K{yellow}%~%(6~.. %B%n@%m)%k%b'
+fi
+
 # Access to git root.
-function g3() { git rev-parse --show-toplevel }
+function g3 { git rev-parse --show-toplevel }
 
-function baked() { bake "$@" --bake-path=$(g3)/bake }
+function vm-of { grep "# $1\>" ~/p/saltstack-config/salt/nodegroups.conf }
 
-function vm-of() { grep $1 ~/p/saltstack-config/salt/nodegroups.conf }
+function fix-drv {
+    if [[ $1 = /nix/store/* ]]; then
+        echo $1
+    else
+        echo /nix/store/$1
+    fi
+}
 
-function showd() {
-    local drv=$1
+function copy-from {
+    nix copy --from http://narpile.groq "$@"
+}
+function copy-to {
+    nix copy --to http://narpile.groq "$@"
+}
+
+function showd {
+    local drv=$(fix-drv $1)
     if [[ -h $drv ]]; then
         drv=$(readlink $drv)
     fi
-    nix show-derivation $drv | jq 'del(.[].env.__json)'
-    nix show-derivation $drv | jq '.[].env.__json | fromjson'
+    case $2 in
+    inputDrvs)
+        nix show-derivation $drv | jq -r '.[].inputDrvs | keys | join("\n")'
+        ;;
+    *)
+        nix show-derivation $drv | jq --color-output 'del(.[].env.__json)'
+        nix show-derivation $drv | jq --color-output '.[].env.__json | fromjson'
+        ;;
+    esac
 }
 
-function hgrep() {
+function drv-out {
+    for drv in "$@"; do
+        nix show-derivation $(fix-drv $drv) | jq -r '.[].outputs[].path'
+    done
+}
+
+function out-drv {
+    for drv in "$@"; do
+        nix show-derivation $(fix-drv $drv) | jq -r 'keys[]'
+    done
+}
+
+function bquery {
+    bake query "$@" >json.json
+    cat json.json | jq --color-output 'del(.[].env.__json)'
+    cat json.json | jq --color-output '.[].env.__json | fromjson'
+}
+
+function _grep {
+    local dir
+    local type=$1
+    shift
     if [[ -d $1 ]]; then
-        local dir=$1
+        dir=$1
         shift
     else
-        dir=.
+        dir=
     fi
-    rg --type haskell "$@" $dir
+    rg --type $type "$@" $dir
 }
 
-function ngrep() {
-    if [[ -d $1 ]]; then
-        local dir=$1
-        shift
-    else
-        dir=.
-    fi
-    rg --type nix "$@" $dir
+function hgrep { _grep haskell "$@" }
+function ngrep { _grep nix "$@" }
+function pgrep { _grep py "$@" }
+
+### bake
+
+function vbake {
+    GROQ_LOG_CONFIG=severity=debug,stderr-also bake "$@"
 }
 
-function ghcib() { no_update=t bake ghci "$@" }
-
-function lbake() {
-    _result_local/Groq/Infra/Bake/bake "$@" --bake-path=$(g3)/bake
+function lbake {
+    _result_local/Groq/Infra/Bake/bake "$@"
 }
 
-function vlbake() {
+function vlbake {
     GROQ_LOG_CONFIG=severity=debug,stderr-also \
-        _result_local/Groq/Infra/Bake/bake "$@" --bake-path=$(g3)/bake
+        _result_local/Groq/Infra/Bake/bake "$@"
+}
+
+function canary {
+    bake run -t //Groq/Infra/Deploy:Deploy -- Deploy canary $@
 }
 
 # configure gcloud cmd
-export CLOUDSDK_COMPUTE_ZONE=us-west1-b
+export CLOUDSDK_COMPUTE_ZONE=us-west1-a
+
+function gitlab_users() {
+    reply=($(cat ~/.cache/gr-users))
+    reply=(${reply:#[0-9]*}) # filter out numbers
+}
+
+alias gr='gr --slack --update-mr --label .Infra --assignee=elaforge'
