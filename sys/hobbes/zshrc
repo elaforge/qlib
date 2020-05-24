@@ -5,24 +5,10 @@ alias blog='vi ~/n/blog/$(y-m-d)'
 
 alias make='make -j6'
 
-# for phabricator for ghc
-alias arc=$src/hs/arcanist/bin/arc
-
 src=/usr/local/src
 dl=$HOME/Downloads
-doc=/usr/local/share/doc # haskell docs
 
 export LEDGER_FILE=$HOME/src/money/journal/main.j
 
 # Look in $CWD for a bin directory.
 path=(bin $path)
-
-unalias d
-function d() {
-    if [[ $1 = g ]]; then
-        shift
-        darcs diff --diff-command 'opendiff %1 %2' "$@"
-    else
-        darcs "$@"
-    fi
-}
