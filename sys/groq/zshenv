@@ -1,1 +1,9 @@
-. /etc/profile.d/nix.sh
+_trydot /etc/profile.d/nix.sh
+
+# Put cabal ahead of nix.
+path=(~/.cabal/bin $path)
+
+# Some VMs don't have a complete termcap db.
+if ! tput longname >/dev/null 2>&1; then
+    TERM=xterm
+fi
