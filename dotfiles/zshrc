@@ -1,4 +1,6 @@
 unset MANPATH
+# Disable whatever functions happen to be lurking.
+fpath=()
 
 alias s='command ls -F --color=tty'
 alias ll='s -lh'

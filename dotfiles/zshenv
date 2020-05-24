@@ -62,6 +62,9 @@ export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
     # Try this with git, so I can get colors and no less.  --no-init disables
     # page flipping, though I sometimes like it.
     # --quit-if-one-screen --no-init
+# For whatever reason, systemctl decides to ignore $LESS in favor of its own
+# annoying defaults.
+export SYSTEMD_LESS=$LESS
 
 export LANG=en_US.UTF-8
 # Otherwise sort sorts in a surprising order.  I can't use LC_ALL because that
