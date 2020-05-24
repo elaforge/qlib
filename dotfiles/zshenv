@@ -31,11 +31,20 @@ export PYTHONPATH
 typeset -U path pythonpath
 export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 
-path=(
+extra_path=(
     ~/bin ~/.cabal/bin ~/.cargo/bin
     $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
-    $path
 )
+for dir in $extra_path; do
+    # I tried this to avoid changing the path order, but other scripts
+    # unconditionally prepend to the path, so it's hopeless.
+    # if [[ -d $dir && ${path[(ie)$dir]} -gt ${#path} ]]; then
+    if [[ -d $dir && ${path[(ie)$dir]} ]]; then
+        path=($dir $path)
+    fi
+done
+unset extra_path
+
 # On OS X, path_helper in /etc/zprofile will rearrange the path, but
 # I shouldn't be overriding system binaries anyway.
 
