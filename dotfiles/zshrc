@@ -98,13 +98,37 @@ function git_refs() {
 #     -K git_refs -f + -f -- + -f git g
 compctl -K git_refs -f git g gog
 
-if [[ $TERM == xterm ]]; then
-    function chpwd {
-        print -nP "\033]2;tty%l: %~\007\033]1;tty%l: %~\007"
-    }
-    chpwd
-    # func 'preexec' executed before each command
-fi
+# if [[ $TERM == xterm ]]; then
+#     function chpwd {
+#         print -nP "\033]2;tty%l: %~\007\033]1;tty%l: %~\007"
+#     }
+#     chpwd
+#     # func 'preexec' executed before each command
+# fi
+
+### nix
+
+function fix-drv {
+    if [[ $1 = /nix/store/* ]]; then
+        echo $1
+    else
+        echo /nix/store/$1
+    fi
+}
+
+function drv-out {
+    for drv in "$@"; do
+        nix show-derivation $(fix-drv $drv) | jq -r '.[].outputs[].path'
+    done
+}
+
+function out-drv {
+    for drv in "$@"; do
+        nix show-derivation $(fix-drv $drv) | jq -r 'keys[]'
+    done
+}
+
+###
 
 _trydot $qlib/sys/$host/zshrc
 _trydot $qlib/sys/$domain/zshrc

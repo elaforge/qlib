@@ -7,14 +7,6 @@ function g3 { git rev-parse --show-toplevel }
 
 function vm-of { grep "# $1\>" ~/p/saltstack-config/salt/nodegroups.conf }
 
-function fix-drv {
-    if [[ $1 = /nix/store/* ]]; then
-        echo $1
-    else
-        echo /nix/store/$1
-    fi
-}
-
 function copy-from {
     nix copy --from http://narpile.groq "$@"
 }
@@ -36,18 +28,6 @@ function showd {
         nix show-derivation $drv | jq --color-output '.[].env.__json | fromjson'
         ;;
     esac
-}
-
-function drv-out {
-    for drv in "$@"; do
-        nix show-derivation $(fix-drv $drv) | jq -r '.[].outputs[].path'
-    done
-}
-
-function out-drv {
-    for drv in "$@"; do
-        nix show-derivation $(fix-drv $drv) | jq -r 'keys[]'
-    done
 }
 
 function bquery {
