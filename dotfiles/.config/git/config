@@ -1,5 +1,7 @@
 # This is Git's per-user configuration file.
 [core]
+user = Evan Laforge
+email = elaforge@groq.com
 # pager = cat
 pager = less --quit-if-one-screen --no-init
 whitespace = trailing-space,tab-in-indent,-blank-at-eof
@@ -9,22 +11,25 @@ verbose = true # put commit diff in commit template
 
 [user]
 name = Evan Laforge
-email = qdunkan@gmail.com
+email = elaforge@groq.com
 
-[diff]
-colorMoved = zebra
-colorMovedWS = allow-indentation-change
-
-[color.diff]
-oldMoved = white
-newMoved = white bold
-oldMovedAlternative = white reverse
-newMovedAlternative = white bold reverse
+# [diff]
+# colorMoved = zebra
+# colorMovedWS = allow-indentation-change
+#
+# [color.diff]
+# oldMoved = white
+# newMoved = white bold
+# oldMovedAlternative = white reverse
+# newMovedAlternative = white bold reverse
 
 [branch]
 # I think this means when creating a local branch from a remote one,
 # automatically add the upstream info
 # autoSetupMerge = always
+
+[merge]
+conflictstyle = diff3
 
 [push]
 default = simple
@@ -51,7 +56,8 @@ lp = log -p -1 # Show either a a single patch, or last patch to a file.
 lg = log --oneline --decorate --all --graph
 m = merge --ff-only
 oblit = reset --keep HEAD^
-r = rebase -i
+p = pull origin head
+r = rebase -i origin/head
 rc = rebase --continue
 s = status --short
 unrec = reset HEAD^
@@ -59,15 +65,23 @@ unrec = reset HEAD^
 unrecs = reset --soft HEAD^
 wip = "!f(){ long_lines_ok=t git commit -am wip; }; f"
 
-# TODO these depend on the head branch name
 sync = pull -r origin head
 # rebase unpushed commits
 ri = "!f() { git rebase -i $(git merge-base head HEAD); }; f"
-
+# fpull = "!f(){ git reset --keep origin/$(git rev-parse --abbrev-ref HEAD); }; f"
 
 
 # For ghc.
 pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recursive; }; f"
 
+# groq
+pnew = "!f(){ git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD); }; f"
+
 [url "git://github.com/ghc/packages-"]
 insteadOf = git://github.com/ghc/packages/
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/elaforge/.cache/hermit/pkg/gh-2.67.0/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/elaforge/.cache/hermit/pkg/gh-2.67.0/gh auth git-credential

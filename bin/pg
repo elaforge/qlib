@@ -1,0 +1,40 @@
+#!/usr/bin/env zsh
+
+set -eu
+
+host_load=10.26.147.35
+host_replica=10.138.1.221
+
+host=10.138.2.163
+db=brake
+is_prod=
+
+case ${1-replica} in
+ro) user=brakero;;
+replica) host=$host_replica; user=brakero;;
+rw) is_prod=t; user=brakerw;;
+rw2) is_prod=t; user=brakerw2;;
+test) db=test; user=tester;;
+brake_test) db=brake_test; user=tester;;
+root) db=postgres; user=postgres;;
+load) host=$host_load; user=tester;;
+load-root) host=$host_load; db=postgres; user=postgres;;
+*) echo unknown db; exit 1;;
+esac
+if [[ -v 1 ]]; then
+    shift
+fi
+
+if [[ -n $is_prod ]]; then
+    color='%033[41m' # red background
+else
+    color='%033[46m' # cyan background
+fi
+args=(
+    # color messes up readline
+    # --set=PROMPT1="%[$color%]%n@%/%R%[%#%033[0m%] "
+    --set=PROMPT1="%n@%/%R "
+)
+
+set -x
+exec psql $args --host=$host $db $user "$@"

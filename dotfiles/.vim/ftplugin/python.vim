@@ -5,7 +5,7 @@ setl foldnestmax=3 " class, method, if
 " setl foldignore=# " ignore comments
 
 setl ai smarttab
-" setl ts=4 sw=4 et softtabstop=4
+setl ts=4 sw=4 et softtabstop=4
 
 ino <buffer> ;di     def __init__(self):<left><left>
 ino <buffer> ;m		if __name__ == '__main__':<cr><tab>

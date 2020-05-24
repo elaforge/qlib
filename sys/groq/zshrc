@@ -1,11 +1,12 @@
-if [[ $host != mehitabel ]]; then
+# Not available in the lab.
+_trydot $GROQ_CONFIG/zsh/bake-completion.zsh
+
+if [[ $host != elaforge ]]; then
     RPS1='%K{yellow}%~%(6~.. %B%n@%m)%k%b'
 fi
 
 # Access to git root.
 function g3 { git rev-parse --show-toplevel }
-
-function vm-of { grep "# $1\>" ~/p/saltstack-config/salt/nodegroups.conf }
 
 function copy-from {
     nix copy --from http://narpile.groq "$@"
@@ -21,20 +22,36 @@ function showd {
     fi
     case $2 in
     inputDrvs)
-        nix show-derivation $drv | jq -r '.[].inputDrvs | keys | join("\n")'
+        nix derivation show $drv\^\* | jq -r '.[].inputDrvs | keys | join("\n")'
         ;;
     *)
-        nix show-derivation $drv | jq --color-output 'del(.[].env.__json)'
-        nix show-derivation $drv | jq --color-output '.[].env.__json | fromjson'
+        nix derivation show $drv\^\* | jq --color-output 'del(.[].env.__json)'
+        nix derivation show $drv\^\* | jq --color-output '.[].env.__json | fromjson'
         ;;
     esac
 }
 
-function bquery {
-    bake query "$@" >json.json
-    cat json.json | jq --color-output 'del(.[].env.__json)'
-    cat json.json | jq --color-output '.[].env.__json | fromjson'
+function showe {
+    local drv=$(fix-drv $1)
+    if [[ -h $drv ]]; then
+        drv=$(readlink $drv)
+    fi
+    nix derivation show $drv\^\* | jq --color-output '.[].env.__json | fromjson'
 }
+
+function bquery {
+    hempy $(g3)/Groq/Infra/Brake/brake_query.py "$@"
+}
+
+function blog {
+    brake log "$@" |& less
+}
+
+# function bquery {
+#     bake query "$@" >json.json
+#     cat json.json | jq --color-output 'del(.[].env.__json)'
+#     cat json.json | jq --color-output '.[].env.__json | fromjson'
+# }
 
 function _grep {
     local dir
@@ -52,32 +69,99 @@ function _grep {
 function hgrep { _grep haskell "$@" }
 function ngrep { _grep nix "$@" }
 function pgrep { _grep py "$@" }
+function cgrep { rg --type c --type cpp "$@" }
+
+function verbose {
+    GROQ_LOG_CONFIG=severity=debug,stderr-only "$@"
+}
 
 ### bake
 
 function vbake {
-    GROQ_LOG_CONFIG=severity=debug,stderr-also bake "$@"
+    verbose bake "$@"
 }
 
 function lbake {
     _result_local/Groq/Infra/Bake/bake "$@"
 }
-
 function vlbake {
-    GROQ_LOG_CONFIG=severity=debug,stderr-also \
-        _result_local/Groq/Infra/Bake/bake "$@"
+    verbose lbake "$@"
+}
+function lbrake {
+    _result_local/Groq/Infra/Brake/brake "$@"
+}
+function vlbrake {
+    verbose lbrake "$@"
 }
 
-function canary {
-    bake run -t //Groq/Infra/Deploy:Deploy -- Deploy canary $@
+function blocal {
+    bake build -Lverbose --local --upload=no "$@"
+}
+function bdump {
+    bake build -Ldump --local --upload=no "$@"
+}
+
+# function canary {
+#     bake run -t //Groq/Infra/Deploy:Deploy -- Deploy canary $@
+# }
+
+function new-issue {
+    gr issue-new --label .Infra,Status::New --assignee=$USER
+}
+
+function gr {
+    local flags=(
+        --slack
+        --update-mr
+        # --ci-start
+    )
+    local extras=()
+    case $1 in
+    # push) extras=(--label ReleaseUpdate::NotRequired);;
+    mr-get) extras=(--format=short)
+    esac
+    SFT_AUTH_SOCK= command gr $flags $extras "$@"
+}
+
+function make-bake {
+    ( cd $(g3) && BAKE_UNCLEAN_BUILD=t BRAKE=t Groq/Infra/Bake/make-bake.sh \
+        && git add Groq/Infra/Bake/current-version \
+        && git commit -am 'bake: update version' \
+    )
 }
 
 # configure gcloud cmd
 export CLOUDSDK_COMPUTE_ZONE=us-west1-a
 
-function gitlab_users() {
-    reply=($(cat ~/.cache/gr-users))
-    reply=(${reply:#[0-9]*}) # filter out numbers
+export LINT_IGNORE_UNTRACKED=true # don't lint untracked files
+
+function c2n {
+    if [[ -z $2 ]]; then
+        cabal2nix --no-check cabal://$1 > $1.nix && grep 'version =' $1.nix
+    else
+        cabal2nix --no-check cabal://$1-$2 > $1.nix && grep 'version =' $1.nix
+    fi
 }
 
-alias gr='gr --slack --update-mr --label .Infra --assignee=elaforge'
+alias redeploy='sudo -i GROQ_LOG_CONFIG=stderr-also =groq_deploy_client --production-run'
+alias state.apply='sudo salt-call state.apply --state-verbose=False'
+alias bq=brake-query
+
+function fix-sft {
+  # =om[1] is crazy zsh magic to get the most recent mtime socket in that
+  # directory.  We have to eval in array context to get wildcards to work
+  # to get filenames without a find subprocess, but you can't index array
+  # literals, and if you assign directly to the SFT_ variable it becomes an
+  # array and can't be exported.
+  local tmp=(/var/run/sftd/client_trust_forwarding/$USER/*(=om[1]))
+  export SFT_AUTH_SOCK=$tmp[1]
+  tmp=(/tmp/ssh-*/agent.*(=om[1]))
+  export SSH_AUTH_SOCK=$tmp[1]
+  # eval $(tmux showenv -s)
+}
+
+function precmd { fix-sft }
+
+e2e=//Groq/Compiler/test/end_to_end
+G=//Groq
+Runtime=//Groq/Systems/Runtime

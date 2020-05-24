@@ -1,0 +1,154 @@
+-- You'll have to update this whenever //haskell-roots changes:
+-- :r !grep -v '\#' haskell-roots
+include:
+    Common/groq-arrow/src
+    Common/groq-chip/test
+    Common/groq-chip/src
+    Common/groq-common/src
+    Common/groq-common/test
+    Common/groq-logging/src
+    Common/groq-logging/test
+    Common/groq-main/src
+    Common/groq-orphanage/src
+    Common/groq-additions/benchmarks
+    Common/groq-additions/src
+    Common/groq-additions/test
+    Compiler/Backend/groq-proto/src
+    Compiler/Common/groq-config/src
+    Compiler/Common/groq-config/test
+    Compiler/Common/groq-common-extras/src
+    Compiler/Common/groq-common-extras/test
+    Compiler/Experiments/slt-reference/src
+    Compiler/Experiments/slt-reference/test
+    Compiler/alan-assembly/src
+    Compiler/alan-assembly/test
+    Compiler/performance/src
+    Compiler/permutor-utils/src
+    Compiler/permutor-utils/test
+    Experimental/aa-mem-fast/src
+    Experimental/compressed-seq/src
+    Experimental/compressed-seq/test
+
+-- Edit these fields to taste
+
+-- Prefer or don't prefer to resolve to these modules or packages.  You'll edit
+-- these when fix-imports guesses wrong:
+
+prio-module-low:
+  GHC.Environment GHC.Read GHC.MVar
+  Network.Google.Data.Time
+
+prio-module-high:
+  Control.Applicative
+  Control.Concurrent.Async
+  Control.Concurrent.STM
+  Control.Monad
+  Control.Monad.State.Strict
+  Control.Monad.Trans.Resource
+  Data.List Data.List.NonEmpty Data.Map Data.Text
+  GHC.Generics
+  Groq.Util.Debug
+  Groq.Util.Flags
+  Groq.Util.Log
+  System.IO
+  System.Posix -- not Path.Posix
+  System.Process
+  System.Random
+
+prio-package-high:
+prio-package-low:
+  haskell98 ghc ghc-prim comonad basement
+  rio
+  unliftio
+
+qualify-as:
+  Data.HashMap.Strict as HashMap;
+  Streaming.Prelude as S;
+  Control.Monad.State.Strict as State
+
+-- Add the things you like to use unqualified:
+
+unqualified:
+  System.FilePath ((</>));
+  Control.Applicative ((<|>), some, many, optional);
+  Control.Monad ((<=<), guard, filterM, forM, replicateM, replicateM_,
+    when, unless, void, zipWithM);
+  Control.Monad.Trans (MonadIO, lift, liftIO);
+  Control.Monad.Base (liftBase);
+  Control.Monad.Extra (anyM, andM, orM, mapMaybeM, firstJustM, partitionM,
+    whenJust, whenJustM, whenM, unlessM, ifM, findM);
+  Data.Bifunctor (bimap, first, second);
+  Data.ByteString (ByteString);
+  Data.Foldable (traverse_, for_);
+  Data.HashMap.Strict (HashMap);
+  Data.HashSet (HashSet);
+  Data.List.NonEmpty (NonEmpty, (:|));
+  Data.Map (Map);
+  Data.IntMap (IntMap);
+  Data.Maybe (mapMaybe, fromMaybe);
+  Data.Set (Set);
+  Data.Text (Text);
+  GHC.Stack (HasCallStack);
+  Groq.Util.Textlike (showt)
+
+-- Groq config, this should stay the same.
+
+language:
+    DeriveAnyClass
+    DerivingStrategies
+    DerivingVia
+    DisambiguateRecordFields
+    LambdaCase
+    MultiWayIf
+    ViewPatterns
+    BangPatterns
+    BinaryLiterals
+    ConstrainedClassMethods
+    ConstraintKinds
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DoAndIfThenElse
+    EmptyCase
+    EmptyDataDecls
+    EmptyDataDeriving
+    ExistentialQuantification
+    ExplicitForAll
+    FlexibleContexts
+    FlexibleInstances
+    ForeignFunctionInterface
+    GADTSyntax
+    GeneralisedNewtypeDeriving
+    HexFloatLiterals
+    ImplicitPrelude
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    MonomorphismRestriction
+    MultiParamTypeClasses
+    NamedFieldPuns
+    NamedWildCards
+    NumericUnderscores
+    PatternGuards
+    PolyKinds
+    PostfixOperators
+    RankNTypes
+    RelaxedPolyRec
+    ScopedTypeVariables
+    StandaloneDeriving
+    StandaloneKindSignatures
+    StarIsType
+    TraditionalRecordSyntax
+    TupleSections
+    TypeApplications
+    TypeOperators
+    TypeSynonymInstances
+
+format:
+  leave-space-for-qualified
+  no-group
+
+-- sort-unqualified-last: f

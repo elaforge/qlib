@@ -2,7 +2,8 @@ let b:did_ftplugin = 1
 
 " options for haskell
 setl foldmethod=indent
-setl ts=4 sw=4 sts=4
+" setl ts=4 sw=4 sts=4
+setl ts=2 sw=2 sts=2
 
 setl comments=:--
 
@@ -12,7 +13,19 @@ setl smarttab
 " haskell has lots of \(...) so don't do the special \ treatment
 setl cpoptions+=M
 
-setl equalprg=fmt-signature\ 4\ 78
+setl equalprg=fmt-signature\ 2\ 78
+
+" This is for fix-imports
+let $GROOT = trim(system("git rev-parse --show-toplevel"))
+setl tags=tags,$GROOT/_ghci/Groq/Infra/Bake/GhciDeps/tags
+" setl tags=tags,_ghci/Groq/Infra/Bake/GhciDeps/tags
+
+
+" let $GHC_PACKAGE_PATH = $GROOT
+"     \ . "/_ghci/Groq/Infra/Bake/GhciDeps/lib/x86_64-pc-linux-gnu-ghc-8.10.7/package.conf.d"
+let $GHC_PACKAGE_PATH = $GROOT
+    \ . "/_ghci/Groq/Infra/Bake/GhciDeps/lib/ghc-9.6.3/lib/package.conf.d"
+let $PATH = "_ghci/Groq/Infra/Bake/GhciDeps/bin:" .  $PATH
 
 vnoremap <buffer> ,c :!cmt --<cr>
 vnoremap <buffer> ,t :!string-literal --toggle-backslash<cr>
@@ -45,7 +58,7 @@ elseif has('python3')
     nnoremap <buffer> <silent> <c-Bslash> :py3 qualified_tag.tag_preview(vim)<cr>
 endif
 
-if exists("b:did_hs_functions") || exists("*ToggleTest")
+if exists("b:did_hs_functions")
     finish
 endif
 let b:did_hs_functions = 1
@@ -104,11 +117,18 @@ function s:ReplaceImports(lines)
     call append(start, a:lines[1:])
 endfunction
 
+" should be faster, but need a newer fix-imports
+" ' --package-path=_ghci/Groq/Infra/Bake/GhciDeps/lib/ghc-9.6.3/lib/package.conf.d/package.cache'
 " Run the contents of the current buffer through the fix-imports cmd.  Print
 " any stderr output on the status line.
 function FixImports()
+    let l:package_cache = '_ghci/Groq/Infra/Bake/GhciDeps/lib/ghc-9.6.3/lib/package.conf.d/package.cache'
     let l:err = tempname()
-    let l:cmd = 'fix-imports -v --edit ' . expand('%') . ' 2>' . l:err
+    let l:cmd = 'PATH=_ghci/Groq/Infra/Bake/GhciDeps/bin:' . $HOME . '/bin'
+        \ . ' /home/elaforge/.cabal/bin/fix-imports -v --edit'
+        \ . ' --config=$HOME/.fix-imports'
+        \ . ' -i ' . $GROOT . '/_ghci/Groq/Infra/Bake/GhciDeps/src'
+        \ . ' ' . expand('%') . ' 2>' . l:err
     let l:out = systemlist(l:cmd, bufnr('%'))
 
     let errs = readfile(l:err)

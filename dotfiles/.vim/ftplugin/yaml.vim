@@ -1,7 +1,7 @@
 let b:did_ftplugin = 1
 
 setl ai
-setl sw=2
+setl ts=4 sw=4 sts=4 et
 setl foldmethod=indent
 
 setl comments=:#

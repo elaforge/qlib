@@ -8,9 +8,11 @@ let mapleader = ","
 " set runtimepath=~/.vim
 
 " fzf
-" https://github.com/junegunn/fzf
-set runtimepath+=/usr/local/opt/fzf
+" set runtimepath+=/usr/local/opt/fzf
+" set runtimepath=~/.vim,~/.nix-profile/share/vim-plugins/fzf-0.17.5/
+set runtimepath+=~/.nix-profile/share/vim-plugins/fzf-0.17.5/
 runtime plugin/fzf.vim
+
 " Using fd as the source means it'll skip gitignore.
 command! -nargs=* -complete=dir FZ
     \ call fzf#run({'source': 'fd --type f --hidden -E .git', 'sink': 'e'})
@@ -27,7 +29,7 @@ filetype plugin on
 au BufNewFile *.hs,*.hsc        so ~/.vim/hs-new.vim
 " " GHC profile output.
 " au BufRead,BufNewFile *.prof    set shiftwidth=1 | set foldmethod=indent | set foldnestmax=20
-au BufRead,BufNewFile */p/*.hs  so ~/.vim/groq.vim
+au BufRead,BufNewFile */p/*     so ~/.vim/groq.vim
 
 set encoding=utf8
 set noloadplugins " don't read crap from $VIM/plugins
@@ -72,7 +74,8 @@ set formatoptions=tcroq
 " delete commments on J
 set formatoptions+=j
 " don't break lines already past tw, break and join chinese sensibly
-set formatoptions+=lmM
+" TODO: new vim seems to have broken this to wrap after , and :?
+" set formatoptions+=lmM
 
 set nolisp
 set textwidth=0

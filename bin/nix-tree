@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+# Change --tree output so vim folding works on it.
+
+tmp=$(mktemp)
+nix-store -q --tree "$@" | sed -e 's/[│]/ /g' >$tmp
+vi -c ':set foldmethod=indent' $tmp
+rm $tmp

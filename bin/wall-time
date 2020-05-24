@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# Like 'time' but sometimes time seems to not work!?
+
+import sys, subprocess, datetime
+
+def main():
+    start = datetime.datetime.now()
+    p = subprocess.Popen(sys.argv[1:])
+    try:
+        p.wait()
+    except KeyboardInterrupt:
+        p.terminate()
+    end = datetime.datetime.now()
+    print(" ".join(sys.argv[1:]), "=>", timedelta(end - start))
+
+
+def timedelta(delta):
+    days = delta.days
+    secs = delta.seconds
+    (days, secs) = divmod(secs, 24 * 60 * 60)
+    (hours, secs) = divmod(secs, 60 * 60)
+    (mins, secs) = divmod(secs, 60)
+    return " ".join(
+        filter(
+            None,
+            [
+                "%dd" % days if days > 0 else "",
+                "%dh" % hours if hours > 0 else "",
+                "%dm" % mins if mins > 0 else "",
+                "%.3gs" % secs,
+            ],
+        )
+    )
+
+if __name__ == "__main__":
+    main()

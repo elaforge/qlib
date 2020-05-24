@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+mounts=(
+    /net/home/elaforge
+    /net/util/elaforge
+    /net/gcp_labshare_hdd/elaforge
+)
+
+set +x
+for p in $mounts; do
+    echo $p
+    rsync -a --delete --exclude .git ~/qlib $p
+done

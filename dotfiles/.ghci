@@ -3,10 +3,10 @@
 -- Broken in ghc >=8.4
 -- :set -fdefer-type-errors
 :set -Wall
-:set -Wno-name-shadowing
+-- :set -Wno-name-shadowing
 :set -Wno-unused-top-binds -Wno-missing-signatures
-:set -Wno-unused-imports
-:set -Wno-duplicate-exports -Wno-unused-do-bind -Wno-orphans
+-- :set -Wno-unused-imports
+-- :set -Wno-duplicate-exports -Wno-unused-do-bind -Wno-orphans
 :set -Wno-type-defaults
 -- warns about ($x), but I don't use TH.
 :set -Wno-operator-whitespace-ext-conflict
@@ -16,15 +16,6 @@
 
 -- cabal likes to throw this, but it seems to be wrong.
 :set -Wno-missing-home-modules
-
--- :set -fwarn-identities
--- :set -fwarn-tabs
--- :set -fwarn-incomplete-record-updates
--- :set -fwarn-missing-fields
--- :set -fwarn-unused-matches
--- :set -fwarn-wrong-do-bind
--- :set -fwarn-redundant-constraints
--- :set -fwarn-unused-top-binds
 
 :seti -XOverloadedStrings
 :seti -XNumericUnderscores
@@ -62,3 +53,13 @@ let _ghciLoadVim arg = do
 
 -- :L loads the file currently edited in vim
 :def L _ghciLoadVim
+
+-- import Text.Show.Pretty (pPrint)
+-- :set -interactive-print=pPrint
+-- :def pp (\_ -> return ":set -interactive-print=pPrint")
+-- :def ppoff (\_ -> return ":set -interactive-print=print")
+
+-- import IPPrint.Colored
+-- :set -interactive-print=IPPrint.Colored.cpprint
+-- :def cp (\_ -> return ":set -interactive-print=IPPrint.Colored.cpprint")
+-- :def ncp (\_ -> return ":set -interactive-print=print")

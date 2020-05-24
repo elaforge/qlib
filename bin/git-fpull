@@ -9,6 +9,7 @@ if [[ -n $1 ]]; then
 fi
 branch=$(git rev-parse --abbrev-ref HEAD)
 git fetch
+git branch -D $tmp
 git branch -f $tmp
 git checkout --quiet origin/$branch
 git checkout -B $branch

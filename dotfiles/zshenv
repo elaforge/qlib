@@ -5,7 +5,8 @@ unhash -fm '*'
 
 # New linux likes to put annoying junk in system profiles.
 # /etc/zshenv will still run though.
-setopt no_global_rcs
+# setopt no_global_rcs
+
 # Disable whatever functions happen to be lurking.
 fpath=()
 
@@ -25,7 +26,9 @@ else
 fi
 # Groq lab servers have no domain.  Or they do.
 if [[ $domain = c.groq*.internal || $domain = *.groq.com \
-        || $domain = *.groq.net || $domain = '' ]]; then
+        || $domain = *.groq.net || $domain = '' \
+        || $domain = local # no idea why some gcp vms do this
+        ]]; then
     domain=groq
 fi
 
@@ -73,7 +76,8 @@ export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
     # --quit-if-one-screen --no-init
 # For whatever reason, systemctl decides to ignore $LESS in favor of its own
 # annoying defaults.
-export SYSTEMD_LESS=$LESS
+# export SYSTEMD_LESS=$LESS
+export SYSTEMD_PAGER=
 
 export LANG=en_US.utf-8
 # Otherwise sort sorts in a surprising order.  I can't use LC_ALL because that
