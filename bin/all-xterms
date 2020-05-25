@@ -30,6 +30,7 @@ case $res in
 esac
 
 # setting main xterm as login shell doesn't seem to do anything
+export SHLVL=0
 for geo in $xterms; do
     xterm -geometry $geo &
 done

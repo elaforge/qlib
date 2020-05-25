@@ -29,8 +29,6 @@ Style "FvwmPager"   Sticky, ClickToFocus
 Style "log_tail"    WindowListSkip, CirculateSkip, ClickToFocus
 
 Style "xload"       WindowListSkip, CirculateSkip, ClickToFocus, Sticky
-Style "xbiff"       UseStyle "xload"
-Style "Dali Clock"  UseStyle "xload", StaysOnTop
 Style "xsysinfo"    UseStyle "xload"
 Style "xnetload"    UseStyle "xload"
 Style "xclock"      UseStyle "xload"

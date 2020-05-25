@@ -49,7 +49,7 @@ set wildmode=longest,list
 " set cinoptions=+0
 
 set visualbell t_vb=
-set comments=
+set comments=:#
 
 " wrap text, comments, format comments
 set formatoptions=tcroq
