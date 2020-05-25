@@ -1,6 +1,4 @@
 unset MANPATH
-# Disable whatever functions happen to be lurking.
-fpath=()
 
 alias s='command ls -F --color=tty'
 alias ll='s -lh'
@@ -98,13 +96,15 @@ function git_refs() {
 #     -K git_refs -f + -f -- + -f git g
 compctl -K git_refs -f git g gog
 
-# if [[ $TERM == xterm ]]; then
+if [[ $TERM == xterm ]]; then
+    # All the xterms I care about are new.
+    TERM=xterm-256color
 #     function chpwd {
 #         print -nP "\033]2;tty%l: %~\007\033]1;tty%l: %~\007"
 #     }
 #     chpwd
 #     # func 'preexec' executed before each command
-# fi
+fi
 
 ### nix
 

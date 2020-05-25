@@ -3,6 +3,12 @@
 unhash -am '*'
 unhash -fm '*'
 
+# New linux likes to put annoying junk in system profiles.
+# /etc/zshenv will still run though.
+setopt no_global_rcs
+# Disable whatever functions happen to be lurking.
+fpath=()
+
 # On some systems, some of the time,  this says zle-not-something and messes up
 # the terminal.
 # bindkey -d
@@ -11,7 +17,7 @@ unhash -fm '*'
 unset MANPATH
 skip_global_compinit=1
 
-host=$(/bin/hostname -s)
+host=$(hostname -s)
 if which dnsdomainname >/dev/null; then
     domain=$(dnsdomainname)
 else
@@ -33,6 +39,7 @@ export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 
 extra_path=(
     ~/bin ~/.cabal/bin ~/.cargo/bin
+    /usr/local/bin
     $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
 )
 for dir in $extra_path; do
