@@ -43,17 +43,16 @@ extra_path=(
     $qlib/sys/$host/bin $qlib/sys/$oname/bin $qlib/sys/$domain/bin
 )
 for dir in $extra_path; do
-    # I tried this to avoid changing the path order, but other scripts
-    # unconditionally prepend to the path, so it's hopeless.
-    # if [[ -d $dir && ${path[(ie)$dir]} -gt ${#path} ]]; then
-    if [[ -d $dir && ${path[(ie)$dir]} ]]; then
+    # Don't mess with the path order if they're already in there.
+    # Otherwise, I wind up putting these back in front of a nix-shell PATH.
+    if [[ -d $dir && ${path[(ie)$dir]} -gt ${#path} ]]; then
         path=($dir $path)
     fi
 done
 unset extra_path
 
-# On OS X, path_helper in /etc/zprofile will rearrange the path, but
-# I shouldn't be overriding system binaries anyway.
+# On OS X, path_helper in /etc/zprofile will rearrange the path.  I just
+# commented it out.
 
 pythonpath=(~/lib/python)
 
