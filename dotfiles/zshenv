@@ -72,7 +72,7 @@ export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --quiet'
 # annoying defaults.
 export SYSTEMD_LESS=$LESS
 
-export LANG=en_US.UTF-8
+export LANG=en_US.utf8
 # Otherwise sort sorts in a surprising order.  I can't use LC_ALL because that
 # will change text input, and then haskell gets upset at non-ASCII.
 export LC_COLLATE=C
