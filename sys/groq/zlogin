@@ -1,0 +1,2 @@
+# I have to do this myself because I setopt no_global_rcs.
+emulate sh -c 'source /etc/profile.d/00.groq.sh'
