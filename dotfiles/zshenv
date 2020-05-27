@@ -77,7 +77,8 @@ export LANG=en_US.utf8
 # will change text input, and then haskell gets upset at non-ASCII.
 export LC_COLLATE=C
 
-_trydot /Users/elaforge/.nix-profile/etc/profile.d/nix.sh
+_trydot /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+_trydot ~/.nix-profile/etc/profile.d/nix-daemon.sh
 
 _trydot $qlib/sys/$host/zshenv
 _trydot $qlib/sys/$domain/zshenv
