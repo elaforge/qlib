@@ -19,6 +19,7 @@
 -- :set -fwarn-unused-top-binds
 
 :seti -XOverloadedStrings
+:seti -XNumericUnderscores
 
 -- Make the prompt obvious.
 :set prompt "\ESC[46m\STX%s>\ESC[39;49m\STX "

@@ -38,6 +38,7 @@ b = branch -v
 c = commit
 co = checkout
 d = diff
+dd = diff --cached
 ds = diff --stat
 lp = log -p -1 # Show either a a single patch, or last patch to a file.
 m = merge --ff-only
@@ -46,6 +47,8 @@ r = rebase -i
 rc = rebase --continue
 s = status --short
 unrec = reset HEAD^
+# Like unrec, but leave changes in staging.
+unrecs = reset --soft HEAD^
 wip = "!f(){ long_lines_ok=t git commit -am wip; }; f"
 
 # TODO these depend on the head branch name

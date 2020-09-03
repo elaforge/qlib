@@ -8,7 +8,7 @@ setl foldmethod=indent
 setl foldnestmax=3
 setl foldignore=# " ignore preprocessor
 
-setl comments=s1:/*,mb:*,ex:*/,://
+setl comments=://
 vm <buffer> <LocalLeader>c :!cmt //<cr>
 
 " setl foldmethod=marker
