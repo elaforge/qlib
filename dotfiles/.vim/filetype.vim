@@ -10,7 +10,7 @@ au BufRead,BufNewFile *.vim,vimrc setf vim
 au BufRead,BufNewFile *.py      setf python
 au BufRead,BufNewFile *.c,*.h   setf c
 au BufRead,BufNewFile *.m,*.mm  setf c
-au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H setf c
+au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H,*.hpp setf c
 au BufRead,BufNewFile *.rs      setf rust
 
 au BufRead,BufNewFile *.scm,*.lsp,*.lisp so setf lisp
