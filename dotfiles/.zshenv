@@ -1,8 +1,16 @@
-if [[ -d ~/qlib ]]; then
-    qlib=~/qlib
-elif [[ -d /net/home/elaforge/qlib ]]; then
-    qlib=/net/home/elaforge/qlib
-fi
+qlibs=(
+    ~/qlib
+    ~/elaforge/qlib
+    /net/home/elaforge/qlib
+    /labshare/elaforge/qlib
+    /lab/elaforge/qlib
+)
+for qlib in $qlibs; do
+    if [[ -d $qlib ]]; then
+        break
+    fi
+done
+unset qlibs
 
 if [[ -n $qlib && -e $qlib ]]; then
     # -e will fail if it's a broken link.  So replace it!
