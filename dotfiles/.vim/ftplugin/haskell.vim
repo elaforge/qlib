@@ -36,9 +36,11 @@ iabbr <buffer> und undefined
 if has('python')
     py import qualified_tag
     nnoremap <buffer> <silent> <c-]> :py qualified_tag.tag_word(vim)<cr>
+    nnoremap <buffer> <silent> <c-Bslash> :py qualified_tag.tag_preview(vim)<cr>
 elseif has('python3')
     py3 import qualified_tag
     nnoremap <buffer> <silent> <c-]> :py3 qualified_tag.tag_word(vim)<cr>
+    nnoremap <buffer> <silent> <c-Bslash> :py qualified_tag.tag_preview(vim)<cr>
 endif
 
 if exists("b:did_hs_functions") || exists("*ToggleTest")
