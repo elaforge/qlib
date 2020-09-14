@@ -110,12 +110,14 @@ def forward_until(lines, start, maxlines, infixes, dedent=False):
             # A dedented after an indent must be the next definition.
             i -= 1
             break
-        elif any(infix in lines[i] for infix in infixes):
-            break
         else:
-            if lines[i][0].isspace():
-                indented = True
-            i += 1
+            ws = lines[i].split()
+            if any(infix in ws for infix in infixes):
+                break
+            else:
+                if lines[i][0].isspace():
+                    indented = True
+                i += 1
     return lines[start : i+1]
 
 kind_context = {
