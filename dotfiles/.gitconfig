@@ -34,7 +34,8 @@ ff = only
 [alias]
 a = add
 amend = commit --amend
-b = branch -v
+# Sort to put most recent branches last.
+b = branch -v --sort=creatordate
 c = commit
 co = checkout
 d = diff
