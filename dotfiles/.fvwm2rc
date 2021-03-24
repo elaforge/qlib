@@ -95,7 +95,7 @@ Key j   A   4S  CursorMove 0 1
 
 Key Return I N  Iconify
 
-#button contxt mod function
+# button contxt mod function
 Mouse 1     R   A   Popup Ops Nop
 Mouse 3     R   A   WindowList
 
@@ -103,7 +103,8 @@ Mouse 1     I   A   Iconify
 Mouse 2     I   A   Move
 Mouse 3     I   A   Move
 
-Mouse 4     FSTW A  Raise-and-Move
+# Mouse 4 is now scrollwheel up!
+# Mouse 4     FSTW A  Raise-and-Move
 Mouse 1     FSTW 4  Raise
 
 Mouse 1     A   4   Popup Ops Nop
