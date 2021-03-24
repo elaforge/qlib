@@ -10,6 +10,7 @@ let mapleader = ","
 " fzf
 set runtimepath+=/usr/local/opt/fzf
 runtime plugin/fzf.vim
+" Using fd as the source means it'll skip gitignore.
 command! -nargs=* -complete=dir FZ
     \ call fzf#run({'source': 'fd', 'sink': 'e'})
 
@@ -94,11 +95,11 @@ mapclear!
 " nmap <silent> n /<cr>
 " nmap <silent> N ?<cr>
 
-" nmap ,e   :edit 
 nmap ,e   :FZ<cr>
-nmap ;e   :edit <C-R>=expand("%:h") . "/" <CR>
+nmap ,E   :edit 
+nmap ;e   :edit <C-R>=substitute(expand('%'), '[^/]\+$', '', '') <CR>
 nmap ,o   :buffer 
-nmap ;o   :buffer <C-R>=expand("%:h") . "/" <CR>
+nmap ;o   :buffer <C-R>=substitute(expand('%'), '[^/]\+$', '', '') <CR>
 nmap ,l   :ls<cr>
 nmap ,u   :bdelete<cr>
 
