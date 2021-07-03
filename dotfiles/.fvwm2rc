@@ -81,7 +81,7 @@ Key q   FSTW  4  Module FvwmIdent
 
 Key v   A   4   WindowList
   # according to the man page, WindowList can take args, but it really doesn't
-Key x   A   4   Exec xterm
+Key x   A   4   Exec xterm0
 Key x   A   4S  XTerms
 
 Key h   A   4   CursorMove -10 0
@@ -129,8 +129,7 @@ AddToMenu   Ops         "ops"      Title
 +           "WinList"   Module FvwmWinList
 +           "Talk"      Module FvwmTalk
 +           "Close"     Close
-+           "Restart std fvwm"  Restart
-+           "Restart local-fvwm"    Restart /home/elaforge/bin/mehitabel/local-fvwm
++           "Restart fvwm"  Restart
 
 ########################### Pager #########################################
 *FvwmPagerHilight darkgreen
