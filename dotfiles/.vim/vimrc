@@ -8,11 +8,12 @@ let mapleader = ","
 " set runtimepath=~/.vim
 
 " fzf
+" https://github.com/junegunn/fzf
 set runtimepath+=/usr/local/opt/fzf
 runtime plugin/fzf.vim
 " Using fd as the source means it'll skip gitignore.
 command! -nargs=* -complete=dir FZ
-    \ call fzf#run({'source': 'fd', 'sink': 'e'})
+    \ call fzf#run({'source': 'fd -t f', 'sink': 'e'})
 
 " stop syntax/syncolor.vim from doing anything
 let syntax_cmd = "mine"
@@ -53,6 +54,11 @@ set nostartofline fileformats=unix,dos,mac
 " or full,list
 set wildmode=longest,list
 
+" unnamed register goes to +, system clipboard
+" The docs say yank also goes there, but it doesn't, so this is actually
+" useless.
+" set clipboard=unnamedplus
+
 " only one indent in parens, but I actually like the 2*
 " set cinoptions=(4
 " c indent continuation lines are just a single indent + 0 spaces
@@ -85,7 +91,7 @@ set notagrelative " don't look for tags relative to the edited file
 set nofileignorecase
 
 " Read changed files without prompting.  This happens a lot due to git
-" checkout, and vim only uses mtime so it's wrong a much of the time.
+" checkout, and vim only uses mtime so it's wrong most of the time.
 set autoread
 
 mapclear
