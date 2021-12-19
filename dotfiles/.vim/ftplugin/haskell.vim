@@ -40,13 +40,20 @@ if has('python')
 elseif has('python3')
     py3 import qualified_tag
     nnoremap <buffer> <silent> <c-]> :py3 qualified_tag.tag_word(vim)<cr>
-    nnoremap <buffer> <silent> <c-Bslash> :py qualified_tag.tag_preview(vim)<cr>
+    nnoremap <buffer> <silent> <c-Bslash> :py3 qualified_tag.tag_preview(vim)<cr>
 endif
 
 if exists("b:did_hs_functions") || exists("*ToggleTest")
     finish
 endif
 let b:did_hs_functions = 1
+
+nnoremap ,G :call FindCallers()<cr>
+function! FindCallers()
+    let cur = expand('%:t:r')
+    let sym = expand('<cword>')
+    call Rg('\\b' . cur . '\\.' . sym . '\\b')
+endfunction
 
 function ToggleTest()
     let filename = expand('%')
