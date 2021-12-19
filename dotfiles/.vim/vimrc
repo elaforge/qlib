@@ -13,7 +13,7 @@ set runtimepath+=/usr/local/opt/fzf
 runtime plugin/fzf.vim
 " Using fd as the source means it'll skip gitignore.
 command! -nargs=* -complete=dir FZ
-    \ call fzf#run({'source': 'fd -t f', 'sink': 'e'})
+    \ call fzf#run({'source': 'fd --hidden --type f', 'sink': 'e'})
 
 " stop syntax/syncolor.vim from doing anything
 let syntax_cmd = "mine"
@@ -59,10 +59,10 @@ set wildmode=longest,list
 " useless.
 " set clipboard=unnamedplus
 
-" only one indent in parens, but I actually like the 2*
-" set cinoptions=(4
+" only one indent in parens
+set cinoptions=(4
 " c indent continuation lines are just a single indent + 0 spaces
-" set cinoptions=+0
+set cinoptions=+0
 
 set visualbell t_vb=
 set comments=:#
@@ -97,7 +97,8 @@ set autoread
 mapclear
 mapclear!
 
-" vim is buggy and doesn't open folds even though its set to
+" I'd like to get rid of the fwd/bwd search state, but this has other bad
+" effects I forget now.
 " nmap <silent> n /<cr>
 " nmap <silent> N ?<cr>
 
@@ -204,12 +205,3 @@ endif
 
 " source ~/.vim/bundle/vim-surround/plugin/surround.vim
 " set runtimepath^=~/.vim/bundle/vim-surround
-" set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-" Disable for now.
-" let g:loaded_ctrlp = 1
-
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_switch_buffer = 'Et'
-" let g:ctrlp_custom_ignore = '\v(_darcs|\.git)$'
-" runtime plugin/ctrlp.vim
