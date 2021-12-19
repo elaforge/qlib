@@ -28,7 +28,8 @@ all-xterms
 xload -nolabel -update 3 -hl red -geometry 640x88+0+0 &
 
 # xsysinfo -update 500 -geometry 212x74+255+0 &
-xclock -padding 4 -d -strftime '%I:%M %a %d' -geometry +0+0 &
+# Without LC_ALL=C I get "Missing charsets" warning and messed up font.
+LC_ALL=C xclock -padding 4 -d -strftime '%I:%M %a %d' -geometry +0+0 &
 
 # nvidia-settings --load-config-only &
 # xscreensaver -no-splash &
