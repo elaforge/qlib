@@ -13,7 +13,7 @@ set runtimepath+=/usr/local/opt/fzf
 runtime plugin/fzf.vim
 " Using fd as the source means it'll skip gitignore.
 command! -nargs=* -complete=dir FZ
-    \ call fzf#run({'source': 'fd --hidden --type f', 'sink': 'e'})
+    \ call fzf#run({'source': 'fd --type f --hidden -E .git', 'sink': 'e'})
 
 " stop syntax/syncolor.vim from doing anything
 let syntax_cmd = "mine"
