@@ -22,9 +22,13 @@
 # if has('python')
 #     py import qualified_tag
 #     nnoremap <buffer> <silent> <c-]> :py qualified_tag.tag_word(vim)<cr>
+#     nnoremap <buffer> <silent> <c-Bslash> :py qualified_tag.tag_preview(vim)<cr>
 # endif
 #
-# Or python3 and py3 if you have those.
+# Substitute has('python3') and 'py3' if your vim uses python3.
+#
+# This also adds ^\ to preview a tag in a quickfix window.  I use this to get
+# type signatures, haddocks, and parameter names, or data declarations.
 #
 # If you use 'filetype', you can do:
 #
@@ -41,13 +45,13 @@ def tag_preview(vim):
     """This abuses vim's quickfix window to show a preview of where the
         tag will go.
     """
-    matches, _tag = get_tag(vim)
+    matches, _word = get_tag(vim)
     if not matches:
         return
     match = matches[0]
     linenumber = int(match['cmd'])
     i, lines = get_preview(match['kind'], match['filename'], linenumber)
-    # This is sketchy, since it only if python repr is valid viml, but
+    # This is sketchy, since it only works if python repr is valid viml, but
     # "sketchy" is normal for vim.  Speaking of which, for some unknown
     # reason, | is a special character when appearing in expressions, but
     # only for :cgetexpr, not for e.g. :echo.
@@ -135,15 +139,19 @@ kind_context = {
 ### follow tag
 
 def tag_word(vim):
-    _, tag = get_tag(vim)
-    if tag is None:
+    matches, word = get_tag(vim)
+    if not matches:
         # I'd use echoerr, but that causes a big messy python traceback.
-        vim.command('echohl ErrorMsg | echo %r | echohl None' %
-            ('tag not found: ' + tag,))
+        vim.command('echohl ErrorMsg | echo %r | echohl None'
+            % ('tag not found: ' + word,))
     else:
-        vim.command('tag ' + tag)
+        vim.command('tag ' + word)
 
 def get_tag(vim):
+    """Get the word under the cursor, return
+        [str] - Exact names for tags matching the word.
+        str - Word from the cursor.
+    """
     word = get_word(vim)
     qual_to_module = get_qualified_imports(vim.current.buffer)
     tag = guess_tag(qual_to_module, word)
@@ -153,10 +161,7 @@ def get_tag(vim):
     if not matches and '.' in tag:
         tag = tag.split('.')[-1]
         matches = has_target(vim, tag)
-    if matches:
-        return matches, tag
-    else:
-        return None, None
+    return matches, tag
 
 def has_target(vim, tag):
     return vim.eval('taglist(%r)' % ('^' + tag + '$',))
@@ -221,9 +226,11 @@ def get_imports(lines):
 
 def finished_imports(line):
     # Hacky heuristic to see if I'm past the import block.
-    # If it starts with non-space but not 'import', then it's probably
-    # not an import or import continuation.
-    return line and not line.startswith('import') and not line[0].isspace()
+    # If column 0 isn't 'import' or a space or a comment.
+    return line and not (
+        line.startswith('import') or line[0].isspace()
+        or line.startswith('--')
+    )
 
 def test():
     fn, tag = sys.argv[1:]
