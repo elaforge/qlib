@@ -4,3 +4,6 @@ listCompletionsImmediately: False
 historyDuplicates: IgnoreConsecutive
 
 bind: ctrl-p ctrl-r
+
+bind: ctrl-a killline : r e l o a d return
+keyseq: "^a" ctrl-a
