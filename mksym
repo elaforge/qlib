@@ -1,29 +1,46 @@
-#!/bin/zsh -e
+#!/usr/bin/env zsh
+
+set -eu
+
+if [[ -e $qlib/sys/$host/xsession ]]; then
+    use_x=t
+else
+    use_x=
+fi
 
 if [[ -z $qlib ]]; then
     echo $0: qlib not set
-else
-    # TODO: This is broken, but rely on it already being set.
-    # qlib=$(realpath $(dirname $(pwd)/$0))
+    exit 1
+fi
 
-    cd
-    dotfiles=(
-        .fvwm2rc .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci
-        .editrc .gitconfig .darcs
-    )
-    for fn in $dotfiles; do
-        ln -Ffs $qlib/dotfiles/$fn
-    done
-    mkdir -p .config
+# TODO: This is broken, let's rely on it already being set.
+# qlib=$(realpath $(dirname $(pwd)/$0))
 
-    # Don't mess up any local configs that may exist.
-    for fn in $qlib/dotfiles/.config/*(N); do
-        ln -Ffs ../$fn .config
-    done
+cd
+dotfiles=(
+    .inputrc .vim .zlogin .zshenv .zshrc .haskeline .ghci .editrc
+)
+if [[ -n $use_x ]]; then
+    dotfiles+=(.fvwm2rc)
+fi
+for fn in $dotfiles; do
+    ln -fs $qlib/dotfiles/$fn
+done
 
-    rm -rf bin
+mkdir -p .config
+# Merge with any local ~/.config files.
+for fn in $qlib/dotfiles/.config/*(N); do
+    ln -fs $fn ~/.config
+done
+
+# clean up the old way
+rm -f ~/.gitconfig
+
+if [[ ! -e bin ]]; then
     ln -s $qlib/bin
+fi
 
+if [[ -n $use_x ]]; then
     ln -sf $qlib/sys/$host/xsession .xsession
     ln -sf .xsession .xinitrc
 fi
