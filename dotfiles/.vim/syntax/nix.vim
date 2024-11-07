@@ -4,7 +4,7 @@ source ~/.vim/global-syntax.vim
 " syn clear
 syn region  nixString    start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
 " syn keyword nixKeyword   true false null
-syn keyword nixKeyword   let in inherit rec or if then else with
+syn keyword nixKeyword   let in inherit rec or if then else with import
 
 syn match nixComment "#.*$"
 

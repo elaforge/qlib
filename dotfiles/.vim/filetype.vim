@@ -37,4 +37,6 @@ au BufRead,BufNewFile *.ky      setf ky
 au BufRead,BufNewFile *.tscore  setf tscore
 au BufRead,BufNewFile *.jscore  setf tscore
 
+au BufRead,BufNewFile *.sql  setf sql
+
 augroup END
