@@ -6,6 +6,9 @@ email = qdunkan@gmail.com
 pager = less --quit-if-one-screen --no-init
 whitespace = trailing-space,tab-in-indent,-blank-at-eof
 
+[commit]
+verbose = true # put commit diff in commit template
+
 [user]
 name = Evan Laforge
 email = qdunkan@gmail.com
@@ -31,11 +34,15 @@ default = simple
 [pull]
 ff = only
 
+[rebase]
+autostash = true
+
 [alias]
 a = add
 amend = commit --amend
 # Sort to put most recent branches last.
 b = branch -v --sort=creatordate
+bb = "!f(){ git branch --list -v $(git branch --show-current); }; f"
 c = commit
 co = checkout
 d = diff
