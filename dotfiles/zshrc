@@ -2,8 +2,6 @@ unset MANPATH
 
 alias s='command ls -F --color=tty'
 alias ll='s -lh'
-alias la='s -a'
-alias ss='s -Ss'
 alias l=less
 alias zreset='exec $SHELL'
 alias rr='rm -rf'
@@ -17,12 +15,16 @@ alias g=git
 function gog() { git log --decorate=short "$@" | l }
 
 
-# history
-setopt inc_append_history # session histories will be interleaved
-setopt hist_save_no_dups
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=10000
+HISTSIZE=10000 # keep this much in memory
+SAVEHIST=100000 # keep this much in HISTFILE
+
+# inc_append_history + extended_history + history search looks in history file
+setopt share_history
+setopt hist_save_no_dups hist_ignore_all_dups
+setopt extendedglob nobgnice noflowcontrol nohup
+setopt interactivecomments listtypes longlistjobs
+setopt nobeep
 
 export DARCS_DONT_ESCAPE_8BIT=1
 # Change obnoxious warnings magenta 35 to blue 34.
@@ -47,6 +49,7 @@ RPS1='%~%(6~.. %B%n%b@%U%m%u)'
 
 _trydot $qlib/dotfiles/set-ls-colors $TERM
 
+# Omit these suffixes from tab completion.
 fignore=(.o .pyc .pyo .hi .hi-boot .o-boot .class)
 
 stty erase '^H'
@@ -68,12 +71,6 @@ bindkey -a	'' history-incremental-search-backward
 # bindkey         '[B' down-line-or-history
 # bindkey         '[D' backward-char
 # bindkey         '[C' forward-char
-
-setopt extendedglob nobgnice noflowcontrol histignoredups nohup
-setopt interactivecomments listtypes longlistjobs
-setopt nobeep
-
-HISTSIZE=300
 
 host_complete=($(<$qlib/dotfiles/hosts))
 if [[ -r $qlib/sys/$host/hosts ]]; then
@@ -113,13 +110,13 @@ function fix-drv {
 
 function drv-out {
     for drv in "$@"; do
-        nix show-derivation $(fix-drv $drv) | jq -r '.[].outputs[].path'
+        nix derivation show $(fix-drv $drv) | jq -r '.[].outputs[].path'
     done
 }
 
 function out-drv {
     for drv in "$@"; do
-        nix show-derivation $(fix-drv $drv) | jq -r 'keys[]'
+        nix derivation show $(fix-drv $drv) | jq -r 'keys[]'
     done
 }
 
