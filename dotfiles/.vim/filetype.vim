@@ -36,4 +36,6 @@ au BufRead,BufNewFile TODO*,todo-*,*/todo/* setf todo
 au BufRead,BufNewFile *.ky      setf ky
 au BufRead,BufNewFile *.tscore  setf tscore
 
+au BufRead,BufNewFile *.sql  setf sql
+
 augroup END

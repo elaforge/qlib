@@ -32,6 +32,8 @@ nnoremap <buffer> <silent> ,t :exec ToggleTest()<cr>
 nnoremap <buffer> <silent> ,a :call FixImports()<cr>
 
 iabbr <buffer> und undefined
+iabbr <buffer> _> ->
+iabbr <buffer> <_ <-
 
 if has('python')
     py import qualified_tag
