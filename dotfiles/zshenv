@@ -23,19 +23,22 @@ if which dnsdomainname >/dev/null; then
 else
     domain=nodomain
 fi
-if [[ $domain = c.groq*.internal ]]; then
+# Groq lab servers have no domain.  Or they do.
+if [[ $domain = c.groq*.internal || $domain = *.groq.com \
+        || $domain = *.groq.net || $domain = '' ]]; then
     domain=groq
 fi
 
 export host domain
 oname=$($qlib/bin/oname)
 
-# typeset -T PATH path # automatic
 # establish a:b:c <-> (a b c) link
-typeset -T PYTHONPATH pythonpath
-export PYTHONPATH
-typeset -U path pythonpath
-export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
+# typeset -T PATH path # automatic
+typeset -U path # make path unique
+
+# typeset -T PYTHONPATH pythonpath
+# export PYTHONPATH
+# export PYTHONSTARTUP=$qlib/dotfiles/pythonstartup.py
 
 extra_path=(
     ~/bin ~/.cabal/bin ~/.cargo/bin
