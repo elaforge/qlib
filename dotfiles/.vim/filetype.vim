@@ -13,7 +13,7 @@ au BufRead,BufNewFile *.m,*.mm  setf c
 au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H,*.hpp setf c
 au BufRead,BufNewFile *.rs      setf rust
 
-au BufRead,BufNewFile *.scm,*.lsp,*.lisp so setf lisp
+au BufRead,BufNewFile *.scm,*.lsp,*.lisp        setf lisp
 au BufRead,BufNewFile *.clj     setf lip
 
 au BufRead,BufNewFile *.hs      setf haskell
@@ -35,5 +35,6 @@ au BufRead,BufNewFile *.nix     setf nix
 au BufRead,BufNewFile TODO*,todo-*,*/todo/* setf todo
 au BufRead,BufNewFile *.ky      setf ky
 au BufRead,BufNewFile *.tscore  setf tscore
+au BufRead,BufNewFile *.jscore  setf tscore
 
 augroup END
