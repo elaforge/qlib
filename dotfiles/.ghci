@@ -8,6 +8,14 @@
 :set -Wno-unused-imports
 :set -Wno-duplicate-exports -Wno-unused-do-bind -Wno-orphans
 :set -Wno-type-defaults
+-- warns about ($x), but I don't use TH.
+:set -Wno-operator-whitespace-ext-conflict
+
+-- I actually use these a fair amount.
+:set -Wno-incomplete-uni-patterns
+
+-- cabal likes to throw this, but it seems to be wrong.
+:set -Wno-missing-home-modules
 
 -- :set -fwarn-identities
 -- :set -fwarn-tabs
@@ -20,12 +28,16 @@
 
 :seti -XOverloadedStrings
 :seti -XNumericUnderscores
+:seti -XOverloadedRecordDot
+
+:set -freverse-errors
 
 -- Make the prompt obvious.
 :set prompt "\ESC[46m\STX%s>\ESC[39;49m\STX "
 
 -- :R is the same as :r
 :def R (\args -> return (":r " ++ args))
+:def T (\args -> return (":t " ++ args))
 
 -- Foo/Bar.hs -> Foo.Bar
 :{
