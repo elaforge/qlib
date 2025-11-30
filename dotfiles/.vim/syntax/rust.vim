@@ -8,14 +8,15 @@ source ~/.vim/global-syntax.vim
 syntax sync fromstart " slow but accurate
 
 syn keyword Keyword
-    \ as break const continue crate dyn else enum extern false fn for if
-    \ impl in let loop match mod move mut pub ref return Self self static
-    \ struct super trait true type unsafe use where while
+    \ as async await break const continue crate dyn else enum extern
+    \ false fn for if impl in let loop match mod move mut pub ref
+    \ return Self self static struct super trait true type union unsafe
+    \ use where while
 
 " reserved
 syn keyword Keyword
-    \ abstract async await become box do final macro override priv try
-    \ typeof unsized virtual yield
+    \ abstract become box do final gen macro override priv try typeof
+    \ unsized virtual yield
 
 syn region  String      start=+"+  skip=+\\\\\|\\"+  end=+"\|$+
 
