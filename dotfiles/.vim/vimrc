@@ -181,12 +181,6 @@ nmap <c-j> :next<cr>
 " mark columns 80 and 81 in red for long lines...
 match ErrorMsg /\%80v.\%81v./
 
-set cpoptions= " turn off more vi compatibility
-
-if v:progname == 'nvim'
-    set cpoptions=_ " restore normal cw, neovim breaks this
-endif
-
 if has('python')
     py import sys, os, vim
     py sys.path.insert(0, os.environ['HOME'] + '/.vim/py')
