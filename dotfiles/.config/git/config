@@ -8,7 +8,7 @@ whitespace = trailing-space,tab-in-indent,-blank-at-eof
 verbose = true # put commit diff in commit template
 
 [user]
-user = Evan Laforge
+name = Evan Laforge
 email = qdunkan@gmail.com
 
 [diff]
