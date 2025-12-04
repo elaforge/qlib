@@ -1,0 +1,7 @@
+# Look in $CWD for a bin directory.
+path=(bin ~/.ghcup/bin /opt/homebrew/bin $path)
+
+# unclear what it does, but brew install recommends it
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
