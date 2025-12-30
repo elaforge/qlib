@@ -37,7 +37,7 @@ autostash = true
 
 [alias]
 a = add
-amend = commit --amend
+amend = commit --amend --no-edit
 # Sort to put most recent branches last.
 b = branch -v --sort=creatordate
 bb = "!f(){ git branch --list -v $(git branch --show-current); }; f"

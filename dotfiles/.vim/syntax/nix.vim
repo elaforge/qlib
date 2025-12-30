@@ -8,7 +8,7 @@ syn keyword nixKeyword   let in inherit rec or if then else with import
 
 syn match nixComment "#.*$"
 
-hi clear
+" hi clear
 hi link warning ErrorMsg
 hi nixString ctermfg=DarkBlue
 hi nixComment cterm=bold

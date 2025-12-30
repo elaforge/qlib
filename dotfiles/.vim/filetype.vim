@@ -12,9 +12,10 @@ au BufRead,BufNewFile *.c,*.h   setf c
 au BufRead,BufNewFile *.m,*.mm  setf c
 au BufRead,BufNewFile *.cc,*.cpp,*.cxx,*.hh,*.C,*.H,*.hpp setf c
 au BufRead,BufNewFile *.rs      setf rust
+au BufRead,BufNewFile *.sh      setf sh
 
-au BufRead,BufNewFile *.scm,*.lsp,*.lisp        setf lisp
-au BufRead,BufNewFile *.clj     setf lip
+au BufRead,BufNewFile *.scm,*.lsp,*.lisp so setf lisp
+au BufRead,BufNewFile *.clj     setf lisp
 
 au BufRead,BufNewFile *.hs      setf haskell
 au BufRead,BufNewFile *.dhall   setf dhall

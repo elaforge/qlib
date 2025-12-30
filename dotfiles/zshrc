@@ -10,6 +10,8 @@ alias cwd='cd $(command pwd)'
 alias pwd='command pwd'
 alias od='od -A x -taxC'
 
+alias hist='fc -RI'
+
 # git
 alias g=git
 function gog() { git log --decorate=short "$@" | l }
@@ -20,11 +22,17 @@ HISTSIZE=10000 # keep this much in memory
 SAVEHIST=100000 # keep this much in HISTFILE
 
 # inc_append_history + extended_history + history search looks in history file
-setopt share_history
+# setopt share_history
+
+# add to history immediately, must import them with fc -RI
+setopt inc_append_history
+
 setopt hist_save_no_dups hist_ignore_all_dups
 setopt extendedglob nobgnice noflowcontrol nohup
 setopt interactivecomments listtypes longlistjobs
 setopt nobeep
+
+# set dvorak # dvorak layout for correct and correct_all, which I don't use
 
 export DARCS_DONT_ESCAPE_8BIT=1
 # Change obnoxious warnings magenta 35 to blue 34.

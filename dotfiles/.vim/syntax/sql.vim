@@ -11,9 +11,10 @@ syntax sync fromstart " slow but accurate
 
 syn case ignore
 syn keyword sqlKeyword
-    \ ALTER DROP SELECT UPDATE FROM CREATE TABLE INDEX TYPE DEFAULT NULL SET
-    \ DOMAIN NOT INNER OUTER JOIN ON USING TYPE PRIMARY KEY AS FOREIGN
-    \ start
+    \ alter drop select update from create table index type default null set
+    \ domain not inner outer join on using type primary key as foreign where
+    \ and or is order by left like limit distinct group having with
+    \ start insert into user delete
     \ true false
 
 syn keyword   TODO     contained TODO XXX
