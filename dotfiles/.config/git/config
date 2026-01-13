@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [core]
 user = Evan Laforge
-email = elaforge@groq.com
+email = elaforge@nvidia.com
 # pager = cat
 pager = less --quit-if-one-screen --no-init
 whitespace = trailing-space,tab-in-indent,-blank-at-eof
@@ -56,8 +56,8 @@ lp = log -p -1 # Show either a a single patch, or last patch to a file.
 lg = log --oneline --decorate --all --graph
 m = merge --ff-only
 oblit = reset --keep HEAD^
-p = pull origin head
-r = rebase -i origin/head
+p = pull origin main
+r = rebase -i origin/main
 rc = rebase --continue
 s = status --short
 unrec = reset HEAD^
@@ -65,9 +65,9 @@ unrec = reset HEAD^
 unrecs = reset --soft HEAD^
 wip = "!f(){ long_lines_ok=t git commit -am wip; }; f"
 
-sync = pull -r origin head
+sync = pull -r origin main
 # rebase unpushed commits
-ri = "!f() { git rebase -i $(git merge-base head HEAD); }; f"
+ri = "!f() { git rebase -i $(git merge-base main HEAD); }; f"
 # fpull = "!f(){ git reset --keep origin/$(git rev-parse --abbrev-ref HEAD); }; f"
 
 
@@ -76,12 +76,3 @@ pullall = "!f(){ git pull --ff-only \"$@\" && git submodule update --init --recu
 
 # groq
 pnew = "!f(){ git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD); }; f"
-
-[url "git://github.com/ghc/packages-"]
-insteadOf = git://github.com/ghc/packages/
-[credential "https://github.com"]
-	helper = 
-	helper = !/home/elaforge/.cache/hermit/pkg/gh-2.67.0/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/home/elaforge/.cache/hermit/pkg/gh-2.67.0/gh auth git-credential

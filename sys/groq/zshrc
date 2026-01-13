@@ -1,7 +1,7 @@
 # Not available in the lab.
 _trydot $GROQ_CONFIG/zsh/bake-completion.zsh
 
-if [[ $host != elaforge ]]; then
+if [[ $host != devvm-elaforge ]]; then
     RPS1='%K{yellow}%~%(6~.. %B%n@%m)%k%b'
 fi
 
@@ -101,14 +101,6 @@ function bdump {
     bake build -Ldump --local --upload=no "$@"
 }
 
-# function canary {
-#     bake run -t //Groq/Infra/Deploy:Deploy -- Deploy canary $@
-# }
-
-function new-issue {
-    gr issue-new --label .Infra,Status::New --assignee=$USER
-}
-
 function gr {
     local flags=(
         --slack
@@ -144,23 +136,7 @@ function c2n {
 }
 
 alias redeploy='sudo -i GROQ_LOG_CONFIG=stderr-also =groq_deploy_client --production-run'
-alias state.apply='sudo salt-call state.apply --state-verbose=False'
 alias bq=brake-query
-
-function fix-sft {
-  # =om[1] is crazy zsh magic to get the most recent mtime socket in that
-  # directory.  We have to eval in array context to get wildcards to work
-  # to get filenames without a find subprocess, but you can't index array
-  # literals, and if you assign directly to the SFT_ variable it becomes an
-  # array and can't be exported.
-  local tmp=(/var/run/sftd/client_trust_forwarding/$USER/*(=om[1]))
-  export SFT_AUTH_SOCK=$tmp[1]
-  tmp=(/tmp/ssh-*/agent.*(=om[1]))
-  export SSH_AUTH_SOCK=$tmp[1]
-  # eval $(tmux showenv -s)
-}
-
-function precmd { fix-sft }
 
 e2e=//Groq/Compiler/test/end_to_end
 G=//Groq
