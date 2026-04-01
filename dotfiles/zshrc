@@ -74,6 +74,8 @@ bindkey		'' push-line
 bindkey -a	'' push-line
 bindkey		'' history-incremental-search-backward
 bindkey -a	'' history-incremental-search-backward
+bindkey         '' insert-last-word
+bindkey -a      '' insert-last-word
 
 # bindkey         '[A' up-line-or-history
 # bindkey         '[B' down-line-or-history
