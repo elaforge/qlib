@@ -23,10 +23,8 @@ if which dnsdomainname >/dev/null; then
 else
     domain=nodomain
 fi
-# Groq lab servers have no domain.  Or they do.
-if [[ $domain = c.groq*.internal || $domain = *.groq.com \
-        || $domain = *.groq.net || $domain = '' ]]; then
-    domain=groq
+if [[ $domain = '' ]]; then
+    domain=nodomain
 fi
 
 export host domain
