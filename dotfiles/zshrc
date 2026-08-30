@@ -16,7 +16,6 @@ alias hist='fc -RI'
 alias g=git
 function gog() { git log --decorate=short "$@" | l }
 
-
 HISTFILE=~/.zsh_history
 HISTSIZE=10000 # keep this much in memory
 SAVEHIST=100000 # keep this much in HISTFILE
@@ -39,6 +38,8 @@ export DARCS_DONT_ESCAPE_8BIT=1
 export GHC_COLOURS='header=:message=4:warning=1;34:error=1;31:fatal=1;31:margin=1;34'
 # Otherwise it's ^^, which is used by vi.
 export MOSH_ESCAPE_KEY=
+# Disable annoying pyrepl, which breaks editline.
+export PYTHON_BASIC_REPL=1
 
 # cd to copy and pasted prompt
 function ccd {
