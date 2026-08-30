@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys, os
 
@@ -6,8 +6,8 @@ def main():
     for fn in sys.argv[1:]:
         try:
             lc(fn)
-        except Error, exc:
-            print 'skipped %r: %s' % (fn, exc)
+        except Error as exc:
+            print('skipped %r: %s' % (fn, exc))
 
 def lc(fn):
     tmpnam = 'aaa'
@@ -15,12 +15,12 @@ def lc(fn):
         raise Error('tmpnam %r exists' % tmpnam)
     if fn.islower():
         return
-    print '%r -> %r' % (fn, tmpnam),
+    print('%r -> %r' % (fn, tmpnam),)
     rename(fn, tmpnam)
     if os.path.exists(fn.lower()):
         rename(tmpnam, fn)
         raise Error('%r exists' % fn.lower())
-    print '** %r -> %r' % (tmpnam, fn.lower())
+    print('** %r -> %r' % (tmpnam, fn.lower()))
     rename(tmpnam, fn.lower())
 
 
