@@ -1,4 +1,5 @@
 unset MANPATH
+unset LESSOPEN
 
 alias s='command ls -F --color=tty'
 alias ll='s -lh'
